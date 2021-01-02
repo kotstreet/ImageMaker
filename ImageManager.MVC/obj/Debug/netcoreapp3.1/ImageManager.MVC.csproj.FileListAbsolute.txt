@@ -79,3 +79,14 @@ D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\ImageMana
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\ImageManager.MVC.dll
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\ImageManager.MVC.pdb
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\ImageManager.MVC.genruntimeconfig.cache
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Serilog.dll
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Serilog.AspNetCore.dll
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Serilog.Extensions.Hosting.dll
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Serilog.Extensions.Logging.dll
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Serilog.Formatting.Compact.dll
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Serilog.Settings.Configuration.dll
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Serilog.Sinks.Console.dll
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Serilog.Sinks.Debug.dll
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Serilog.Sinks.File.dll

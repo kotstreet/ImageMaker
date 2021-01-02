@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace ImageManager.MVC
 {
@@ -41,7 +42,8 @@ namespace ImageManager.MVC
         public void Configure(IApplicationBuilder app,
             IWebHostEnvironment env,
             UserManager<AppUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -61,6 +63,7 @@ namespace ImageManager.MVC
             app.UseAuthorization();
 
             IdentityDbInit.SeedDataAsync(userManager, roleManager).Wait();
+            logger.LogInformation("SeedDataAsync finished withiut errors.");
 
             app.UseEndpoints(endpoints =>
             {

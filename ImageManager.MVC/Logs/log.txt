@@ -1,0 +1,252 @@
+2021-01-02 16:48:46.914 +03:00 [INF] Loger created
+2021-01-02 16:48:47.113 +03:00 [INF] Starting web host
+2021-01-02 16:48:48.319 +03:00 [DBG] Hosting starting
+2021-01-02 16:48:48.388 +03:00 [INF] User profile is available. Using 'C:\Users\kotst\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-01-02 16:48:48.439 +03:00 [DBG] Reading data from file 'C:\Users\kotst\AppData\Local\ASP.NET\DataProtection-Keys\key-b5b1ac78-c4a7-42e1-ad82-c1aa492badec.xml'.
+2021-01-02 16:48:48.469 +03:00 [DBG] Reading data from file 'C:\Users\kotst\AppData\Local\ASP.NET\DataProtection-Keys\key-e9acfa78-a2c8-4622-8e87-44b06dcf66bb.xml'.
+2021-01-02 16:48:48.471 +03:00 [DBG] Reading data from file 'C:\Users\kotst\AppData\Local\ASP.NET\DataProtection-Keys\key-e9f959fa-a432-4536-8fa6-dd835fb65a75.xml'.
+2021-01-02 16:48:48.496 +03:00 [DBG] Found key {b5b1ac78-c4a7-42e1-ad82-c1aa492badec}.
+2021-01-02 16:48:48.503 +03:00 [DBG] Found key {e9acfa78-a2c8-4622-8e87-44b06dcf66bb}.
+2021-01-02 16:48:48.504 +03:00 [DBG] Found key {e9f959fa-a432-4536-8fa6-dd835fb65a75}.
+2021-01-02 16:48:48.515 +03:00 [DBG] Considering key {b5b1ac78-c4a7-42e1-ad82-c1aa492badec} with expiration date 2021-03-24 09:31:51Z as default key.
+2021-01-02 16:48:48.710 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-01-02 16:48:48.715 +03:00 [DBG] Decrypting secret element using Windows DPAPI.
+2021-01-02 16:48:48.718 +03:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2021-01-02 16:48:48.724 +03:00 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2021-01-02 16:48:48.729 +03:00 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2021-01-02 16:48:48.735 +03:00 [DBG] Using key {b5b1ac78-c4a7-42e1-ad82-c1aa492badec} as the default key.
+2021-01-02 16:48:48.736 +03:00 [DBG] Key ring with default key {b5b1ac78-c4a7-42e1-ad82-c1aa492badec} was loaded during application startup.
+2021-01-02 16:48:48.894 +03:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2021-01-02 16:48:49.581 +03:00 [DBG] The index {'UserId'} was not created on entity type 'IdentityUserRole<string>' as the properties are already covered by the index {'UserId', 'RoleId'}.
+2021-01-02 16:48:49.601 +03:00 [DBG] The index {'UserId'} was not created on entity type 'IdentityUserToken<string>' as the properties are already covered by the index {'UserId', 'LoginProvider', 'Name'}.
+2021-01-02 16:48:49.823 +03:00 [INF] Entity Framework Core 3.1.10 initialized 'AppIdentityDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-02 16:48:49.886 +03:00 [DBG] Opening connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:50.227 +03:00 [DBG] Opened connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:50.237 +03:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2021-01-02 16:48:50.249 +03:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (6ms).
+2021-01-02 16:48:50.268 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-02 16:48:50.909 +03:00 [INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-02 16:48:50.918 +03:00 [DBG] Closing connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:50.927 +03:00 [DBG] Closed connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:50.931 +03:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2021-01-02 16:48:50.933 +03:00 [DBG] Created DbCommand for 'ExecuteScalar' (2ms).
+2021-01-02 16:48:50.935 +03:00 [DBG] Opening connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:50.938 +03:00 [DBG] Opened connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:50.940 +03:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-02 16:48:50.985 +03:00 [INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-02 16:48:51.195 +03:00 [DBG] Closing connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.198 +03:00 [DBG] Closed connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.596 +03:00 [DBG] queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<IdentityRole>(
+    asyncEnumerable: new QueryingEnumerable<IdentityRole>(
+        (RelationalQueryContext)queryContext, 
+        RelationalCommandCache, 
+        null, 
+        null, 
+        Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, IdentityRole>, 
+        ImageManager.MVC.Infrastructure.AppIdentityDbContext, 
+        null
+    ), 
+    cancellationToken: queryContext.CancellationToken)
+2021-01-02 16:48:51.645 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-01-02 16:48:51.647 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-01-02 16:48:51.656 +03:00 [DBG] Opening connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.662 +03:00 [DBG] Opened connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.696 +03:00 [DBG] Executing DbCommand [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2021-01-02 16:48:51.762 +03:00 [INF] Executed DbCommand (97ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2021-01-02 16:48:51.816 +03:00 [DBG] Context 'AppIdentityDbContext' started tracking 'IdentityRole' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2021-01-02 16:48:51.844 +03:00 [DBG] A data reader was disposed.
+2021-01-02 16:48:51.848 +03:00 [DBG] Closing connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.852 +03:00 [DBG] Closed connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.858 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-01-02 16:48:51.860 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-01-02 16:48:51.862 +03:00 [DBG] Opening connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.865 +03:00 [DBG] Opened connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.866 +03:00 [DBG] Executing DbCommand [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2021-01-02 16:48:51.870 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2021-01-02 16:48:51.874 +03:00 [DBG] Context 'AppIdentityDbContext' started tracking 'IdentityRole' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2021-01-02 16:48:51.876 +03:00 [DBG] A data reader was disposed.
+2021-01-02 16:48:51.877 +03:00 [DBG] Closing connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.881 +03:00 [DBG] Closed connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.896 +03:00 [DBG] queryContext => new QueryingEnumerable<AppUser>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache, 
+    null, 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, int[], ResultCoordinator, AppUser>, 
+    ImageManager.MVC.Infrastructure.AppIdentityDbContext, 
+    null
+)
+    .SingleOrDefault()
+2021-01-02 16:48:51.902 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-01-02 16:48:51.904 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-01-02 16:48:51.906 +03:00 [DBG] Opening connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.907 +03:00 [DBG] Opened connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.909 +03:00 [DBG] Executing DbCommand [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2021-01-02 16:48:51.920 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2021-01-02 16:48:51.943 +03:00 [DBG] Context 'AppIdentityDbContext' started tracking 'AppUser' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2021-01-02 16:48:51.967 +03:00 [DBG] A data reader was disposed.
+2021-01-02 16:48:51.968 +03:00 [DBG] Closing connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.971 +03:00 [DBG] Closed connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.978 +03:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2021-01-02 16:48:51.980 +03:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2021-01-02 16:48:51.982 +03:00 [DBG] Opening connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.984 +03:00 [DBG] Opened connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:51.988 +03:00 [DBG] Executing DbCommand [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2021-01-02 16:48:51.996 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[IsActive], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2021-01-02 16:48:52.000 +03:00 [DBG] Context 'AppIdentityDbContext' started tracking 'AppUser' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2021-01-02 16:48:52.005 +03:00 [DBG] A data reader was disposed.
+2021-01-02 16:48:52.006 +03:00 [DBG] Closing connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:52.008 +03:00 [DBG] Closed connection to database 'ImageManager' on server 'DESKTOP-VIK0G3F'.
+2021-01-02 16:48:52.010 +03:00 [INF] SeedDataAsync finished withiut errors.
+2021-01-02 16:48:52.111 +03:00 [DBG] 'AppIdentityDbContext' disposed.
+2021-01-02 16:48:52.142 +03:00 [DBG] Failed to locate the development https certificate at 'null'.
+2021-01-02 16:48:52.221 +03:00 [DBG] Using development certificate: CN=localhost (Thumbprint: C2A4A8C290F54820BD478DE7A475D8A0DEE32E8B)
+2021-01-02 16:48:52.282 +03:00 [INF] Now listening on: https://localhost:5001
+2021-01-02 16:48:52.291 +03:00 [INF] Now listening on: http://localhost:5000
+2021-01-02 16:48:52.293 +03:00 [DBG] Loaded hosting startup assembly ImageManager.MVC
+2021-01-02 16:48:52.296 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-01-02 16:48:52.297 +03:00 [INF] Hosting environment: Development
+2021-01-02 16:48:52.299 +03:00 [INF] Content root path: D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC
+2021-01-02 16:48:52.300 +03:00 [DBG] Hosting started
+2021-01-02 16:48:52.434 +03:00 [DBG] Connection id "0HM5F4KHUQOQP" received FIN.
+2021-01-02 16:48:52.435 +03:00 [DBG] Connection id "0HM5F4KHUQOQQ" received FIN.
+2021-01-02 16:48:52.455 +03:00 [DBG] Connection id "0HM5F4KHUQOQP" accepted.
+2021-01-02 16:48:52.455 +03:00 [DBG] Connection id "0HM5F4KHUQOQQ" accepted.
+2021-01-02 16:48:52.460 +03:00 [DBG] Connection id "0HM5F4KHUQOQP" started.
+2021-01-02 16:48:52.460 +03:00 [DBG] Connection id "0HM5F4KHUQOQQ" started.
+2021-01-02 16:48:52.501 +03:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Authentication failed because the remote party has closed the transport stream.
+   at System.Net.Security.SslStream.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
+   at System.Net.Security.SslStream.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
+   at System.Net.Security.SslStream.ForceAuthentication(Boolean receiveFirst, Byte[] buffer, AsyncProtocolRequest asyncRequest)
+   at System.Net.Security.SslStream.ProcessAuthentication(LazyAsyncResult lazyResult, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.BeginAuthenticateAsServer(SslServerAuthenticationOptions sslServerAuthenticationOptions, CancellationToken cancellationToken, AsyncCallback asyncCallback, Object asyncState)
+   at System.Net.Security.SslStream.<>c.<AuthenticateAsServerAsync>b__69_0(SslServerAuthenticationOptions arg1, CancellationToken arg2, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncImpl[TArg1,TArg2](Func`5 beginMethod, Func`2 endFunction, Action`1 endAction, TArg1 arg1, TArg2 arg2, Object state, TaskCreationOptions creationOptions)
+   at System.Threading.Tasks.TaskFactory.FromAsync[TArg1,TArg2](Func`5 beginMethod, Action`1 endMethod, TArg1 arg1, TArg2 arg2, Object state, TaskCreationOptions creationOptions)
+   at System.Threading.Tasks.TaskFactory.FromAsync[TArg1,TArg2](Func`5 beginMethod, Action`1 endMethod, TArg1 arg1, TArg2 arg2, Object state)
+   at System.Net.Security.SslStream.AuthenticateAsServerAsync(SslServerAuthenticationOptions sslServerAuthenticationOptions, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.InnerOnConnectionAsync(ConnectionContext context)
+2021-01-02 16:48:52.502 +03:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Authentication failed because the remote party has closed the transport stream.
+   at System.Net.Security.SslStream.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
+   at System.Net.Security.SslStream.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
+   at System.Net.Security.SslStream.ForceAuthentication(Boolean receiveFirst, Byte[] buffer, AsyncProtocolRequest asyncRequest)
+   at System.Net.Security.SslStream.ProcessAuthentication(LazyAsyncResult lazyResult, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.BeginAuthenticateAsServer(SslServerAuthenticationOptions sslServerAuthenticationOptions, CancellationToken cancellationToken, AsyncCallback asyncCallback, Object asyncState)
+   at System.Net.Security.SslStream.<>c.<AuthenticateAsServerAsync>b__69_0(SslServerAuthenticationOptions arg1, CancellationToken arg2, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncImpl[TArg1,TArg2](Func`5 beginMethod, Func`2 endFunction, Action`1 endAction, TArg1 arg1, TArg2 arg2, Object state, TaskCreationOptions creationOptions)
+   at System.Threading.Tasks.TaskFactory.FromAsync[TArg1,TArg2](Func`5 beginMethod, Action`1 endMethod, TArg1 arg1, TArg2 arg2, Object state, TaskCreationOptions creationOptions)
+   at System.Threading.Tasks.TaskFactory.FromAsync[TArg1,TArg2](Func`5 beginMethod, Action`1 endMethod, TArg1 arg1, TArg2 arg2, Object state)
+   at System.Net.Security.SslStream.AuthenticateAsServerAsync(SslServerAuthenticationOptions sslServerAuthenticationOptions, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.InnerOnConnectionAsync(ConnectionContext context)
+2021-01-02 16:48:54.117 +03:00 [DBG] Connection id "0HM5F4KHUQOQP" stopped.
+2021-01-02 16:48:54.117 +03:00 [DBG] Connection id "0HM5F4KHUQOQQ" stopped.
+2021-01-02 16:48:54.125 +03:00 [DBG] Connection id "0HM5F4KHUQOQP" sending FIN because: "The Socket transport's send loop completed gracefully."
+2021-01-02 16:48:54.125 +03:00 [DBG] Connection id "0HM5F4KHUQOQQ" sending FIN because: "The Socket transport's send loop completed gracefully."
+2021-01-02 16:48:55.121 +03:00 [DBG] Connection id "0HM5F4KHUQOQR" accepted.
+2021-01-02 16:48:55.124 +03:00 [DBG] Connection id "0HM5F4KHUQOQR" started.
+2021-01-02 16:48:55.315 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/  
+2021-01-02 16:48:55.320 +03:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2021-01-02 16:48:55.324 +03:00 [DBG] The request path / does not match a supported file type
+2021-01-02 16:48:55.436 +03:00 [DBG] 1 candidate(s) found for the request path '/'
+2021-01-02 16:48:55.439 +03:00 [DBG] Endpoint 'ImageManager.MVC.Controllers.HomeController.Index (ImageManager.MVC)' with route pattern '{controller=Home}/{action=Index}/{id?}' is valid for the request path '/'
+2021-01-02 16:48:55.442 +03:00 [DBG] Request matched endpoint 'ImageManager.MVC.Controllers.HomeController.Index (ImageManager.MVC)'
+2021-01-02 16:48:55.486 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2021-01-02 16:48:55.490 +03:00 [INF] Executing endpoint 'ImageManager.MVC.Controllers.HomeController.Index (ImageManager.MVC)'
+2021-01-02 16:48:55.506 +03:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2021-01-02 16:48:55.608 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller ImageManager.MVC.Controllers.HomeController (ImageManager.MVC).
+2021-01-02 16:48:55.612 +03:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2021-01-02 16:48:55.613 +03:00 [DBG] Execution plan of resource filters (in the following order): ["Microsoft.AspNetCore.Mvc.ViewFeatures.Filters.SaveTempDataFilter"]
+2021-01-02 16:48:55.616 +03:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)","Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2021-01-02 16:48:55.619 +03:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2021-01-02 16:48:55.620 +03:00 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.ViewFeatures.Filters.SaveTempDataFilter"]
+2021-01-02 16:48:55.624 +03:00 [DBG] Executing controller factory for controller ImageManager.MVC.Controllers.HomeController (ImageManager.MVC)
+2021-01-02 16:48:55.626 +03:00 [DBG] Executed controller factory for controller ImageManager.MVC.Controllers.HomeController (ImageManager.MVC)
+2021-01-02 16:48:55.638 +03:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Index.cshtml'.
+2021-01-02 16:48:55.640 +03:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Home/Privacy.cshtml'.
+2021-01-02 16:48:55.641 +03:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/Error.cshtml'.
+2021-01-02 16:48:55.643 +03:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/_Layout.cshtml'.
+2021-01-02 16:48:55.644 +03:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/Shared/_ValidationScriptsPartial.cshtml'.
+2021-01-02 16:48:55.646 +03:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/_ViewImports.cshtml'.
+2021-01-02 16:48:55.650 +03:00 [DBG] Initializing Razor view compiler with compiled view: '/Views/_ViewStart.cshtml'.
+2021-01-02 16:48:55.663 +03:00 [DBG] View lookup cache miss for view 'Index' in controller 'Home'.
+2021-01-02 16:48:55.676 +03:00 [INF] Executing ViewResult, running view Index.
+2021-01-02 16:48:55.685 +03:00 [DBG] The view path '/Views/Home/Index.cshtml' was found in 17.4587ms.
+2021-01-02 16:48:55.716 +03:00 [DBG] View lookup cache miss for view '_Layout' in controller 'Home'.
+2021-01-02 16:48:55.756 +03:00 [DBG] Found the endpoints ["Route: {controller=Home}/{action=Index}/{id?}"] for address Microsoft.AspNetCore.Routing.RouteValuesAddress
+2021-01-02 16:48:55.769 +03:00 [DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in  and 
+2021-01-02 16:48:55.782 +03:00 [DBG] Link generation succeeded for endpoints ["Route: {controller=Home}/{action=Index}/{id?}"] with result /
+2021-01-02 16:48:55.786 +03:00 [DBG] Found the endpoints ["Route: {controller=Home}/{action=Index}/{id?}"] for address Microsoft.AspNetCore.Routing.RouteValuesAddress
+2021-01-02 16:48:55.791 +03:00 [DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in  and 
+2021-01-02 16:48:55.794 +03:00 [DBG] Link generation succeeded for endpoints ["Route: {controller=Home}/{action=Index}/{id?}"] with result /
+2021-01-02 16:48:55.796 +03:00 [DBG] Found the endpoints ["Route: {controller=Home}/{action=Index}/{id?}"] for address Microsoft.AspNetCore.Routing.RouteValuesAddress
+2021-01-02 16:48:55.799 +03:00 [DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Privacy and 
+2021-01-02 16:48:55.801 +03:00 [DBG] Link generation succeeded for endpoints ["Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Privacy
+2021-01-02 16:48:55.808 +03:00 [DBG] Found the endpoints ["Route: {controller=Home}/{action=Index}/{id?}"] for address Microsoft.AspNetCore.Routing.RouteValuesAddress
+2021-01-02 16:48:55.810 +03:00 [DBG] Successfully processed template {controller=Home}/{action=Index}/{id?} for Route: {controller=Home}/{action=Index}/{id?} resulting in /Home/Privacy and 
+2021-01-02 16:48:55.812 +03:00 [DBG] Link generation succeeded for endpoints ["Route: {controller=Home}/{action=Index}/{id?}"] with result /Home/Privacy
+2021-01-02 16:48:55.832 +03:00 [INF] Executed ViewResult - view Index executed in 170.657ms.
+2021-01-02 16:48:55.835 +03:00 [INF] Executed action ImageManager.MVC.Controllers.HomeController.Index (ImageManager.MVC) in 212.3485ms
+2021-01-02 16:48:55.840 +03:00 [INF] Executed endpoint 'ImageManager.MVC.Controllers.HomeController.Index (ImageManager.MVC)'
+2021-01-02 16:48:55.848 +03:00 [INF] Request finished in 535.7626ms 200 text/html; charset=utf-8
+2021-01-02 16:49:03.910 +03:00 [DBG] Connection id "0HM5F4KHUQOQR" received FIN.
+2021-01-02 16:49:03.930 +03:00 [DBG] Connection id "0HM5F4KHUQOQR" is closed. The last processed stream ID was 1.
+2021-01-02 16:49:03.932 +03:00 [DBG] Connection id "0HM5F4KHUQOQR" sending FIN because: "The client closed the connection."
+2021-01-02 16:49:03.935 +03:00 [DBG] Connection id "0HM5F4KHUQOQR" stopped.
