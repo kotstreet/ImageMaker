@@ -1,6 +1,8 @@
 using ImageManager.MVC.Constants;
 using ImageManager.MVC.Infrastructure;
 using ImageManager.MVC.Models;
+using ImageManager.MVC.Services;
+using ImageManager.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -25,6 +27,8 @@ namespace ImageManager.MVC
         {
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(ConnectionStrings.DefaultConnection)));
+
+            services.AddTransient<IAccountService, AccountService>();
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {

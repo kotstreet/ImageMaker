@@ -1,0 +1,52 @@
+﻿@model ImageManager.MVC.ViewModels.RegisterViewModel
+
+@{
+    ViewBag.Title = "Регистрация";
+}
+
+<div class="row justify-content-center">
+    <div class="text-center pt-md-5 mt-md-2">
+        <div class="mb-4">
+            <h2>Регистрация</h2>
+        </div>
+        <div class="border border-secondary rounded bg-white">
+            @using (@Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, null, new { @class = "text-danger small" })
+                <div class="form-group pl-md-5 pr-md-5 pt-md-3 pb-md-2 text-md-left">
+                    <div class="pt-md-1">
+                        @Html.LabelFor(model => model.LastName, "Фамилия", new { @class = "small" })<br />
+                        @Html.TextBoxFor(model => model.LastName)<br />
+                        @Html.ValidationMessageFor(model => model.LastName, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.FirstName, "Имя", new { @class = "small" })<br />
+                        @Html.TextBoxFor(model => model.FirstName)<br />
+                        @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.Email, "Почта", new { @class = "small" })<br />
+                        @Html.TextBoxFor(model => model.Email)<br />
+                        @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.Password, "Пароль", new { @class = "small" })<br />
+                        @Html.PasswordFor(model => model.Password)<br />
+                        @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.ConfirmPassword, "Подтверждение пароля", new { @class = "small" })<br />
+                        @Html.PasswordFor(model => model.ConfirmPassword)<br />
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-4 ">
+                        <input type="submit" class="btn btn-success" value="Зарегестрироваться" \>
+                    </div>
+                </div>
+            }
+        </div>
+        <br />
+        <br />
+    </div>
+</div>
