@@ -1,0 +1,10 @@
+﻿namespace ImageManager.MVC.Constants
+{
+    public static class ModelErrorMessages
+    {
+        public const string UserNotExist = "Такого пользвателя не существует.";
+        public const string PasswordOrEmailIncorrect = "Почта или пароль указаны неверно.";
+        public const string EmailIsNotUnique = "Такая почта уже существует.";
+        public const string SomethingIsGoingWrong = "Что-то пошло не так.";
+    }
+}

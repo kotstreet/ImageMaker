@@ -41,14 +41,14 @@ namespace ImageManager.MVC.Controllers
             var user = await _accountService.FindUserAsync(model.Email);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Такого пользвателя не существует.");
+                ModelState.AddModelError(string.Empty, ModelErrorMessages.UserNotExist);
                 _logger.LogDebug("Login action, user with such email is not exist yet.");
                 return View(model);
             }
 
             if (!await _accountService.CheckPasswordAsync(user, model.Password))
             {
-                ModelState.AddModelError(string.Empty, "Почта или пароль указаны неверно.");
+                ModelState.AddModelError(string.Empty, ModelErrorMessages.PasswordOrEmailIncorrect);
                 _logger.LogDebug("Login action, password is not valid for the email.");
                 return View(model);
             }
@@ -80,7 +80,7 @@ namespace ImageManager.MVC.Controllers
 
             if (!await _accountService.IsEmailUniqueAsync(model.Email))
             {
-                ModelState.AddModelError(string.Empty, "Такая почта уже существует.");
+                ModelState.AddModelError(string.Empty, ModelErrorMessages.EmailIsNotUnique);
                 _logger.LogDebug("Register action, email is not unique.");
                 return View(model);
             }
@@ -96,7 +96,7 @@ namespace ImageManager.MVC.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Что-то пошло не так.");
+                ModelState.AddModelError(string.Empty, ModelErrorMessages.SomethingIsGoingWrong);
                 _logger.LogDebug("Register action, something was wrong while create user.");
                 return View(model);
             }
