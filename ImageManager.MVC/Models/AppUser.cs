@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ImageManager.MVC.Models
 {
@@ -11,7 +12,24 @@ namespace ImageManager.MVC.Models
         /// <summary>
         /// User fullname.
         /// </summary>
-        public string FullName { get; set; }
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+
+        /// <summary>
+        /// User first name.
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// User last name.
+        /// </summary>
+        public string LastName { get; set; }
 
         /// <summary>
         /// Is user active on site.

@@ -9,11 +9,14 @@ namespace ImageManager.MVC.Infrastructure
     {
         private const string AdminPassword = "admin1";
         private const string AdminEmail = "admin@mail.ru";
-        private const string AdminFullName = "Anton Antonov";
+        private const string AdminFirstName = "Anton";
+        private const string AdminLastName = "Antonov";
 
         private const string UserPassword = "user11";
         private const string UserEmail = "user@mail.ru";
-        private const string UserFullName = "Ivan Ivanov";
+        private const string UserFirstName = "Ivan";
+        private const string UserLastName = "Ivanov";
+
 
         private static async Task AddAdminAsync(UserManager<AppUser> userManager,
             IdentityRole adminRole,
@@ -28,7 +31,9 @@ namespace ImageManager.MVC.Infrastructure
             {
                 UserName = AdminEmail,
                 Email = AdminEmail,
-                FullName = AdminFullName,
+                FirstName = AdminFirstName,
+                LastName = AdminLastName,
+                IsActive = true,
             };
             var resultAdmin = await userManager.CreateAsync(admin, AdminPassword);
             if (resultAdmin.Succeeded)
@@ -49,7 +54,9 @@ namespace ImageManager.MVC.Infrastructure
             {
                 UserName = UserEmail,
                 Email = UserEmail,
-                FullName = UserFullName,
+                FirstName = UserFirstName,
+                LastName = UserLastName,
+                IsActive = true,
             };
             var resultUser = await userManager.CreateAsync(user, UserPassword);
             if (resultUser.Succeeded)

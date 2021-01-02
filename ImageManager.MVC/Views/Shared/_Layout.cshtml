@@ -25,7 +25,8 @@
             <div class="d-sm-inline-flex pr-md-5">
                 @if (User.Identity.IsAuthenticated)
                 {
-                @Html.ActionLink("Выход", "Logout", "Account", null, new { @class = "text-white m-2", id = "logoutLink" })
+                    @Html.ActionLink(User.Identity.Name, "Show", "Profile", null, new { @class = "text-white m-2", id = "profileLink" })
+                    @Html.ActionLink("Выход", "Logout", "Account", null, new { @class = "text-white m-2", id = "logoutLink" })
                 }
                 else
                 {

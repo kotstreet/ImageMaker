@@ -2,6 +2,7 @@
 using ImageManager.MVC.Models;
 using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
@@ -52,7 +53,8 @@ namespace ImageManager.MVC.Services
             {
                 UserName = model.Email,
                 Email = model.Email,
-                FullName = $"{model.FirstName} {model.LastName}",
+                FirstName = model.FirstName,
+                LastName = model.LastName,
                 IsActive = true,
             };
 
