@@ -1,13 +1,17 @@
 ﻿using ImageManager.MVC.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ImageManager.MVC.Infrastructure
 {
+    /// <summary>
+    /// Database context for the app that implement identity logic.
+    /// </summary>
     public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {        
-        public AppIdentityDbContext(string connectionString)
-               : base(CreateContextOptions(connectionString))
+        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options)
+               : base(options)
         {
             Database.EnsureCreated();
         }
@@ -16,23 +20,5 @@ namespace ImageManager.MVC.Infrastructure
         /// It's a purchaice history set.
         /// </summary>
         public DbSet<Image> Images { get; set; }
-        
-        private static DbContextOptions<AppIdentityDbContext> CreateContextOptions(string connection)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<AppIdentityDbContext>();
-            return optionsBuilder
-                    .UseSqlServer(connection)
-                    .Options;
-        }
-
-        ////protected override void OnModelCreating(ModelBuilder modelBuilder)
-        ////{
-        ////    modelBuilder.Entity<AppUser>().HasData(
-        ////        new AppUser[]
-        ////        {
-        ////        new AppUser { Name="Tom", Age=23},
-        ////        new AppUser { FullName="Alice", Age=26},
-        ////        });
-        ////}
     }
 }

@@ -1,17 +1,13 @@
+using ImageManager.MVC.Constants;
 using ImageManager.MVC.Infrastructure;
 using ImageManager.MVC.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ImageManager.MVC
 {
@@ -25,9 +21,9 @@ namespace ImageManager.MVC
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        { 
+        {
             services.AddDbContext<AppIdentityDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString(ConnectionStrings.DefaultConnection)));
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {
@@ -37,10 +33,15 @@ namespace ImageManager.MVC
             })
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
 
+
+
             services.AddControllersWithViews();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app,
+            IWebHostEnvironment env,
+            UserManager<AppUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -58,6 +59,8 @@ namespace ImageManager.MVC
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            IdentityDbInit.SeedDataAsync(userManager, roleManager).Wait();
 
             app.UseEndpoints(endpoints =>
             {

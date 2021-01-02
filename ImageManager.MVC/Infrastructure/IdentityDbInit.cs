@@ -1,13 +1,11 @@
 ﻿using ImageManager.MVC.Constants;
 using ImageManager.MVC.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace ImageManager.MVC.Infrastructure
 {
-    internal class IdentityDbInit
-        : DropCreateDatabaseIfModelChanges<AppIdentityDbContext>
+    internal static class IdentityDbInit
     {
         private const string AdminPassword = "admin1";
         private const string AdminEmail = "admin@mail.ru";
@@ -21,6 +19,11 @@ namespace ImageManager.MVC.Infrastructure
             IdentityRole adminRole,
             IdentityRole userRole)
         {
+            if (await userManager.FindByEmailAsync(AdminEmail) != null)
+            {
+                return;
+            }
+
             var admin = new AppUser
             {
                 UserName = AdminEmail,
@@ -37,6 +40,11 @@ namespace ImageManager.MVC.Infrastructure
 
         private static async Task AddUserAsync(UserManager<AppUser> userManager, IdentityRole userRole)
         {
+            if (await userManager.FindByEmailAsync(UserEmail) != null)
+            {
+                return;
+            }
+
             var user = new AppUser
             {
                 UserName = UserEmail,
@@ -50,22 +58,21 @@ namespace ImageManager.MVC.Infrastructure
             }
         }
 
-        protected override Task Seed(AppIdentityDbContext context)
+        public static async Task SeedDataAsync(UserManager<AppUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
-            await PerformInitialSetupAsync(context);
-            base.Seed(context);
-        }
-
-        private static async Task PerformInitialSetupAsync(AppIdentityDbContext context)
-        {
-            var userManager = new UserManager<AppUser>(new UserStore<AppUser>(context));
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
             var adminRole = new IdentityRole { Name = UserRoles.Admin };
             var userRole = new IdentityRole { Name = UserRoles.User };
 
-            await roleManager.CreateAsync(adminRole);
-            await roleManager.CreateAsync(userRole);
+            if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+            {
+                await roleManager.CreateAsync(adminRole);
+            }
+
+            if (!await roleManager.RoleExistsAsync(UserRoles.User))
+            {
+                await roleManager.CreateAsync(userRole);
+            }
 
             await AddAdminAsync(userManager, adminRole, userRole);
             await AddUserAsync(userManager, userRole);
