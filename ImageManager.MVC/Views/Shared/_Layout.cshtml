@@ -18,7 +18,7 @@
                 }
                 @if (User.IsInRole(ImageManager.MVC.Constants.UserRoles.Admin))
                 {
-                    @Html.ActionLink("Пользователи", "Venues", "Home", null, new { @class = "text-white m-2" })
+                    @Html.ActionLink("Пользователи", "ShowAll", "User", null, new { @class = "text-white m-2" })
                 }
             </div>
 

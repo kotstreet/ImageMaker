@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ImageManager.MVC.ViewModels.UserWithRolesInfoViewModel>
+@{
+    ViewData["Title"] = "Пользователи";
+}
+
+
+<div class="col">
+    <div class="text-center m-sm-1">
+        <p class="display-3 ">Пользователи</p>
+    </div>
+    <br />
+    <div>
+        <table class="table ">
+            <tr class="font-weight-bold text-center text-secondary justify-content-between">
+                <td style="width:25vw">Почта</td>
+                <td style="width:35vw">Имя</td>
+                <td style="width:10vw">Админ</td>
+                <td style="width:15vw">Пользователь</td>
+                <td style="width:15vw"></td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="text-black-50">
+                    <td>@item.Email</td>
+                    <td>@item.FullName</td>
+                    <td class="text-sm-center">@(item.IsAdmin ? "да" : "нет")</td>
+                    <td class="text-sm-center">@(item.IsUser ? "да" : "нет")</td>
+                    @if (item.IsActive)
+                    {
+                        <td title="Сейчас пользователь активирован.">
+                            <a class="btn btn-danger" asp-action="Deactivate" asp-controller="User" asp-route-userId="@item.Id">Деактивировать</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td title="Сейчас пользователь деактивирован.">
+                            <a class="btn btn-success" asp-action="Activate" asp-controller="User" asp-route-userId="@item.Id">Активировать</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</div>

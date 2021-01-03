@@ -93,3 +93,4 @@ D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\bin\Debug\netcoreapp3.1\Serilog.S
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Show.cshtml.g.cs
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\Razor\Views\User\ShowAll.cshtml.g.cs
