@@ -11,5 +11,17 @@ namespace ImageManager.MVC.Services.Interfaces
         /// </summary>
         /// <returns>UserWithRolesInfoViewModel.</returns>
         Task<List<UserWithRolesInfoViewModel>> GetAllUsersWithRolesAsync();
+
+        /// <summary>
+        /// Activate user.
+        /// </summary>
+        /// <param name="userId">The user id.</param>
+        Task ActivateAsync(string userId);
+
+        /// <summary>
+        /// Deactivate user.
+        /// </summary>
+        /// <param name="userId">The user id.</param>
+        Task DeactivateAsync(string userId);
     }
 }

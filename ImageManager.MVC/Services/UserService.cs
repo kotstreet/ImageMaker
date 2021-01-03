@@ -47,19 +47,20 @@ namespace ImageManager.MVC.Services
             });
 
             return usersWithRoleInfo.ToListAsync();
-            //return await (from user in users
-            //              join userRole in userRoles on user.Id equals userRole.UserId
-            //              join role in roles on userRole.RoleId equals role.Id
-            //              select new UserWithRolesInfoViewModel
-            //              {
-            //                  Id = user.Id,
-            //                  Email = user.Email,
-            //                  FullName = user.FullName,
-            //                  IsActive = user.IsActive,
-            //                  IsAdmin = role.Name == UserRoles.Admin,
-            //                  IsUser = role.Name == UserRoles.User,
-            //              })
-            //        .ToListAsync();
+        }
+
+        public async Task ActivateAsync(string userId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            user.IsActive = true;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeactivateAsync(string userId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            user.IsActive = false;
+            await _context.SaveChangesAsync();
         }
     }
 }
