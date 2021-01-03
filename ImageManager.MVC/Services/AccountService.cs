@@ -2,7 +2,6 @@
 using ImageManager.MVC.Models;
 using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 

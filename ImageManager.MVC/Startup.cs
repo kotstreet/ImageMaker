@@ -29,6 +29,7 @@ namespace ImageManager.MVC
                 options.UseSqlServer(Configuration.GetConnectionString(ConnectionStrings.DefaultConnection)));
 
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IProfileService, ProfileService>();
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {

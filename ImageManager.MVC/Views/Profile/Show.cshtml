@@ -1,0 +1,37 @@
+﻿@model ImageManager.MVC.ViewModels.UserInfoViewModel
+
+@{
+    ViewBag.Title = "Профиль";
+}
+
+<div class="row justify-content-center">
+    <div class="text-center pt-md-5 mt-md-2">
+        <div class="mb-4">
+            <h2>Информация пользователя</h2>
+        </div>
+        <br />
+
+        <div class="text-center">
+            <div class="border rounded m-sm-3 p-sm-4 bg-lightgrey">
+                <div>
+                    <div class="text-sm-left">
+                        @{
+                            var isActive = Model.IsActive ? "активирован" : "заблокирован";
+                        }
+                        Почта: <i>@Model.Email</i><br />
+                        Фамилия: <i>@Model.LastName</i><br />
+                        Имя: <i>@Model.FirstName</i><br />
+                        Активность: <i>@isActive</i><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-2">
+            <b>
+                <button class="btn btn-info" onclick="window.history.back()">Назад</button>
+            </b>
+        </div>
+
+    </div>
+</div>
