@@ -1,8 +1,73 @@
-﻿.zoom {
-    transition: transform .2s;
+﻿.btn-filter {
+    width: 100% !important;
+    background-color: #d4fff8;
 }
 
-.zoom:hover {
-    transform: scale(1.2);
+.btn-filter:hover {
+    border:solid;
+    border-bottom-width: 1px;
+    border-color: black;
+    transform: scale(1.1);
 }
 
+.btn-menu {
+    width: 15% !important;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.btn-menu-save {
+    border-color: #00bf06;
+    border-width: 1px;
+    border-radius: 0.25rem !important;
+}
+
+.btn-menu-save:hover {
+    background-color: #00bf06;
+    color: white;
+}
+
+.btn-menu-open {
+    border-color: #0020bf;
+    border-width: 1px;
+    border-radius: 0.25rem !important;
+}
+
+.btn-menu-open:hover {
+    background-color: #0020bf;
+    color: white;
+}
+
+.btn-menu-redo {
+    border-color: #fad900;
+    border-width: 1px;
+    border-radius: 0.25rem !important;
+}
+
+.btn-menu-redo:hover {
+    background-color: #fad900;
+}
+
+.btn-menu-undo {
+    border-color: #fad900;
+    border-width: 1px;
+    border-radius: 0.25rem !important;
+}
+
+.btn-menu-undo:hover {
+    background-color: #fad900;
+}
+
+.canvas-div {
+    overflow: scroll;
+    max-width: 900px !important;
+    max-height: 550px !important;
+}
+
+.work-div {
+    min-width: 1200px;
+}
+
+.tool-div {
+    min-width: 275px;
+}

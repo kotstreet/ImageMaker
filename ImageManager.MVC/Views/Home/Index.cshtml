@@ -1,8 +1,51 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Главная";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="col-sm-12">
+    <br />
+    <div class="row pt-sm-3 pb-sm-3">
+        <input type="hidden" id="imageUrl" />
+        <input type="file" accept=".jpg, .jpeg, .png" hidden id="fileInputItem" onchange="inputFile_changed(this.files)" />
+
+        <button id="openButton" class="btn btn-menu btn-menu-open ml-0" onclick="open_click();"> Открыть</button>
+        <button id="saveButtton" class="btn btn-menu btn-menu-save">Сохранить</button>
+        <button id="saveAsButton" class="btn btn-menu btn-menu-save mr-5">Сохранить как...</button>
+        <button id="undoButton" class="btn btn-menu btn-menu-undo ml-5">Назад</button>
+        <button id="redoButton" class="btn btn-menu btn-menu-redo mr-0">Вперёд</button>
+    </div>
+
+    <div class="row work-div">
+        <div class="pl-sm-4 pr-sm-4 border rounded tool-div">
+            <b>Модераторы</b><br />
+            <button id="cutAction" class="btn btn-filter">обрезать</button><br />
+            <button id="resizeAction" class="btn btn-filter">изменить размер</button><br />
+            <br />
+
+            <b>Повороты</b><br />
+            <button id="rightRotate" class="btn btn-filter">поворот вправо</button><br />
+            <button id="leftRotate" class="btn btn-filter">поворот влево</button><br />
+            <br />
+
+            @*<b>Рамка</b><br />
+            <button id="kingBorder" class="btn btn-filter">царская</button><br />
+            <button id="paperBorder" class="btn btn-filter">бумажная</button><br />
+            <button id="noneBorder" class="btn btn-filter">нет</button><br />
+            <br />*@
+
+            <b>Фильтры</b><br />
+            <button id="autumnFilter" class="btn btn-filter">осень</button><br />
+            <button id="winterFilter" class="btn btn-filter">зима</button><br />
+            <button id="springFilter" class="btn btn-filter">весна</button><br />
+            <button id="summerFilter" class="btn btn-filter">лето</button><br />
+            <button id="blackWhiteFilter" class="btn btn-filter">черно-белое</button><br />
+            <button id="noneFilter" class="btn btn-filter">нет</button><br />
+
+        </div>
+
+        <div class=" canvas-div">
+            <canvas height="3500" width="5800" id="myCanvas" class="bg-secondary "></canvas>
+        </div>
+    </div>
 </div>
+<br />

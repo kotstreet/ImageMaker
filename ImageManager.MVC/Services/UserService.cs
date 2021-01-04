@@ -23,7 +23,7 @@ namespace ImageManager.MVC.Services
             _logger = logger;
         }
 
-        public Task<List<UserWithRolesInfoViewModel>> GetAllUsersWithRolesAsync()
+        public async Task<List<UserWithRolesInfoViewModel>> GetAllUsersWithRolesAsync()
         {
             var users = _context.Users.AsQueryable();
             var userRoles = _context.UserRoles.AsQueryable();
@@ -51,7 +51,7 @@ namespace ImageManager.MVC.Services
                   .Any(),
             });
 
-            var usersForReturn = usersWithRoleInfo
+            var usersForReturn = await usersWithRoleInfo
                 .OrderByDescending(user => user.IsAdmin)
                 .ThenBy(user => user.Email)
                 .ToListAsync();

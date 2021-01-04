@@ -1,47 +1,31 @@
-﻿
-$(function () {
-    $.ajaxSetup({ cache: false });
-    $(".delItem").click(function (e) {
+﻿function inputFile_changed(files) {
+	if (!files.length) {
+		return;
+	}
 
-        e.preventDefault();
-        $.get(this.href, function (data) {
-            $('#dialogContent').html(data);
-            $('#modDialog').modal('show');
-        });
-    });
-})
+	var size = files[0].size + " байт;"
 
-$(document).ready(function () {
-    $("#generalInfo").on("hide.bs.collapse", function () {
-        $(".btn-collapse").html('Показать общую статистику <i class="fas fa-chevron-down"></i>');
-    });
-    $("#generalInfo").on("show.bs.collapse", function () {
-        $(".btn-collapse").html('Скрыть общую статистику <i class="fas fa-chevron-up"></i>');
-    });
-});
+	var canvas = document.getElementById("myCanvas");
+	var context = canvas.getContext("2d");
+
+	var imgUrl = window.URL.createObjectURL(files[0])
+	var img = new Image();
+	img.onload = function () {
+		canvas.width = this.width;
+		canvas.height = this.height;
+
+		context.drawImage(img, 0, 0, this.width, this.height);
+		canvas.title = "ширина: " + this.width + "; высота: " + this.height + "; " + size;
+	};
+
+	var imageUrlInput = document.getElementById("imageUrl");
+	imageUrlInput.value = imgUrl;
+
+	img.src = imgUrl;
+}
 
 
-$(function () {
-    $.ajaxSetup({ cache: false });
-    $(".delItem").click(function (e) {
-
-        e.preventDefault();
-        $.get(this.href, function (data) {
-            $('#dialogContentDelete').html(data);
-            $('#modDialogDelete').modal('show');
-        });
-    });
-})
-
-$(function () {
-    $.ajaxSetup({ cache: false });
-    $(".carryItem").click(function (e) {
-
-        e.preventDefault();
-        $.get(this.href, function (data) {
-            $('#dialogContentCarry').html(data);
-            $('#modDialogCarry').modal('show');
-        });
-    });
-})
-
+function open_click() {
+	var fileInputItem = document.getElementById("fileInputItem");
+	fileInputItem.click();
+}
