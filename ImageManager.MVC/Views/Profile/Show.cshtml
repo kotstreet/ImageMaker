@@ -15,13 +15,9 @@
             <div class="border rounded m-sm-3 p-sm-4 bg-lightgrey">
                 <div>
                     <div class="text-sm-left">
-                        @{
-                            var isActive = Model.IsActive ? "активирован" : "заблокирован";
-                        }
                         Почта: <i>@Model.Email</i><br />
                         Фамилия: <i>@Model.LastName</i><br />
                         Имя: <i>@Model.FirstName</i><br />
-                        Активность: <i>@isActive</i><br />
                     </div>
                 </div>
             </div>
@@ -30,6 +26,9 @@
         <div class="m-2">
             <b>
                 <button class="btn btn-info" onclick="window.history.back()">Назад</button>
+            </b>
+            <b>
+                <a class="btn btn-info" asp-route-userId="@Model.Id" asp-action="Edit" asp-controller="Profile">Изменить</a>
             </b>
         </div>
 

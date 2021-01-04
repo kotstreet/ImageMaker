@@ -22,7 +22,6 @@ namespace ImageManager.MVC.Services
                 Email = appUser.Email,
                 FirstName = appUser.FirstName,
                 LastName = appUser.LastName,
-                IsActive = appUser.IsActive,
             };
         }
     }

@@ -21,10 +21,5 @@
         /// User last name.
         /// </summary>
         public string LastName { get; set; }
-
-        /// <summary>
-        /// Is user active on site.
-        /// </summary>
-        public bool IsActive { get; set; }
     }
 }
