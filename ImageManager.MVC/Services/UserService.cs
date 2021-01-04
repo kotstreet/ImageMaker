@@ -3,6 +3,8 @@ using ImageManager.MVC.Infrastructure;
 using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,10 +14,13 @@ namespace ImageManager.MVC.Services
     public class UserService : IUserService
     {
         private readonly AppIdentityDbContext _context;
+        private readonly ILogger<UserService> _logger;
 
-        public UserService(AppIdentityDbContext context)
+        public UserService(AppIdentityDbContext context,
+            ILogger<UserService> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public Task<List<UserWithRolesInfoViewModel>> GetAllUsersWithRolesAsync()
@@ -50,6 +55,8 @@ namespace ImageManager.MVC.Services
                 .OrderByDescending(user => user.IsAdmin)
                 .ThenBy(user => user.Email)
                 .ToListAsync();
+
+            _logger.LogInformation($"GetAllUsersWithRolesAsync method of UserService before return, usersForReturn= {JsonConvert.SerializeObject(usersForReturn)}.");
             return usersForReturn;
         }
 
