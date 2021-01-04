@@ -7,5 +7,8 @@
 
         public const string UserController = "User";
         public const string ShowAllAction = "ShowAll";
+
+        public const string ProfileController = "Profile";
+        public const string ShowAction = "Show";
     }
 }

@@ -15,21 +15,17 @@
             <div class="border rounded m-sm-3 p-sm-4 bg-lightgrey">
                 <div>
                     <div class="text-sm-left">
-                        Почта: <i>@Model.Email</i><br />
-                        Фамилия: <i>@Model.LastName</i><br />
-                        Имя: <i>@Model.FirstName</i><br />
+                        <span class="text-black-50">Почта:</span> <i>@Model.Email</i><br />
+                        <span class="text-black-50">Фамилия:</span> <i>@Model.LastName</i><br />
+                        <span class="text-black-50">Имя:</span> <i>@Model.FirstName</i><br />
                     </div>
                 </div>
+                <br />
+                <div class="m-2 row justify-content-sm-around">
+                    <button class="btn btn-outline-warning mr-sm-2" onclick="window.history.back()">Назад</button>
+                    <a class="btn btn-outline-info" asp-route-userId="@Model.Id" asp-action="Edit" asp-controller="Profile">Изменить</a>
+                </div>
             </div>
-        </div>
-
-        <div class="m-2">
-            <b>
-                <button class="btn btn-info" onclick="window.history.back()">Назад</button>
-            </b>
-            <b>
-                <a class="btn btn-info" asp-route-userId="@Model.Id" asp-action="Edit" asp-controller="Profile">Изменить</a>
-            </b>
         </div>
 
     </div>
