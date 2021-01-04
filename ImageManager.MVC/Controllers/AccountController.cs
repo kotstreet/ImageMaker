@@ -52,6 +52,12 @@ namespace ImageManager.MVC.Controllers
                 _logger.LogDebug("Login action, password is not valid for the email.");
                 return View(model);
             }
+            else if (!user.IsActive)
+            {
+                ModelState.AddModelError(string.Empty, ModelErrorMessages.UserIsNotActive);
+                _logger.LogDebug("Login action, user is not activated.");
+                return View(model);
+            }
             else
             {
                 await _accountService.SignInAsync(user);

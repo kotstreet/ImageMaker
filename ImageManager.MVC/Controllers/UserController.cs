@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ImageManager.MVC.Controllers
 {
-    [Authorize(UserRoles.Admin)]
+    [Authorize(Roles = UserRoles.Admin)]
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;

@@ -46,7 +46,11 @@ namespace ImageManager.MVC.Services
                   .Any(),
             });
 
-            return usersWithRoleInfo.ToListAsync();
+            var usersForReturn = usersWithRoleInfo
+                .OrderByDescending(user => user.IsAdmin)
+                .ThenBy(user => user.Email)
+                .ToListAsync();
+            return usersForReturn;
         }
 
         public async Task ActivateAsync(string userId)

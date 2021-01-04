@@ -2,6 +2,7 @@
 {
     public static class ModelErrorMessages
     {
+        public const string UserIsNotActive = "Учетная запись деактивирована.";
         public const string UserNotExist = "Такого пользвателя не существует.";
         public const string PasswordOrEmailIncorrect = "Почта или пароль указаны неверно.";
         public const string EmailIsNotUnique = "Такая почта уже существует.";
