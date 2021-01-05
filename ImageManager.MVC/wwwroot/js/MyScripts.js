@@ -1,6 +1,7 @@
 ﻿var canvas = document.getElementById("myCanvas");
 var imageUrlInput = document.getElementById("imageUrl");
 var fileInputItem = document.getElementById("fileInputItem");
+var downloadLnkItem = document.getElementById("downloadLnk");
 
 var blurFilterButton = document.getElementById("blurFilter");
 var brightnessFilterButton = document.getElementById("brightnessFilter");
@@ -34,6 +35,7 @@ var filters = [
 
 var angle = 0;
 var size = 0;
+var filter = 'none';
 
 function calcAngle(incAngle) {
 	angle = angle + incAngle;
@@ -46,53 +48,16 @@ function calcAngle(incAngle) {
 }
 
 function calcCanvasWidth(width) {
-	if (width > 900) {
-		canvas.width = width;
-	}
-	else {
-		canvas.width = 900;
-	}
+	canvas.width = width;
 }
 
 function calcCanvasHeight(height) {
-	if (height > 550) {
-		canvas.height = height;
-	}
-	else {
-		canvas.height = 550;
-	}
+	canvas.height = height;
 }
 
 function setCanvasTitle(width, height) {
 	canvas.title = "ширина: " + width + "; высота: " + height + "; " + size + " байт;";
 }
-
-//function settingCanvasByAngle(context, img) {
-//	switch (angle) {
-//		case 90:
-//			calcCanvasWidth(img.height);
-//			calcCanvasHeight(img.width);
-//			setCanvasTitle(img.height, this.width);
-//			context.translate(img.height, 0);
-//			break;
-//		case 180:
-//			calcCanvasWidth(img.width);
-//			calcCanvasHeight(img.height);
-//			setCanvasTitle(img.width, img.height);
-//			context.translate(img.width, img.height);
-//			break;
-//		case 270:
-//			calcCanvasWidth(img.height);
-//			calcCanvasHeight(img.width);
-//			setCanvasTitle(img.height, img.width);
-//			context.translate(0, img.width);
-//			break;
-//		default:
-//			calcCanvasWidth(img.width);
-//			calcCanvasHeight(img.height);
-//			setCanvasTitle(img.width, img.height);
-//	}
-//}
 
 function settingCanvasByAngle() {
 	var context = canvas.getContext("2d");
@@ -129,6 +94,7 @@ function settingCanvasByAngle() {
 		}
 
 		context.rotate(angle * Math.PI / 180);
+		context.filter = filter;
 		context.drawImage(img, 0, 0);
 		context.restore();
 	};
@@ -166,8 +132,20 @@ function inputFile_changed(files) {
 
 	imageUrlInput.value = imgUrl;
 	img.src = imgUrl;
+
 	angle = 0;
-	noneFilterButton.click();
+	filter = "none";
+	someFiterClick(noneFilterButton);
+}
+
+function save_click() {
+	var url = canvas.toDataURL('image/jpeg');
+
+	console.log("url = " + url); //
+	alert(url); //
+
+	downloadLnkItem.href = url;
+	downloadLnkItem.click();
 }
 
 function open_click() {
@@ -186,61 +164,73 @@ function someFiterClick(button) {
 
 
 function noneFiltrButton_click() {
-	canvas.style.filter = "none";
+	filter = 'none';
+	settingCanvasByAngle();
 	someFiterClick(noneFilterButton);
 }
 
 function blurFiltrButton_click() {
-	canvas.style.filter = "blur(3px)";
+	filter = 'blur(3px)';
+	settingCanvasByAngle();
 	someFiterClick(blurFilterButton);
 }
 
 function brightnessFiltrButton_click() {
-	canvas.style.filter = "brightness(150%)";
+	filter = "brightness(150%)";
+	settingCanvasByAngle();
 	someFiterClick(brightnessFilterButton);
 }
 
 function notBrightnessFiltrButton_click() {
-	canvas.style.filter = "brightness(50%)";
+	filter = "brightness(50%)";
+	settingCanvasByAngle();
 	someFiterClick(notBrightnessFilterButton);
 }
 
 function contrastFiltrButton_click() {
-	canvas.style.filter = "contrast(25%)";
+	filter = "contrast(25%)";
+	settingCanvasByAngle();
 	someFiterClick(contrastFilterButton);
 }
 
 function shadowFiltrButton_click() {
-	canvas.style.filter = "drop-shadow(0 0 3px rgba(100,0,0,0.5))";
+	filter = "drop-shadow(0 0 3px rgba(100,0,0,0.5))";
+	settingCanvasByAngle();
 	someFiterClick(shadowFilterButton);
 }
 
 function grayscaleButton_click() {
-	canvas.style.filter = "grayscale(1)";
+	filter = 'grayscale(1)';
+	settingCanvasByAngle();
 	someFiterClick(grayscaleFilterButton);
 }
 
 function invertButton_click() {
-	canvas.style.filter = "invert(100%)";
+	filter = "invert(100%)";
+	settingCanvasByAngle();
 	someFiterClick(invertFilterButton);
 }
 
 function hueRotate1Button_click() {
-	canvas.style.filter = "hue-rotate(90deg)";
+	filter = "hue-rotate(90deg)";
+	settingCanvasByAngle();
 	someFiterClick(hueRotate1FilterButton);
 }
 
 function hueRotate2Button_click() {
-	canvas.style.filter = "hue-rotate(180deg)";
+	filter = "hue-rotate(180deg)";
+	settingCanvasByAngle();
 	someFiterClick(hueRotate2FilterButton);
 }
 
 function hueRotate3Button_click() {
-	canvas.style.filter = "hue-rotate(270deg)";
+	filter = "hue-rotate(270deg)";
+	settingCanvasByAngle();
 	someFiterClick(hueRotate3FilterButton);
 }
 
 function sepiaFiltrButton_click() {
-	canvas.style.filter = "sepia(75%)";
+	filter = "sepia(75%)";
+	settingCanvasByAngle();
 	someFiterClick(sepiaFilterButton);
 }

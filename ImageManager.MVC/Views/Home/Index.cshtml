@@ -7,9 +7,10 @@
     <div class="row pt-sm-3 pb-sm-3">
         <input type="hidden" id="imageUrl" />
         <input type="file" accept=".jpg, .jpeg, .png" hidden id="fileInputItem" onchange="inputFile_changed(this.files)" />
+        <a id="downloadLnk" download="File from online editor.jpg" hidden></a>
 
         <button id="openButton" class="btn btn-menu btn-menu-open ml-0" onclick="open_click();"> Открыть</button>
-        <button id="saveButtton" class="btn btn-menu btn-menu-save">Сохранить</button>
+        <button id="saveButtton" class="btn btn-menu btn-menu-save" onclick="save_click();">Сохранить</button>
         <button id="saveAsButton" class="btn btn-menu btn-menu-save mr-5">Сохранить как...</button>
         <button id="undoButton" class="btn btn-menu btn-menu-undo ml-5">Назад</button>
         <button id="redoButton" class="btn btn-menu btn-menu-redo mr-0">Вперёд</button>
@@ -46,8 +47,8 @@
 
         </div>
 
-        <div class=" canvas-div">
-            <canvas height="3500" width="5800" id="myCanvas" class="bg-secondary"></canvas>
+        <div class="bg-secondary canvas-div">
+            <canvas id="myCanvas" class=""></canvas>
         </div>
     </div>
 </div>

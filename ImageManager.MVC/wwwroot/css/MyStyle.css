@@ -62,6 +62,8 @@
     overflow: scroll;
     max-width: 900px !important;
     max-height: 550px !important;
+    min-width: 900px !important;
+    min-height: 550px !important;
 }
 
 .work-div {
