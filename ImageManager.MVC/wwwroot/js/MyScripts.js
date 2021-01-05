@@ -67,34 +67,34 @@ function setCanvasTitle(width, height) {
 	canvas.title = "ширина: " + width + "; высота: " + height + "; " + size + " байт;";
 }
 
-function settingCanvasByAngle(context, img) {
-	switch (angle) {
-		case 90:
-			calcCanvasWidth(img.height);
-			calcCanvasHeight(img.width);
-			setCanvasTitle(img.height, this.width);
-			context.translate(img.height, 0);
-			break;
-		case 180:
-			calcCanvasWidth(img.width);
-			calcCanvasHeight(img.height);
-			setCanvasTitle(img.width, img.height);
-			context.translate(img.width, img.height);
-			break;
-		case 270:
-			calcCanvasWidth(img.height);
-			calcCanvasHeight(img.width);
-			setCanvasTitle(img.height, img.width);
-			context.translate(0, img.width);
-			break;
-		default:
-			calcCanvasWidth(img.width);
-			calcCanvasHeight(img.height);
-			setCanvasTitle(img.width, img.height);
-	}
-}
+//function settingCanvasByAngle(context, img) {
+//	switch (angle) {
+//		case 90:
+//			calcCanvasWidth(img.height);
+//			calcCanvasHeight(img.width);
+//			setCanvasTitle(img.height, this.width);
+//			context.translate(img.height, 0);
+//			break;
+//		case 180:
+//			calcCanvasWidth(img.width);
+//			calcCanvasHeight(img.height);
+//			setCanvasTitle(img.width, img.height);
+//			context.translate(img.width, img.height);
+//			break;
+//		case 270:
+//			calcCanvasWidth(img.height);
+//			calcCanvasHeight(img.width);
+//			setCanvasTitle(img.height, img.width);
+//			context.translate(0, img.width);
+//			break;
+//		default:
+//			calcCanvasWidth(img.width);
+//			calcCanvasHeight(img.height);
+//			setCanvasTitle(img.width, img.height);
+//	}
+//}
 
-function rotateLeft_click() {
+function settingCanvasByAngle() {
 	var context = canvas.getContext("2d");
 	var imgUrl = imageUrlInput.value;
 	var img = new Image();
@@ -103,8 +103,30 @@ function rotateLeft_click() {
 		context.save();
 		context.clearRect(0, 0, canvas.width, canvas.height);
 
-		calcAngle(-90);
-		settingCanvasByAngle(context, this);		
+		switch (angle) {
+			case 90:
+				calcCanvasWidth(this.height);
+				calcCanvasHeight(this.width);
+				setCanvasTitle(this.height, this.width);
+				context.translate(this.height, 0);
+				break;
+			case 180:
+				calcCanvasWidth(this.width);
+				calcCanvasHeight(this.height);
+				setCanvasTitle(this.width, this.height);
+				context.translate(this.width, this.height);
+				break;
+			case 270:
+				calcCanvasWidth(this.height);
+				calcCanvasHeight(this.width);
+				setCanvasTitle(this.height, this.width);
+				context.translate(0, this.width);
+				break;
+			default:
+				calcCanvasWidth(this.width);
+				calcCanvasHeight(this.height);
+				setCanvasTitle(this.width, this.height);
+		}
 
 		context.rotate(angle * Math.PI / 180);
 		context.drawImage(img, 0, 0);
@@ -113,23 +135,14 @@ function rotateLeft_click() {
 	img.src = imgUrl;
 }
 
+function rotateLeft_click() {
+	calcAngle(-90);
+	settingCanvasByAngle();
+}
+
 function rotateRight_click() {
-	var context = canvas.getContext("2d");
-	var imgUrl = imageUrlInput.value;
-	var img = new Image();
-
-	img.onload = function () {
-		context.save();
-		context.clearRect(0, 0, canvas.width, canvas.height); 
-
-		calcAngle(90);
-		settingCanvasByAngle(context, this);
-
-		context.rotate(angle * Math.PI / 180); 
-		context.drawImage(img, 0, 0); 
-		context.restore();
-	};
-	img.src = imgUrl;
+	calcAngle(90);
+	settingCanvasByAngle();
 }
 
 function inputFile_changed(files) {
@@ -153,6 +166,7 @@ function inputFile_changed(files) {
 
 	imageUrlInput.value = imgUrl;
 	img.src = imgUrl;
+	angle = 0;
 	noneFilterButton.click();
 }
 
