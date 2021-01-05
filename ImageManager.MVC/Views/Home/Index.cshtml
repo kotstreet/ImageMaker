@@ -23,15 +23,9 @@
             <br />
 
             <b>Повороты</b><br />
-            <button id="rightRotate" class="btn btn-filter">поворот вправо</button><br />
-            <button id="leftRotate" class="btn btn-filter">поворот влево</button><br />
+            <button id="rightRotate" class="btn btn-filter" onclick="rotateRight_click()">поворот вправо</button><br />
+            <button id="leftRotate" class="btn btn-filter" onclick="rotateLeft_click()">поворот влево</button><br />
             <br />
-
-            @*<b>Рамка</b><br />
-        <button id="kingBorder" class="btn btn-filter">царская</button><br />
-        <button id="paperBorder" class="btn btn-filter">бумажная</button><br />
-        <button id="noneBorder" class="btn btn-filter">нет</button><br />
-        <br />*@
 
             <b>Фильтры</b><br />
             <button id="blurFilter" class="btn btn-filter" onclick="blurFiltrButton_click()">размытие</button><br />
@@ -53,7 +47,7 @@
         </div>
 
         <div class=" canvas-div">
-            <canvas height="3500" width="5800" id="myCanvas" class="bg-secondary "></canvas>
+            <canvas height="3500" width="5800" id="myCanvas" class="bg-secondary"></canvas>
         </div>
     </div>
 </div>

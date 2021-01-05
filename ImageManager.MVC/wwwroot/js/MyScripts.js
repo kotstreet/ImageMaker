@@ -32,6 +32,106 @@ var filters = [
 	noneFilterButton,
 ]
 
+var angle = 0;
+var size = 0;
+
+function calcAngle(incAngle) {
+	angle = angle + incAngle;
+	if (angle < 0) {
+		angle = angle + 360;
+	}
+	if (angle >= 360) {
+		angle = angle - 360;
+	}
+}
+
+function calcCanvasWidth(width) {
+	if (width > 900) {
+		canvas.width = width;
+	}
+	else {
+		canvas.width = 900;
+	}
+}
+
+function calcCanvasHeight(height) {
+	if (height > 550) {
+		canvas.height = height;
+	}
+	else {
+		canvas.height = 550;
+	}
+}
+
+function setCanvasTitle(width, height) {
+	canvas.title = "ширина: " + width + "; высота: " + height + "; " + size + " байт;";
+}
+
+function settingCanvasByAngle(context, img) {
+	switch (angle) {
+		case 90:
+			calcCanvasWidth(img.height);
+			calcCanvasHeight(img.width);
+			setCanvasTitle(img.height, this.width);
+			context.translate(img.height, 0);
+			break;
+		case 180:
+			calcCanvasWidth(img.width);
+			calcCanvasHeight(img.height);
+			setCanvasTitle(img.width, img.height);
+			context.translate(img.width, img.height);
+			break;
+		case 270:
+			calcCanvasWidth(img.height);
+			calcCanvasHeight(img.width);
+			setCanvasTitle(img.height, img.width);
+			context.translate(0, img.width);
+			break;
+		default:
+			calcCanvasWidth(img.width);
+			calcCanvasHeight(img.height);
+			setCanvasTitle(img.width, img.height);
+	}
+}
+
+function rotateLeft_click() {
+	var context = canvas.getContext("2d");
+	var imgUrl = imageUrlInput.value;
+	var img = new Image();
+
+	img.onload = function () {
+		context.save();
+		context.clearRect(0, 0, canvas.width, canvas.height);
+
+		calcAngle(-90);
+		settingCanvasByAngle(context, this);		
+
+		context.rotate(angle * Math.PI / 180);
+		context.drawImage(img, 0, 0);
+		context.restore();
+	};
+	img.src = imgUrl;
+}
+
+function rotateRight_click() {
+	var context = canvas.getContext("2d");
+	var imgUrl = imageUrlInput.value;
+	var img = new Image();
+
+	img.onload = function () {
+		context.save();
+		context.clearRect(0, 0, canvas.width, canvas.height); 
+
+		calcAngle(90);
+		settingCanvasByAngle(context, this);
+
+		context.rotate(angle * Math.PI / 180); 
+		context.drawImage(img, 0, 0); 
+		context.restore();
+	};
+	img.src = imgUrl;
+}
+
 function inputFile_changed(files) {
 	if (!files.length) {
 		return;
@@ -42,11 +142,13 @@ function inputFile_changed(files) {
 	var img = new Image();
 
 	img.onload = function () {
-		canvas.width = this.width;
-		canvas.height = this.height;
-		canvas.title = "ширина: " + this.width + "; высота: " + this.height + "; " + files[0].size + " байт;";
+		calcCanvasWidth(this.width);
+		calcCanvasHeight(this.height);
 
-		context.drawImage(img, 0, 0, this.width, this.height);
+		size = files[0].size;
+		setCanvasTitle(this.width, this.height);
+
+		context.drawImage(img, 0, 0);
 	};
 
 	imageUrlInput.value = imgUrl;
@@ -100,7 +202,7 @@ function shadowFiltrButton_click() {
 }
 
 function grayscaleButton_click() {
-	canvas.style.filter = "grayscale(.8)";
+	canvas.style.filter = "grayscale(1)";
 	someFiterClick(grayscaleFilterButton);
 }
 
