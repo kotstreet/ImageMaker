@@ -69,5 +69,7 @@
 }
 
 .tool-div {
+    overflow: scroll;
+    max-height: 550px !important;
     min-width: 275px;
 }
