@@ -3,6 +3,10 @@ var imageUrlInput = document.getElementById("imageUrl");
 var fileInputItem = document.getElementById("fileInputItem");
 var downloadLnkItem = document.getElementById("downloadLnk");
 
+var saveButttonItem = document.getElementById("saveButtton");
+var cancelAllButttonItem = document.getElementById("canselAllButtton");
+var imageActionDivItem = document.getElementById("imageActionDiv");
+
 var blurFilterButton = document.getElementById("blurFilter");
 var brightnessFilterButton = document.getElementById("brightnessFilter");
 var notBrightnessFilterButton = document.getElementById("notBrightnessFilter");
@@ -16,6 +20,15 @@ var hueRotate3FilterButton = document.getElementById("hueRotate3Filter");
 var invertFilterButton = document.getElementById("invertFilter");
 var sepiaFilterButton = document.getElementById("sepiaFilter");
 var noneFilterButton = document.getElementById("noneFilter");
+
+var forActivate = [
+	saveButttonItem,
+	cancelAllButttonItem,
+	document.getElementById("cutAction"),
+	document.getElementById("resizeAction"),
+	document.getElementById("rightRotate"),
+	document.getElementById("leftRotate"),
+]
 
 var filters = [
 	blurFilterButton,
@@ -34,7 +47,7 @@ var filters = [
 ]
 
 var angle = 0;
-var size = 0;
+var size = 0, startSize = 0;
 var filter = 'none';
 
 function calcAngle(incAngle) {
@@ -125,6 +138,7 @@ function inputFile_changed(files) {
 		calcCanvasHeight(this.height);
 
 		size = files[0].size;
+		startSize = size;
 		setCanvasTitle(this.width, this.height);
 
 		context.drawImage(img, 0, 0);
@@ -133,23 +147,92 @@ function inputFile_changed(files) {
 	imageUrlInput.value = imgUrl;
 	img.src = imgUrl;
 
+	activateElements();
+	deleteTitles();
 	angle = 0;
 	filter = "none";
 	someFiterClick(noneFilterButton);
 }
 
+function canselAll_click() {
+	if (!imageUrlInput.value.length) {
+		alert("Что-то пошло не так.");
+		return;
+	}
+
+	var context = canvas.getContext("2d");
+	var img = new Image();
+
+	img.onload = function () {
+		calcCanvasWidth(this.width);
+		calcCanvasHeight(this.height);
+
+		size = startSize;
+		setCanvasTitle(this.width, this.height);
+
+		context.drawImage(img, 0, 0);
+	};
+
+	img.src = imageUrlInput.value;
+
+	activateElements();
+	deleteTitles();
+	angle = 0;
+	filter = "none";
+	someFiterClick(noneFilterButton);
+}
+
+
+function addImage(url) {
+	console.log('start'); 
+	console.log('{"imageUrl":"' + url + '"}'); 
+	$.ajax({
+		type: "POST",
+		url: '/Home/AddImage?imageUrl=' + url,
+		//url: '/Home/AddImage',
+		//data: { 'imageUrl': "'" + url + "'" },
+		//data:  '{"imageUrl":"' + "asdasd" + '"}',
+		//data:  'imageUrl=asdasd',
+		//dataType: 'json',
+		//contentType: "application/json; charset=utf-8",
+		success: function (result) {
+			console.log(result.msg);
+		},
+		error: function (result) {
+			console.log('error');
+		},
+	})
+	console.log('finish'); 
+}
+
 function save_click() {
 	var url = canvas.toDataURL('image/jpeg');
-
-	console.log("url = " + url); //
-	alert(url); //
-
 	downloadLnkItem.href = url;
 	downloadLnkItem.click();
+
+	console.log('before start'); 
+	addImage(url);
+	console.log('after finish'); 
 }
+
 
 function open_click() {
 	fileInputItem.click();
+}
+
+function deleteTitles() {
+	imageActionDivItem.title = "";
+	cancelAllButttonItem.title = "Откатить все сделанные изменения.";
+	saveButttonItem.title = "";
+}
+
+function activateElements() {
+	for (var i = 0; i < filters.length; i++) {
+		filters[i].disabled = false;
+	}
+	for (var i = 0; i < forActivate.length; i++) {
+		forActivate[i].disabled = false;
+	}
 }
 
 function someFiterClick(button) {

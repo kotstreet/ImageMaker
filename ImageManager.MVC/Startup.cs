@@ -31,6 +31,7 @@ namespace ImageManager.MVC
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IProfileService, ProfileService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IImageService, ImageService>();
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {

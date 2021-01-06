@@ -38,24 +38,15 @@
     color: white;
 }
 
-.btn-menu-redo {
-    border-color: #fad900;
+.btn-menu-cancel {
+    border-color: #ff6e6e;
     border-width: 1px;
     border-radius: 0.25rem !important;
 }
 
-.btn-menu-redo:hover {
-    background-color: #fad900;
-}
-
-.btn-menu-undo {
-    border-color: #fad900;
-    border-width: 1px;
-    border-radius: 0.25rem !important;
-}
-
-.btn-menu-undo:hover {
-    background-color: #fad900;
+.btn-menu-cancel:hover {
+    background-color: #ff6e6e;
+    color: white;
 }
 
 .canvas-div {
@@ -74,4 +65,9 @@
     overflow: scroll;
     max-height: 550px !important;
     min-width: 275px;
+}
+
+.my-img {
+    max-width: 250px !important;
+    max-height: 250px !important;
 }

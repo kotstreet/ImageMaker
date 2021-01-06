@@ -95,3 +95,4 @@ D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\Razor\Vie
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Show.cshtml.g.cs
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\Razor\Views\User\ShowAll.cshtml.g.cs
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Edit.cshtml.g.cs
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Home\History.cshtml.g.cs
