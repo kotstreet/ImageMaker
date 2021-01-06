@@ -18,5 +18,12 @@ namespace ImageManager.MVC.Services.Interfaces
         /// <param name="email">The user email.</param>
         /// <returns>UserImagesViewModel.</returns>
         Task<UserImagesViewModel> GetImagesByEmailAsync(string email);
+
+        /// <summary>
+        /// Get image urls with user info by user id.
+        /// </summary>
+        /// <param name="id">The user id.</param>
+        /// <returns>UserImagesViewModel.</returns>
+        Task<UserImagesViewModel> GetImagesByUserIdAsync(string id);
     }
 }

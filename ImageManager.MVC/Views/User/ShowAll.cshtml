@@ -7,7 +7,7 @@
 <div class="container body-content">
     <div class="col">
         <div class="text-center m-sm-1">
-            <p class="display-3 ">Пользователи</p>
+            <p class="display-4">Пользователи</p>
         </div>
         <br />
         <div>
@@ -22,21 +22,28 @@
                 @foreach (var item in Model)
                 {
                     <tr class="text-black-50">
-                        <td>@item.Email</td>
-                        <td>@item.FullName</td>
+                        <td class="text-sm-center" title="Посмотреть историю редактирования"><a asp-action="ShowImage" asp-controller="User" asp-route-userId="@item.Id">@item.Email</a></td>
+                        <td class="text-sm-center">@item.FullName</td>
                         <td class="text-sm-center">@(item.IsAdmin ? "да" : "нет")</td>
                         <td class="text-sm-center">@(item.IsUser ? "да" : "нет")</td>
-                        @if (item.IsActive)
+                        @if (User.Identity.Name != item.Email)
                         {
-                            <td title="Сейчас пользователь активирован.">
-                                <a class="btn btn-danger" asp-action="Deactivate" asp-controller="User" asp-route-userId="@item.Id">Деактивировать</a>
-                            </td>
+                            @if (item.IsActive)
+                            {
+                                <td title="Сейчас пользователь активирован." class="text-sm-center">
+                                    <a class="btn btn-deactivate" asp-action="Deactivate" asp-controller="User" asp-route-userId="@item.Id">Деактивировать</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td title="Сейчас пользователь деактивирован." class="text-sm-center">
+                                    <a class="btn btn-activate" asp-action="Activate" asp-controller="User" asp-route-userId="@item.Id">Активировать</a>
+                                </td>
+                            }
                         }
                         else
                         {
-                            <td title="Сейчас пользователь деактивирован.">
-                                <a class="btn btn-success" asp-action="Activate" asp-controller="User" asp-route-userId="@item.Id">Активировать</a>
-                            </td>
+                            <td title="Вы не уможете управлять собой."></td>
                         }
                     </tr>
                 }

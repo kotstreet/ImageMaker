@@ -320,3 +320,14 @@ function sepiaFiltrButton_click() {
 	settingCanvasByAngle();
 	someFiterClick(sepiaFilterButton);
 }
+
+function backOrClose() {
+	var prevPage = window.location.href;
+	window.history.back();
+
+	setTimeout(function () {
+		if (window.location.href == prevPage) {
+			window.close();
+		}
+	}, 500);
+}

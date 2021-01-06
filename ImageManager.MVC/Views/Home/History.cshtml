@@ -11,12 +11,25 @@
         <p class="text-center">Сделано для приятных воспоминаниях о прошлом, котрые не хочется забывать. @Model.FullName, с заботой о вас)</p>
     </div>
     <br />
-    <div class="row justify-content-center mr-4 ml-4">
-        @foreach (var imgUrl in Model.ImageUrls)
-        {
-        <div class="m-sm-2">
-            <img src="@imgUrl" class=" my-img" />
+
+    @if (Model.ImageUrls.Count == 0)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="row justify-content-center mr-4 ml-4">
+            <button class="btn btn-outline-info text-center" onclick="backOrClose();">Назад</button>
         </div>
-        }
-    </div>
+    }
+    else
+    {
+        <div class="row justify-content-center mr-4 ml-4">
+            @foreach (var imgUrl in Model.ImageUrls)
+            {
+                <div class="m-sm-2">
+                    <img src="@imgUrl" class=" my-img" />
+                </div>
+            }
+        </div>
+    }
 </div>

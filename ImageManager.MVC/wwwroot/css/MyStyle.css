@@ -49,6 +49,26 @@
     color: white;
 }
 
+.btn-deactivate {
+    border-color: #ffd4d5;
+    border-width: 1px;
+    border-radius: 0.25rem !important;
+}
+
+.btn-deactivate:hover {
+    background-color: #ffd4d5;
+}
+
+.btn-activate {
+    border-color: #cfffc4;
+    border-width: 1px;
+    border-radius: 0.25rem !important;
+}
+
+.btn-activate:hover {
+    background-color: #cfffc4;
+}
+
 .canvas-div {
     overflow: scroll;
     max-width: 900px !important;

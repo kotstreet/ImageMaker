@@ -12,12 +12,15 @@ namespace ImageManager.MVC.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _userService;
+        private readonly IImageService _imageService;
 
         public UserController(ILogger<UserController> logger,
-            IUserService userService)
+            IUserService userService,
+            IImageService imageService)
         {
             _logger = logger;
             _userService = userService;
+            _imageService = imageService;
         }
 
         [HttpGet]
@@ -25,6 +28,13 @@ namespace ImageManager.MVC.Controllers
         {
             _logger.LogInformation("ShowAll action of UserController.");
             return View(await _userService.GetAllUsersWithRolesAsync());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ShowImage(string userId)
+        {
+            _logger.LogInformation($"ShowImage action of UserController with userId = {userId}.");
+            return View(await _imageService.GetImagesByUserIdAsync(userId));
         }
 
         [HttpGet]

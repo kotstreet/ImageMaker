@@ -39,6 +39,12 @@ namespace ImageManager.MVC.Services
             return await GetImagesForUserAsync(user);
         }
 
+        public async Task<UserImagesViewModel> GetImagesByUserIdAsync(string id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            return await GetImagesForUserAsync(user);
+        }
+
         public async Task AddImageToUserAsync(string email, string imageUrl)
         {
             var user = await _context.Users.FirstOrDefaultAsync(user => user.Email == email);

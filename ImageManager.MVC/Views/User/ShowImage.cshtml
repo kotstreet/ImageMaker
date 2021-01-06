@@ -1,0 +1,44 @@
+﻿@model ImageManager.MVC.ViewModels.UserImagesViewModel
+@{
+    ViewData["Title"] = "История пользователя";
+}
+
+<div>
+    <div>
+        <br />
+        <h3 class="text-center">История пользователя</h3>
+        @if (Model.ImageUrls.Count == 0)
+        {
+            <h4 class="text-center mt-sm-3">Данный пользователь ещё не успел поработать с изображениями, как только он с ними поработает, они появятся здесь.</h4>
+        }
+        else
+        {
+            <h4 class="text-center mt-sm-3">Здесь вы можете увидеть все редактируемые изображения пользователя.</h4>
+        }
+        <p class="text-center">
+            Имя пользователя: <i>@Model.FullName</i>. Почта пользователя: <i>@Model.Email</i>.
+        </p>
+    </div>
+    <br />
+
+    @if (Model.ImageUrls.Count == 0)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="row justify-content-center mr-4 ml-4">
+            <button class="btn btn-outline-info text-center" onclick="backOrClose();">Назад</button>
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center mr-4 ml-4">
+            @foreach (var imgUrl in Model.ImageUrls)
+            {
+                <div class="m-sm-2">
+                    <img src="@imgUrl" class=" my-img" />
+                </div>
+            }
+        </div>
+    }
+</div>
