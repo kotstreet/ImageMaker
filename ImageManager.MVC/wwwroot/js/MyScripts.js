@@ -183,19 +183,12 @@ function canselAll_click() {
 }
 
 function settingNewCanvas(newCanvas, width, height) {
-	var max = 500;
+	var max = 200;
 
-	if (width > max && height > max) {
-		if (width > height) {
-			var index = width / max;
-			newCanvas.width = max;
-			newCanvas.height = height / index;
-		}
-		else {
-			var index = height / max;
-			newCanvas.height = max;
-			newCanvas.width = width / index;
-        }
+	if (height > max) {
+		var index = height / max;
+		newCanvas.height = max;
+		newCanvas.width = width / index;
 	}
 	else {
 		newCanvas.width = width;
