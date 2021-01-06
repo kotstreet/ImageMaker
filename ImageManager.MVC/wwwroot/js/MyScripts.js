@@ -182,36 +182,46 @@ function canselAll_click() {
 	someFiterClick(noneFilterButton);
 }
 
+function settingNewCanvas(newCanvas, width, height) {
+	var max = 500;
 
-function addImage(url) {
-	console.log('start'); 
-	console.log('{"imageUrl":"' + url + '"}'); 
-	$.ajax({
-		type: "POST",
-		url: '/Home/AddImage?imageUrl=' + url,
-		//url: '/Home/AddImage',
-		//data: { 'imageUrl': "'" + url + "'" },
-		//data:  '{"imageUrl":"' + "asdasd" + '"}',
-		//data:  'imageUrl=asdasd',
-		//dataType: 'json',
-		//contentType: "application/json; charset=utf-8",
-		success: function (result) {
-			console.log(result.msg);
-		},
-		error: function (result) {
-			console.log('error');
-		},
-	})
-	console.log('finish'); 
+	if (width > max && height > max) {
+		if (width > height) {
+			var index = width / max;
+			newCanvas.width = max;
+			newCanvas.height = height / index;
+		}
+		else {
+			var index = height / max;
+			newCanvas.height = max;
+			newCanvas.width = width / index;
+        }
+	}
+	else {
+		newCanvas.width = width;
+		newCanvas.height = height;
+    }
+
 }
 
 function save_click() {
 	var url = canvas.toDataURL('image/jpeg');
+	console.log(url); 
+
 	downloadLnkItem.href = url;
 	downloadLnkItem.click();
 
+	var resizedCanvas = document.createElement("canvas");
+	var resizedContext = resizedCanvas.getContext("2d");
+
+	settingNewCanvas(resizedCanvas, canvas.width, canvas.height);
+
+	resizedContext.drawImage(canvas, 0, 0, resizedCanvas.width, resizedCanvas.height);
+	var myResizedData = resizedCanvas.toDataURL('image/jpeg');
+	console.log("myResizedData = " + myResizedData);
+
 	console.log('before start'); 
-	addImage(url);
+	addImage(myResizedData);
 	console.log('after finish'); 
 }
 

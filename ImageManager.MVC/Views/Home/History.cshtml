@@ -3,7 +3,7 @@
     ViewData["Title"] = "История";
 }
 
-<div class="justify-content-center">
+<div>
     <div>
         <br />
         <br />
@@ -14,10 +14,12 @@
     </div>
     <br />
     <br />
-    <div>
+    <div class="row justify-content-center mr-4 ml-4">
         @foreach (var imgUrl in Model.ImageUrls)
         {
-            <img src="@imgUrl" class="my-img m-sm-3" />
+        <div class="m-sm-3">
+            <img src="@imgUrl" class="img my-img" />
+        </div>
         }
     </div>
 </div>

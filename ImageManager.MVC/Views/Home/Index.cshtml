@@ -2,56 +2,74 @@
 @{
     ViewData["Title"] = "Главная";
 }
+<div class="container body-content">
+    <div class="col-sm-12">
+        <br />
+        <div class="row pt-sm-3 pb-sm-3">
+            <input type="hidden" id="imageUrl" />
+            <input type="file" accept=".jpg, .jpeg, .png" hidden id="fileInputItem" onchange="inputFile_changed(this.files)" />
+            <a id="downloadLnk" download="File from online editor.jpg" hidden></a>
 
-<div class="col-sm-12">
-    <br />
-    <div class="row pt-sm-3 pb-sm-3">
-        <input type="hidden" id="imageUrl" />
-        <input type="file" accept=".jpg, .jpeg, .png" hidden id="fileInputItem" onchange="inputFile_changed(this.files)" />
-        <a id="downloadLnk" download="File from online editor.jpg" hidden></a>
-
-        <button id="openButton" class="btn btn-menu btn-menu-open ml-0" onclick="open_click();"> Открыть</button>
-        <button id="saveButtton" class="btn btn-menu btn-menu-save mr-sm-5" disabled  title="Сначала откройте изображение." onclick="save_click();">Сохранить</button>
-        <button id="canselAllButtton" class="btn btn-menu btn-menu-cancel" disabled  title="Сначала откройте изображение." onclick="canselAll_click();">Откатить всё</button>
-    </div>
-
-    <div class="row work-div">
-        <div id="imageActionDiv" class="pl-sm-4 pr-sm-4 border rounded tool-div" title="Сначала откройте изображение.">
-            <b>Модераторы</b><br />
-            <button id="cutAction" class="btn btn-filter" disabled>обрезать</button><br />
-            <button id="resizeAction" class="btn btn-filter" disabled>изменить размер</button><br />
-            <br />
-
-            <b>Повороты</b><br />
-            <button id="rightRotate" class="btn btn-filter" disabled onclick="rotateRight_click()">поворот вправо</button><br />
-            <button id="leftRotate" class="btn btn-filter" disabled onclick="rotateLeft_click()">поворот влево</button><br />
-            <br />
-
-            <b>Фильтры</b><br />
-            <button id="blurFilter" class="btn btn-filter" disabled onclick="blurFiltrButton_click()">размытие</button><br />
-            <button id="brightnessFilter" class="btn btn-filter" disabled onclick="brightnessFiltrButton_click()">яркое</button><br />
-            <button id="notBrightnessFilter" class="btn btn-filter" disabled onclick="notBrightnessFiltrButton_click()">темное</button><br />
-
-            <button id="contrastFilter" class="btn btn-filter" disabled onclick="contrastFiltrButton_click()">контрастное</button><br />
-            <button id="shadowFilter" class="btn btn-filter" disabled onclick="shadowFiltrButton_click()">тени</button><br />
-            <button id="grayscaleFilter" class="btn btn-filter" disabled onclick="grayscaleButton_click()">черно-белое</button><br />
-
-            <button id="hueRotate1Filter" class="btn btn-filter" disabled onclick="hueRotate1Button_click()">замена цвета 1</button><br />
-            <button id="hueRotate2Filter" class="btn btn-filter" disabled onclick="hueRotate2Button_click()">замена цвета 2</button><br />
-            <button id="hueRotate3Filter" class="btn btn-filter" disabled onclick="hueRotate3Button_click()">замена цвета 3</button><br />
-
-            <button id="invertFilter" class="btn btn-filter" disabled onclick="invertButton_click()">неготив</button><br />
-            <button id="sepiaFilter" class="btn btn-filter" disabled onclick="sepiaFiltrButton_click()">старина</button><br />
-            <button id="noneFilter" class="btn btn-filter" disabled onclick="noneFiltrButton_click()">нет</button><br />
+            <button id="openButton" class="btn btn-menu btn-menu-open ml-0" onclick="open_click();"> Открыть</button>
+            <button id="saveButtton" class="btn btn-menu btn-menu-save mr-sm-5" disabled title="Сначала откройте изображение." onclick="save_click();">Сохранить</button>
+            <button id="canselAllButtton" class="btn btn-menu btn-menu-cancel" disabled title="Сначала откройте изображение." onclick="canselAll_click();">Откатить всё</button>
         </div>
 
-        <div class="bg-secondary canvas-div">
-            <canvas id="myCanvas" class=""></canvas>
+        <div class="row work-div">
+            <div id="imageActionDiv" class="pl-sm-4 pr-sm-4 border rounded tool-div" title="Сначала откройте изображение.">
+                <b>Модераторы</b><br />
+                <button id="cutAction" class="btn btn-filter" disabled>обрезать</button><br />
+                <button id="resizeAction" class="btn btn-filter" disabled>изменить размер</button><br />
+                <br />
+
+                <b>Повороты</b><br />
+                <button id="rightRotate" class="btn btn-filter" disabled onclick="rotateRight_click()">поворот вправо</button><br />
+                <button id="leftRotate" class="btn btn-filter" disabled onclick="rotateLeft_click()">поворот влево</button><br />
+                <br />
+
+                <b>Фильтры</b><br />
+                <button id="blurFilter" class="btn btn-filter" disabled onclick="blurFiltrButton_click()">размытие</button><br />
+                <button id="brightnessFilter" class="btn btn-filter" disabled onclick="brightnessFiltrButton_click()">яркое</button><br />
+                <button id="notBrightnessFilter" class="btn btn-filter" disabled onclick="notBrightnessFiltrButton_click()">темное</button><br />
+
+                <button id="contrastFilter" class="btn btn-filter" disabled onclick="contrastFiltrButton_click()">контрастное</button><br />
+                <button id="shadowFilter" class="btn btn-filter" disabled onclick="shadowFiltrButton_click()">тени</button><br />
+                <button id="grayscaleFilter" class="btn btn-filter" disabled onclick="grayscaleButton_click()">черно-белое</button><br />
+
+                <button id="hueRotate1Filter" class="btn btn-filter" disabled onclick="hueRotate1Button_click()">замена цвета 1</button><br />
+                <button id="hueRotate2Filter" class="btn btn-filter" disabled onclick="hueRotate2Button_click()">замена цвета 2</button><br />
+                <button id="hueRotate3Filter" class="btn btn-filter" disabled onclick="hueRotate3Button_click()">замена цвета 3</button><br />
+
+                <button id="invertFilter" class="btn btn-filter" disabled onclick="invertButton_click()">неготив</button><br />
+                <button id="sepiaFilter" class="btn btn-filter" disabled onclick="sepiaFiltrButton_click()">старина</button><br />
+                <button id="noneFilter" class="btn btn-filter" disabled onclick="noneFiltrButton_click()">нет</button><br />
+            </div>
+
+            <div class="bg-secondary canvas-div">
+                <canvas id="myCanvas" class=""></canvas>
+            </div>
         </div>
     </div>
 </div>
 <br />
 
 <script>
+    function addImage(url) {
+
+        console.log('start');
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddImage", "Home")',
+            data: { imageUrl : url },
+            dataType: 'text',
+            success: function (result) {
+                console.log(result.msg);
+            },
+            error: function (result) {
+                console.log('error');
+            },
+        })
+        console.log('finish');
+    }
 
 </script>
