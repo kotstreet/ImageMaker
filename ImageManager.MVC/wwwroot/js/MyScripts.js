@@ -29,7 +29,6 @@ var noneFilterButton = document.getElementById("noneFilter");
 var forActivate = [
 	saveButttonItem,
 	cancelAllButttonItem,
-	document.getElementById("cutAction"),
 	document.getElementById("resizeAction"),
 	document.getElementById("rightRotate"),
 	document.getElementById("leftRotate"),
@@ -78,6 +77,7 @@ function settingCanvasByAngle() {
 	img.onload = function () {
 		context.save();
 		context.clearRect(0, 0, canvas.width, canvas.height);
+		var w, h;
 
 		switch (angle) {
 			case 90:
