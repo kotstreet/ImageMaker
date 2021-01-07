@@ -6,7 +6,7 @@
 .btn-filter:hover {
     border:solid;
     border-bottom-width: 1px;
-    border-color: black;
+    /*border-color: black;*/
     transform: scale(1.1);
 }
 
@@ -104,4 +104,41 @@
     border-radius: 0.25rem !important;
     vertical-align: middle;
     align-items: baseline
+}
+
+.change-size-div {
+    display: none;
+    background-color: #e3fffa;
+    border: 1px;
+    border-top: 0;
+    border-style: solid;
+    border-color: grey;
+}
+
+.change-size-btn {
+    background-color: #b3fcc4;
+}
+
+.change-size-btn:hover {
+    background-color: #95fcb9;
+    transform: scale(1.1);
+}
+
+.change-size-input {
+    width: 65px;
+}
+
+.change-size-div-show {
+    display: block;
+    animation: showBlock 1s linear forwards;
+}
+
+@keyframes showBlock {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

@@ -19,7 +19,25 @@
             <div id="imageActionDiv" class="pl-sm-4 pr-sm-4 border rounded tool-div" title="Сначала откройте изображение.">
                 <b>Модераторы</b><br />
                 <button id="cutAction" class="btn btn-filter" disabled>обрезать</button><br />
-                <button id="resizeAction" class="btn btn-filter" disabled>изменить размер</button><br />
+                <button id="resizeAction" class="btn btn-filter" disabled onclick="resizeAction_click();">изменить размер</button><br />
+
+                <div id="changeSizeDiv" class="change-size-div col-11 ml-2 mr-2">
+                    <div class="row justify-content-around">
+                        <div class="m-1 p-1" id="changeSizeHDiv">
+                            <label>высота</label><br />
+                            <input type="number" id="changeSizeH" class="change-size-input" value="0" min="0" onchange="changeSizeH_change();" />
+                        </div>
+                        <div class="m-1 p-1" id="changeSizeWDiv">
+                            <label>ширина</label><br />
+                            <input type="number" id="changeSizeW" class="change-size-input" value="0" min="0" onchange="changeSizeW_change();" />
+                        </div>
+                    </div>
+                    <div class="text-center p-2">
+                        <div>
+                            <button id="changeSizeBtn" class="btn change-size-btn" onclick="changeSizeBtn_click();">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
                 <br />
 
                 <b>Повороты</b><br />

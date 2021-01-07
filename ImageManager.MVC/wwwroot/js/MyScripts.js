@@ -7,6 +7,11 @@ var saveButttonItem = document.getElementById("saveButtton");
 var cancelAllButttonItem = document.getElementById("canselAllButtton");
 var imageActionDivItem = document.getElementById("imageActionDiv");
 
+var changeSizeDiv = document.getElementById("changeSizeDiv");
+var changeSizeBtn = document.getElementById("changeSizeBtn");
+var changeSizeW = document.getElementById("changeSizeW");
+var changeSizeH = document.getElementById("changeSizeH");
+
 var blurFilterButton = document.getElementById("blurFilter");
 var brightnessFilterButton = document.getElementById("brightnessFilter");
 var notBrightnessFilterButton = document.getElementById("notBrightnessFilter");
@@ -45,7 +50,8 @@ var filters = [
 	sepiaFilterButton,
 	noneFilterButton,
 ]
-
+var widthSize = 0, heightSize = 0;
+var resizeDivState = 0;
 var angle = 0;
 var size = 0, startSize = 0;
 var filter = 'none';
@@ -69,7 +75,7 @@ function calcCanvasHeight(height) {
 }
 
 function setCanvasTitle(width, height) {
-	canvas.title = "ширина: " + width + "; высота: " + height + "; " + size + " байт;";
+	canvas.title = "ширина: " + width + "; высота: " + height + "; изначальный размер:" + size + " байт;";
 }
 
 function settingCanvasByAngle() {
@@ -83,33 +89,39 @@ function settingCanvasByAngle() {
 
 		switch (angle) {
 			case 90:
-				calcCanvasWidth(this.height);
-				calcCanvasHeight(this.width);
-				setCanvasTitle(this.height, this.width);
-				context.translate(this.height, 0);
+				calcCanvasWidth(heightSize);
+				calcCanvasHeight(widthSize);
+				setCanvasTitle(heightSize, widthSize);
+				context.translate(heightSize, 0);
 				break;
 			case 180:
-				calcCanvasWidth(this.width);
-				calcCanvasHeight(this.height);
-				setCanvasTitle(this.width, this.height);
-				context.translate(this.width, this.height);
+				calcCanvasWidth(widthSize);
+				calcCanvasHeight(heightSize);
+				setCanvasTitle(widthSize, heightSize);
+				context.translate(widthSize, heightSize);
 				break;
 			case 270:
-				calcCanvasWidth(this.height);
-				calcCanvasHeight(this.width);
-				setCanvasTitle(this.height, this.width);
-				context.translate(0, this.width);
+				calcCanvasWidth(heightSize);
+				calcCanvasHeight(widthSize);
+				setCanvasTitle(heightSize, widthSize);
+				context.translate(0, widthSize);
 				break;
 			default:
-				calcCanvasWidth(this.width);
-				calcCanvasHeight(this.height);
-				setCanvasTitle(this.width, this.height);
+				calcCanvasWidth(widthSize);
+				calcCanvasHeight(heightSize);
+				setCanvasTitle(widthSize, heightSize);
 		}
 
 		context.rotate(angle * Math.PI / 180);
 		context.filter = filter;
-		context.drawImage(img, 0, 0);
+		context.drawImage(img, 0, 0, widthSize, heightSize);
 		context.restore();
+
+		if (resizeDivState == 1) {
+			showResizeDiv();
+			changeSizeW_change();
+			changeSizeH_change();
+		}
 	};
 	img.src = imgUrl;
 }
@@ -134,6 +146,8 @@ function inputFile_changed(files) {
 	var img = new Image();
 
 	img.onload = function () {
+		heightSize = this.height;
+		widthSize = this.width;
 		calcCanvasWidth(this.width);
 		calcCanvasHeight(this.height);
 
@@ -147,6 +161,7 @@ function inputFile_changed(files) {
 	imageUrlInput.value = imgUrl;
 	img.src = imgUrl;
 
+	hideResizeDiv();
 	activateElements();
 	deleteTitles();
 	angle = 0;
@@ -164,6 +179,8 @@ function canselAll_click() {
 	var img = new Image();
 
 	img.onload = function () {
+		heightSize = this.height;
+		widthSize = this.width;
 		calcCanvasWidth(this.width);
 		calcCanvasHeight(this.height);
 
@@ -175,11 +192,53 @@ function canselAll_click() {
 
 	img.src = imageUrlInput.value;
 
+	hideResizeDiv();
 	activateElements();
 	deleteTitles();
 	angle = 0;
 	filter = "none";
 	someFiterClick(noneFilterButton);
+}
+
+
+function hideResizeDiv() {
+	changeSizeH.value = 0;
+	changeSizeW.value = 0;
+
+	if (changeSizeDiv.classList.contains('change-size-div-show')) {
+		changeSizeDiv.classList.remove('change-size-div-show');
+	}
+	resizeDivState = 0;
+}
+
+function showResizeDiv() {
+	changeSizeH.max = canvas.height;
+	changeSizeW.max = canvas.width;
+	document.getElementById('changeSizeHDiv').title = 'максимальное значение: ' + canvas.height;
+	document.getElementById('changeSizeWDiv').title = 'максимальное значение: ' + canvas.width;
+
+	if (!changeSizeDiv.classList.contains('change-size-div-show')) {
+		changeSizeDiv.classList.add('change-size-div-show');
+	}
+	resizeDivState = 1;
+}
+
+function changeSizeBtn_click() {
+	heightSize = changeSizeH.value;
+	widthSize = changeSizeW.value;
+
+	hideResizeDiv();
+
+	settingCanvasByAngle();
+}
+
+function resizeAction_click() {
+	if (resizeDivState == 0) {
+		showResizeDiv();
+	}
+	else {
+		hideResizeDiv();
+	}
 }
 
 function settingNewCanvas(newCanvas, width, height) {
@@ -218,6 +277,17 @@ function save_click() {
 	console.log('after finish'); 
 }
 
+function changeSizeH_change() {
+	if (changeSizeH.value > canvas.height) {
+		changeSizeH.value = canvas.height;
+    }
+}
+
+function changeSizeW_change() {
+	if (changeSizeW.value > canvas.width) {
+		changeSizeW.value = canvas.width;
+	}
+}
 
 function open_click() {
 	fileInputItem.click();
