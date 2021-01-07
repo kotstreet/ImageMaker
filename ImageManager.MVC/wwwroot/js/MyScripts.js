@@ -66,14 +66,6 @@ function calcAngle(incAngle) {
 	}
 }
 
-function calcCanvasWidth(width) {
-	canvas.width = width;
-}
-
-function calcCanvasHeight(height) {
-	canvas.height = height;
-}
-
 function setCanvasTitle(width, height) {
 	canvas.title = "ширина: " + width + "; высота: " + height + "; изначальный размер:" + size + " байт;";
 }
@@ -89,26 +81,26 @@ function settingCanvasByAngle() {
 
 		switch (angle) {
 			case 90:
-				calcCanvasWidth(heightSize);
-				calcCanvasHeight(widthSize);
+				canvas.width = heightSize;
+				canvas.height = widthSize;
 				setCanvasTitle(heightSize, widthSize);
 				context.translate(heightSize, 0);
 				break;
 			case 180:
-				calcCanvasWidth(widthSize);
-				calcCanvasHeight(heightSize);
+				canvas.width = widthSize;
+				canvas.height = heightSize;
 				setCanvasTitle(widthSize, heightSize);
 				context.translate(widthSize, heightSize);
 				break;
 			case 270:
-				calcCanvasWidth(heightSize);
-				calcCanvasHeight(widthSize);
+				canvas.width = heightSize;
+				canvas.height = widthSize;
 				setCanvasTitle(heightSize, widthSize);
 				context.translate(0, widthSize);
 				break;
 			default:
-				calcCanvasWidth(widthSize);
-				calcCanvasHeight(heightSize);
+				canvas.width = widthSize;
+				canvas.height = heightSize;
 				setCanvasTitle(widthSize, heightSize);
 		}
 
@@ -148,8 +140,8 @@ function inputFile_changed(files) {
 	img.onload = function () {
 		heightSize = this.height;
 		widthSize = this.width;
-		calcCanvasWidth(this.width);
-		calcCanvasHeight(this.height);
+		canvas.width = this.width;
+		canvas.height = this.height;
 
 		size = files[0].size;
 		startSize = size;
@@ -181,8 +173,8 @@ function canselAll_click() {
 	img.onload = function () {
 		heightSize = this.height;
 		widthSize = this.width;
-		calcCanvasWidth(this.width);
-		calcCanvasHeight(this.height);
+		canvas.width = this.width;
+		canvas.height = this.height;
 
 		size = startSize;
 		setCanvasTitle(this.width, this.height);
