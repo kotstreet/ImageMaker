@@ -4,50 +4,72 @@
 }
 
 
-<div class="container body-content">
-    <div class="col">
-        <div class="text-center m-sm-1">
-            <p class="display-4">Пользователи</p>
-        </div>
-        <br />
-        <div>
-            <table class="table ">
-                <tr class="font-weight-bold text-center text-secondary justify-content-between">
-                    <td style="width:25vw">Почта</td>
-                    <td style="width:35vw">Имя</td>
-                    <td style="width:10vw">Админ</td>
-                    <td style="width:15vw">Пользователь</td>
-                    <td style="width:15vw"></td>
-                </tr>
-                @foreach (var item in Model)
+<div class="col">
+    <div class="text-center m-sm-1">
+        <p class="display-4">Пользователи</p>
+        <p>
+            Вы в любой момент можете <a asp-action="Create" asp-controller="User" title="Нажмите, чтобы создать.">создать</a> нового пользователя.
+        </p>
+    </div>
+    <br />
+    <div>
+        <table class="table">
+            <tr class="font-weight-bold text-center text-secondary justify-content-between">
+                <td style="width:20vw">Почта</td>
+                <td style="width:20vw">Имя</td>
+                <td style="width:10vw">Админ</td>
+                <td style="width:10vw">Пользователь</td>
+
+                <td style="width:10vw"></td>
+                <td style="width:10vw"></td>
+                <td style="width:10vw"></td>
+                <td style="width:10vw"></td>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr class="text-black-50">
+                <td class="text-sm-center" title="Посмотреть историю редактирования"><a asp-action="ShowImage" asp-controller="User" asp-route-userId="@item.Id">@item.Email</a></td>
+                <td class="text-sm-center">@item.FullName</td>
+                <td class="text-sm-center">@(item.IsAdmin ? "да" : "нет")</td>
+                <td class="text-sm-center">@(item.IsUser ? "да" : "нет")</td>
+                @if (User.Identity.Name != item.Email)
                 {
-                    <tr class="text-black-50">
-                        <td class="text-sm-center" title="Посмотреть историю редактирования"><a asp-action="ShowImage" asp-controller="User" asp-route-userId="@item.Id">@item.Email</a></td>
-                        <td class="text-sm-center">@item.FullName</td>
-                        <td class="text-sm-center">@(item.IsAdmin ? "да" : "нет")</td>
-                        <td class="text-sm-center">@(item.IsUser ? "да" : "нет")</td>
-                        @if (User.Identity.Name != item.Email)
-                        {
-                            @if (item.IsActive)
-                            {
-                                <td title="Сейчас пользователь активирован." class="text-sm-center">
-                                    <a class="btn btn-deactivate" asp-action="Deactivate" asp-controller="User" asp-route-userId="@item.Id">Деактивировать</a>
-                                </td>
-                            }
-                            else
-                            {
-                                <td title="Сейчас пользователь деактивирован." class="text-sm-center">
-                                    <a class="btn btn-activate" asp-action="Activate" asp-controller="User" asp-route-userId="@item.Id">Активировать</a>
-                                </td>
-                            }
-                        }
-                        else
-                        {
-                            <td title="Вы не уможете управлять собой."></td>
-                        }
-                    </tr>
+                    @if (item.IsActive)
+                    {
+                        <td title="Отпишитесь от пользователя, чтобы не получать уведомления." class="text-sm-center">
+                            <a class="btn btn-deactivate" asp-action="Unsubscribe" asp-controller="User" asp-route-userId="@item.Id">Отписаться</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td title="Подпишитесь на пользователя, чтобы получать уведомления." class="text-sm-center">
+                            <a class="btn btn-activate" asp-action="Subscribe" asp-controller="User" asp-route-userId="@item.Id">Подписаться</a>
+                        </td>
+                    }
+                    @if (item.IsActive)
+                    {
+                        <td title="Сейчас пользователь активирован." class="text-sm-center">
+                            <a class="btn btn-deactivate" asp-action="Deactivate" asp-controller="User" asp-route-userId="@item.Id">Деактивировать</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td title="Сейчас пользователь деактивирован." class="text-sm-center">
+                            <a class="btn btn-activate" asp-action="Activate" asp-controller="User" asp-route-userId="@item.Id">Активировать</a>
+                        </td>
+                    }
+                    <td class="text-sm-center"><a class="btn btn-outline-info" asp-action="Edit" asp-controller="User" asp-route-userId="@item.Id">Редактировать</a></td>
+                    <td class="text-sm-center"><a class="btn btn-outline-danger" asp-action="Edit" asp-controller="User" asp-route-userId="@item.Id">Удалить</a></td>
                 }
-            </table>
-        </div>
+                else
+                {
+                    <td title="Вы не можете быть подписаны на себя."></td>
+                    <td title="Вы не можете управлять собой."></td>
+                    <td title="Вы не можете изменять себя."></td>
+                    <td title="Вы не можете удалить себя."></td>
+                }
+            </tr>
+            }
+        </table>
     </div>
 </div>
