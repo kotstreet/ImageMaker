@@ -31,5 +31,10 @@
         /// Is user active on site.
         /// </summary>
         public bool IsActive { get; set; }
+
+        /// <summary>
+        /// Is admin has subscription for a user.
+        /// </summary>
+        public bool HasSubscription { get; set; }
     }
 }

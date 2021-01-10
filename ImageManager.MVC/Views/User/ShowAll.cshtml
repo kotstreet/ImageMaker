@@ -8,7 +8,7 @@
     <div class="text-center m-sm-1">
         <p class="display-4">Пользователи</p>
         <p>
-            Вы в любой момент можете <a asp-action="Create" asp-controller="User" title="Нажмите, чтобы создать.">создать</a> нового пользователя.
+            Вы в любой момент можете <a asp-action="Create" asp-controller="User" title="Нажмите, чтобы создать нового пользователя.">создать</a> нового пользователя.
         </p>
     </div>
     <br />
@@ -34,16 +34,16 @@
                 <td class="text-sm-center">@(item.IsUser ? "да" : "нет")</td>
                 @if (User.Identity.Name != item.Email)
                 {
-                    @if (item.IsActive)
+                    @if (item.HasSubscription)
                     {
                         <td title="Отпишитесь от пользователя, чтобы не получать уведомления." class="text-sm-center">
-                            <a class="btn btn-deactivate" asp-action="Unsubscribe" asp-controller="User" asp-route-userId="@item.Id">Отписаться</a>
+                            <a class="btn btn-subscribe" asp-action="Unsubscribe" asp-controller="User" asp-route-userId="@item.Id">Отписаться</a>
                         </td>
                     }
                     else
                     {
                         <td title="Подпишитесь на пользователя, чтобы получать уведомления." class="text-sm-center">
-                            <a class="btn btn-activate" asp-action="Subscribe" asp-controller="User" asp-route-userId="@item.Id">Подписаться</a>
+                            <a class="btn btn-subscribe" asp-action="Subscribe" asp-controller="User" asp-route-userId="@item.Id">Подписаться</a>
                         </td>
                     }
                     @if (item.IsActive)

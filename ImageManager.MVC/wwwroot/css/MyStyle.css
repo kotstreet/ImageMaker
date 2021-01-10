@@ -58,6 +58,16 @@
     background-color: #ffd4d5;
 }
 
+.btn-subscribe {
+    border-color: #c7fffc;
+    border-width: 1px;
+    border-radius: 0.25rem !important;
+}
+
+.btn-subscribe:hover {
+    background-color: #adfffb;
+}
+
 .btn-activate {
     border-color: #cfffc4;
     border-width: 1px;
