@@ -81,6 +81,7 @@
             dataType: 'text',
             success: function (result) {
                 console.log(result.msg);
+                saveImage(url);
             },
             error: function (result) {
                 if (result.status == 401) {
@@ -96,7 +97,6 @@
             },
         })
         console.log('finish');
-
     }
 
 </script>

@@ -233,40 +233,21 @@ function resizeAction_click() {
 	}
 }
 
-function settingNewCanvas(newCanvas, width, height) {
-	var max = 200;
-
-	if (height > max) {
-		var index = height / max;
-		newCanvas.height = max;
-		newCanvas.width = width / index;
-	}
-	else {
-		newCanvas.width = width;
-		newCanvas.height = height;
-    }
-
-}
-
 function save_click() {
 	var url = canvas.toDataURL('image/jpeg');
-	console.log(url); 
+	console.log(url);
 
-	downloadLnkItem.href = url;
-	downloadLnkItem.click();
-
-	var resizedCanvas = document.createElement("canvas");
-	var resizedContext = resizedCanvas.getContext("2d");
-
-	settingNewCanvas(resizedCanvas, canvas.width, canvas.height);
-
-	resizedContext.drawImage(canvas, 0, 0, resizedCanvas.width, resizedCanvas.height);
-	var myResizedData = resizedCanvas.toDataURL('image/jpeg');
-	console.log("myResizedData = " + myResizedData);
-
-	console.log('before start'); 
-	addImage(myResizedData);
+	console.log('before start');
+	addImage(url);
 	console.log('after finish'); 
+}
+
+function saveImage(url) {
+	if (typeof (downloadLnkItem) != 'undefined' && downloadLnkItem != null) {
+		downloadLnkItem.href = url;
+		downloadLnkItem.click();
+		console.log('img downloaded'); 
+	}
 }
 
 function changeSizeH_change() {
