@@ -92,8 +92,8 @@
                     console.log('error');
                 }
             },
-            complete: function (jqXHR) {
-                console.log("completed with status code: " + jqXHR.status);
+            complete: function (result) {
+                console.log("completed with status code: " + result.status);
             },
         })
         console.log('finish');
