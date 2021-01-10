@@ -45,14 +45,13 @@ namespace ImageManager.MVC.Services
         {
             var fileName = $"Image_{imageId}.jpeg";
             var filePath = Path.Combine(Environment.CurrentDirectory, ImageFolder, fileName);
-            File.Create(fileName).Close();
 
             var base64 = url
                 .Substring(StartOfUrl.Length)
                 .Replace(ReplacedChar, CharForReplace);
             var imageBytes = Convert.FromBase64String(base64);
-            File.WriteAllBytes(filePath, imageBytes);
 
+            File.WriteAllBytes(filePath, imageBytes);
             return $"../Images/{fileName}";
         }
 
