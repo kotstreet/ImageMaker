@@ -1,4 +1,5 @@
 using ImageManager.MVC.Constants;
+using ImageManager.MVC.Filters;
 using ImageManager.MVC.Infrastructure;
 using ImageManager.MVC.Models;
 using ImageManager.MVC.Services;

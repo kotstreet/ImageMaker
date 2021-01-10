@@ -1,4 +1,5 @@
 ﻿using ImageManager.MVC.Constants;
+using ImageManager.MVC.Filters;
 using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ImageManager.MVC.Controllers
 {
+    [BlockedFilter]
     [Authorize]
     public class ProfileController : Controller
     {

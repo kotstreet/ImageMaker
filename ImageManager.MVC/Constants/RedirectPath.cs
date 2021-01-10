@@ -10,5 +10,8 @@
 
         public const string ProfileController = "Profile";
         public const string ShowAction = "Show";
+
+        public const string AccountController = "Account";
+        public const string LogoutAction = "Logout";
     }
 }

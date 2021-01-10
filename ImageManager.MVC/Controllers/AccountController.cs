@@ -42,7 +42,7 @@ namespace ImageManager.MVC.Controllers
             }
         }
 
-        [NonAuthorize]
+        [NonAuthorizeFilter]
         [HttpGet]
         public IActionResult Login()
         {
@@ -50,7 +50,7 @@ namespace ImageManager.MVC.Controllers
             return View();
         }
 
-        [NonAuthorize]
+        [NonAuthorizeFilter]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -89,7 +89,7 @@ namespace ImageManager.MVC.Controllers
             }
         }
 
-        [NonAuthorize]
+        [NonAuthorizeFilter]
         [HttpGet]
         public IActionResult Register()
         {
@@ -97,7 +97,7 @@ namespace ImageManager.MVC.Controllers
             return View();
         }
 
-        [NonAuthorize]
+        [NonAuthorizeFilter]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)

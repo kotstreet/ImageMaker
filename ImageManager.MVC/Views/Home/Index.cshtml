@@ -83,10 +83,20 @@
                 console.log(result.msg);
             },
             error: function (result) {
-                console.log('error');
+                if (result.status == 401) {
+                    console.log('error 401');
+                    location.reload();
+                }
+                else {
+                    console.log('error');
+                }
+            },
+            complete: function (jqXHR) {
+                console.log("completed with status code: " + jqXHR.status);
             },
         })
         console.log('finish');
+
     }
 
 </script>

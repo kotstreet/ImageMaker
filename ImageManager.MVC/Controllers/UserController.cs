@@ -1,4 +1,5 @@
 ﻿using ImageManager.MVC.Constants;
+using ImageManager.MVC.Filters;
 using ImageManager.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ImageManager.MVC.Controllers
 {
+    [BlockedFilter]
     [Authorize(Roles = UserRoles.Admin)]
     public class UserController : Controller
     {
