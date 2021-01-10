@@ -1,7 +1,6 @@
 ﻿using ImageManager.MVC.Constants;
 using ImageManager.MVC.Models;
 using ImageManager.MVC.Services.Interfaces;
-using ImageManager.MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ImageManager.MVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = UserRoles.User)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -54,11 +53,13 @@ namespace ImageManager.MVC.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

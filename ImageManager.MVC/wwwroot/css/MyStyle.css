@@ -6,7 +6,6 @@
 .btn-filter:hover {
     border:solid;
     border-bottom-width: 1px;
-    /*border-color: black;*/
     transform: scale(1.1);
 }
 

@@ -1,6 +1,9 @@
 ﻿using ImageManager.MVC.Constants;
+using ImageManager.MVC.Filters;
+using ImageManager.MVC.Models;
 using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -20,6 +23,26 @@ namespace ImageManager.MVC.Controllers
             _accountService = accountService;
         }
 
+        private async Task<IActionResult> SettingActionForReturnAferLoginAsync(AppUser user)
+        {
+            if (await _accountService.IsUserJustAUserAsync(user))
+            {
+                _logger.LogDebug("Login action, user signed in as User.");
+                return RedirectToAction(RedirectPath.IndexAction, RedirectPath.HomeController);
+            }
+            else if (await _accountService.IsUserAdminAsync(user))
+            {
+                _logger.LogDebug("Login action, user signed in as Admin.");
+                return RedirectToAction(RedirectPath.ShowAllAction, RedirectPath.UserController);
+            }
+            else
+            {
+                _logger.LogDebug("Login action, user signed in, but have not any role.");
+                return BadRequest(HttpErrorMessages.YouHaveNotAnyRole);
+            }
+        }
+
+        [NonAuthorize]
         [HttpGet]
         public IActionResult Login()
         {
@@ -27,6 +50,7 @@ namespace ImageManager.MVC.Controllers
             return View();
         }
 
+        [NonAuthorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -61,11 +85,11 @@ namespace ImageManager.MVC.Controllers
             else
             {
                 await _accountService.SignInAsync(user);
-                _logger.LogDebug("Login action, user signed in.");
-                return RedirectToAction(RedirectPath.IndexAction, RedirectPath.HomeController);
+                return await SettingActionForReturnAferLoginAsync(user);
             }
         }
 
+        [NonAuthorize]
         [HttpGet]
         public IActionResult Register()
         {
@@ -73,6 +97,7 @@ namespace ImageManager.MVC.Controllers
             return View();
         }
 
+        [NonAuthorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -108,7 +133,7 @@ namespace ImageManager.MVC.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult> Logout()
         {

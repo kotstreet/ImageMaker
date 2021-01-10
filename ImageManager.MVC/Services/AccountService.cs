@@ -65,5 +65,15 @@ namespace ImageManager.MVC.Services
         {
             await _userManager.AddToRoleAsync(user, UserRoles.User);
         }
+
+        public Task<bool> IsUserJustAUserAsync(AppUser user)
+        {
+            return _userManager.IsInRoleAsync(user, UserRoles.User);
+        }
+
+        public Task<bool> IsUserAdminAsync(AppUser user)
+        {
+            return _userManager.IsInRoleAsync(user, UserRoles.Admin);
+        }
     }
 }

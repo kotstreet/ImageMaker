@@ -51,5 +51,19 @@ namespace ImageManager.MVC.Services.Interfaces
         /// </summary>
         /// <param name="user">The user.</param>
         Task AddUserToRoleAsync(AppUser user);
+
+        /// <summary>
+        /// Check if user has admin role.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>True if has, otherwise false.</returns>
+        Task<bool> IsUserAdminAsync(AppUser user);
+
+        /// <summary>
+        /// Check if user has user role.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>True if has, otherwise false.</returns>
+        Task<bool> IsUserJustAUserAsync(AppUser user);
     }
 }
