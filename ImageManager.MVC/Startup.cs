@@ -2,6 +2,8 @@ using ImageManager.MVC.Constants;
 using ImageManager.MVC.Filters;
 using ImageManager.MVC.Infrastructure;
 using ImageManager.MVC.Models;
+using ImageManager.MVC.Repositories;
+using ImageManager.MVC.Repositories.Interfaces;
 using ImageManager.MVC.Services;
 using ImageManager.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +37,11 @@ namespace ImageManager.MVC
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<ISubscriptionService, SubscriptionService>();
             services.AddTransient<INotificationService, NotificationService>();
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IImageRepository, ImageRepository>();
+            services.AddTransient<ISubscriptionRepository, SubscriptionRepository>();
+            services.AddTransient<INotificationRepository, NotificationRepository>();
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {

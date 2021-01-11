@@ -41,6 +41,6 @@ namespace ImageManager.MVC.Models
         /// <summary>
         /// Notifications for the subscription.
         /// </summary>
-        public List<Notice> Notice { get; set; }
+        public List<Notice> Notices { get; set; }
     }
 }
