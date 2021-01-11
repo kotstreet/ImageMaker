@@ -194,9 +194,6 @@ function canselAll_click() {
 
 
 function hideResizeDiv() {
-	changeSizeH.value = 0;
-	changeSizeW.value = 0;
-
 	if (changeSizeDiv.classList.contains('change-size-div-show')) {
 		changeSizeDiv.classList.remove('change-size-div-show');
 	}
@@ -206,6 +203,9 @@ function hideResizeDiv() {
 function showResizeDiv() {
 	changeSizeH.max = canvas.height;
 	changeSizeW.max = canvas.width;
+	changeSizeH.value = canvas.height;
+	changeSizeW.value = canvas.width;
+
 	document.getElementById('changeSizeHDiv').title = 'максимальное значение: ' + canvas.height;
 	document.getElementById('changeSizeWDiv').title = 'максимальное значение: ' + canvas.width;
 
