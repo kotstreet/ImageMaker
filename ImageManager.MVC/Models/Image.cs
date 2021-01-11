@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ImageManager.MVC.Models
+﻿namespace ImageManager.MVC.Models
 {
     public class Image
     {
