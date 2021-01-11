@@ -1,9 +1,8 @@
 ﻿using ImageManager.MVC.Constants;
-using ImageManager.MVC.Infrastructure;
+using ImageManager.MVC.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
-using System.Linq;
 
 namespace ImageManager.MVC.Filters
 {
@@ -18,10 +17,10 @@ namespace ImageManager.MVC.Filters
         {
             if (context.HttpContext.User.Identity.IsAuthenticated)
             {
-                var dbContext = (AppIdentityDbContext)context.HttpContext.RequestServices.GetService(typeof(AppIdentityDbContext));
+                var userRepository = (IUserRepository)context.HttpContext.RequestServices.GetService(typeof(IUserRepository));
 
                 var userEmail = context.HttpContext.User.Identity.Name;
-                var user = dbContext.Users.FirstOrDefault(u => u.Email == userEmail);
+                var user = userRepository.GetByEmailAsync(userEmail).Result;
                 if (!user.IsActive || user == null)
                 {
                     context.Result = new RedirectToActionResult(RedirectPath.LogoutAction, RedirectPath.AccountController, null);

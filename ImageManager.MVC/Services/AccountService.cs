@@ -1,5 +1,6 @@
 ﻿using ImageManager.MVC.Constants;
 using ImageManager.MVC.Models;
+using ImageManager.MVC.Repositories.Interfaces;
 using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -11,17 +12,20 @@ namespace ImageManager.MVC.Services
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IUserRepository _userRepository;
 
         public AccountService(UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager)
+            SignInManager<AppUser> signInManager,
+            IUserRepository userRepository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _userRepository = userRepository;
         }
 
         public Task<AppUser> FindUserAsync(string email)
         {
-            return _userManager.FindByEmailAsync(email);
+            return _userRepository.GetByEmailAsync(email);
         }
 
         public Task<bool> CheckPasswordAsync(AppUser user, string password)
@@ -42,11 +46,11 @@ namespace ImageManager.MVC.Services
 
         public async Task<bool> IsEmailUniqueAsync(string email)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userRepository.GetByEmailAsync(email);
             return user == null;
         }
 
-        public async Task<AppUser> CreateNewUserAsync(RegisterViewModel model)
+        public Task<AppUser> CreateNewUserAsync(RegisterViewModel model)
         {
             var user = new AppUser
             {
@@ -56,9 +60,8 @@ namespace ImageManager.MVC.Services
                 LastName = model.LastName,
                 IsActive = true,
             };
-
-            var result = await _userManager.CreateAsync(user, model.Password);
-            return result.Succeeded ? user : null;
+ 
+            return _userRepository.CreateAsync(user, model.Password);
         }
 
         public async Task AddUserToRoleAsync(AppUser user)
@@ -79,6 +82,11 @@ namespace ImageManager.MVC.Services
         public Task<bool> IsUserAdminAsync(AppUser user)
         {
             return _userManager.IsInRoleAsync(user, UserRoles.Admin);
+        }
+
+        public async Task RemoveFromRoleAsync(AppUser user, string role)
+        {
+            await _userManager.RemoveFromRoleAsync(user, role);
         }
     }
 }

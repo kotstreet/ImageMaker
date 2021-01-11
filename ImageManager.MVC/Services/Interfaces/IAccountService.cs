@@ -71,5 +71,12 @@ namespace ImageManager.MVC.Services.Interfaces
         /// <param name="user">The user.</param>
         /// <returns>True if has, otherwise false.</returns>
         Task<bool> IsUserJustAUserAsync(AppUser user);
+
+        /// <summary>
+        /// Removed the user from the named role.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="role">The user role.</param>>
+        Task RemoveFromRoleAsync(AppUser user, string role);
     }
 }

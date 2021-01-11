@@ -3,6 +3,7 @@ using ImageManager.MVC.Filters;
 using ImageManager.MVC.Infrastructure;
 using ImageManager.MVC.Models;
 using ImageManager.MVC.Repositories;
+using ImageManager.MVC.Repositories.Helpers;
 using ImageManager.MVC.Repositories.Interfaces;
 using ImageManager.MVC.Services;
 using ImageManager.MVC.Services.Interfaces;
@@ -42,6 +43,7 @@ namespace ImageManager.MVC
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<ISubscriptionRepository, SubscriptionRepository>();
             services.AddTransient<INotificationRepository, NotificationRepository>();
+            services.AddTransient<IUserRoleDataHelper, UserRoleDataHelper>();
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {

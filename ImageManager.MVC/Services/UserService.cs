@@ -1,6 +1,7 @@
 ﻿using ImageManager.MVC.Constants;
-using ImageManager.MVC.Infrastructure;
 using ImageManager.MVC.Models;
+using ImageManager.MVC.Repositories.Helpers;
+using ImageManager.MVC.Repositories.Interfaces;
 using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -15,32 +16,32 @@ namespace ImageManager.MVC.Services
 {
     public class UserService : IUserService
     {
-        private readonly AppIdentityDbContext _context;
+        private readonly IUserRepository _userRepository;
+        private readonly IUserRoleDataHelper _userRoleDataHelper;
         private readonly IAccountService _accountService;
         private readonly ISubscriptionService _subscriptionService;
         private readonly ILogger<UserService> _logger;
-        private readonly UserManager<AppUser> _userManager;
 
-        public UserService(AppIdentityDbContext context,
+        public UserService(IUserRoleDataHelper useRoleDataHelper,
+            IUserRepository userRepository,
             IAccountService accountService,
             ISubscriptionService subscriptionService,
-            UserManager<AppUser> userManager,
             ILogger<UserService> logger)
         {
-            _context = context;
+            _userRoleDataHelper = useRoleDataHelper;
+            _userRepository = userRepository;
             _accountService = accountService;
             _subscriptionService = subscriptionService;
-            _userManager = userManager;
             _logger = logger;
         }
 
         public async Task<List<UserWithRolesInfoViewModel>> GetAllUsersWithRolesAsync(string email)
         {
-            var admin = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var admin = await _userRepository.GetByEmailAsync(email);
 
-            var users = _context.Users.AsQueryable();
-            var userRoles = _context.UserRoles.AsQueryable();
-            var roles = _context.Roles.AsQueryable();
+            var users = _userRepository.GetAll();
+            var userRoles = _userRoleDataHelper.GetAllUserRoles();
+            var roles = _userRoleDataHelper.GetAllRoles();
 
             var usersWithRoleInfo = users.Select(user => new UserWithRolesInfoViewModel
             {
@@ -69,7 +70,7 @@ namespace ImageManager.MVC.Services
                 .ThenBy(user => user.Email)
                 .ToListAsync();
 
-            for(var i = 0; i < usersForReturn.Count; i++)
+            for (var i = 0; i < usersForReturn.Count; i++)
             {
                 usersForReturn.ElementAt(i).HasSubscription = await _subscriptionService.HasSubscriptionAsync(admin.Id, usersForReturn.ElementAt(i).Id);
             }
@@ -80,21 +81,21 @@ namespace ImageManager.MVC.Services
 
         public async Task ActivateAsync(string userId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _userRepository.GetByIdAsync(userId);
             user.IsActive = true;
-            await _context.SaveChangesAsync();
+            await _userRepository.UpdateAsync(user);
         }
 
         public async Task DeactivateAsync(string userId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _userRepository.GetByIdAsync(userId);
             user.IsActive = false;
-            await _context.SaveChangesAsync();
+            await _userRepository.UpdateAsync(user);
         }
 
         public async Task<EditUserViewModel> GetEditUserViewModel(string userId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _userRepository.GetByIdAsync(userId);
             var model = new EditUserViewModel
             {
                 Id = user.Id,
@@ -107,7 +108,7 @@ namespace ImageManager.MVC.Services
 
             return model;
         }
-        
+
         public async Task<AppUser> CreateUserAsync(CreateUserViewModel model)
         {
             var registerViewModel = new RegisterViewModel
@@ -124,27 +125,27 @@ namespace ImageManager.MVC.Services
                 return null;
             }
 
-            if(model.IsAdmin)
+            if (model.IsAdmin)
             {
                 await _accountService.MarkUserAsAdminAsync(user);
             }
-            if(model.IsUser)
+            if (model.IsUser)
             {
                 await _accountService.AddUserToRoleAsync(user);
             }
 
             return user;
         }
-        
+
         public async Task EditUserAsync(EditUserViewModel model)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == model.Id);
+            var user = await _userRepository.GetByIdAsync(model.Id);
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.Email = model.Email;
             user.UserName = model.Email;
 
-            await _userManager.UpdateAsync(user);
+            await _userRepository.UpdateAsync(user);
 
             if (model.IsAdmin != await _accountService.IsUserAdminAsync(user) && model.IsAdmin)
             {
@@ -152,7 +153,7 @@ namespace ImageManager.MVC.Services
             }
             else if (model.IsAdmin != await _accountService.IsUserAdminAsync(user) && !model.IsAdmin)
             {
-                await _userManager.RemoveFromRoleAsync(user, UserRoles.Admin);
+                await _accountService.RemoveFromRoleAsync(user, UserRoles.Admin);
             }
 
             if (model.IsUser != await _accountService.IsUserJustAUserAsync(user) && model.IsUser)
@@ -161,14 +162,13 @@ namespace ImageManager.MVC.Services
             }
             else if (model.IsUser != await _accountService.IsUserJustAUserAsync(user) && !model.IsUser)
             {
-                await _userManager.RemoveFromRoleAsync(user, UserRoles.User);
+                await _accountService.RemoveFromRoleAsync(user, UserRoles.User);
             }
         }
 
         public async Task DeleteAsync(string userId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            await _userManager.DeleteAsync(user);
+            await _userRepository.DeleteAsync(userId);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using ImageManager.MVC.Infrastructure;
-using ImageManager.MVC.Models;
+﻿using ImageManager.MVC.Models;
+using ImageManager.MVC.Repositories.Interfaces;
 using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -17,19 +17,22 @@ namespace ImageManager.MVC.Services
         private const char ReplacedChar = ' ';
         private const char CharForReplace = '+';
 
-        private readonly AppIdentityDbContext _context;
+        private readonly IImageRepository _imageRepository;
+        private readonly IUserRepository _userRepository;
         private readonly INotificationService _notificationService;
 
-        public ImageService(AppIdentityDbContext context,
-            INotificationService notificationService)
+        public ImageService(INotificationService notificationService,
+            IImageRepository imageRepository,
+            IUserRepository userRepository)
         {
-            _context = context;
             _notificationService = notificationService;
+            _imageRepository = imageRepository;
+            _userRepository = userRepository;
         }
 
         private async Task<UserImagesViewModel> GetImagesForUserAsync(AppUser user)
         {
-            var imageUrls = await _context.Images
+            var imageUrls = await _imageRepository.GetAll()
                 .Where(img => img.AppUserId == user.Id)
                 .OrderByDescending(img => img.Id)
                 .Select(img => img.Path)
@@ -59,19 +62,19 @@ namespace ImageManager.MVC.Services
 
         public async Task<UserImagesViewModel> GetImagesByEmailAsync(string email)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(user => user.Email == email);
+            var user = await _userRepository.GetByEmailAsync(email);
             return await GetImagesForUserAsync(user);
         }
 
         public async Task<UserImagesViewModel> GetImagesByUserIdAsync(string id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _userRepository.GetByIdAsync(id);
             return await GetImagesForUserAsync(user);
         }
 
         public async Task AddImageToUserAsync(string email, string imageUrl)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(user => user.Email == email);
+            var user = await _userRepository.GetByEmailAsync(email);
             var urlForSave = imageUrl.Replace(ReplacedChar, CharForReplace);
             var image = new Image
             {
@@ -79,13 +82,11 @@ namespace ImageManager.MVC.Services
                 Path = urlForSave,
             };
 
-            var img = _context.Images.Add(image).Entity;
-            await _context.SaveChangesAsync();
+            var createdImage = await _imageRepository.CreateAsync(image);
+            createdImage.Path = CreateImage(createdImage.Id, imageUrl);
+            await _imageRepository.UpdateAsync(createdImage);
 
-            img.Path = CreateImage(img.Id, imageUrl);
-            await _context.SaveChangesAsync();
-
-            await _notificationService.AddNotificationsForUserAsync(user.Id, img.Id);
+            await _notificationService.AddNotificationsForUserAsync(user.Id, createdImage.Id);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using ImageManager.MVC.Infrastructure;
-using ImageManager.MVC.Models;
+﻿using ImageManager.MVC.Models;
+using ImageManager.MVC.Repositories.Interfaces;
 using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -11,16 +11,25 @@ namespace ImageManager.MVC.Services
 {
     public class NotificationService : INotificationService
     {
-        private readonly AppIdentityDbContext _context;
+        private readonly IImageRepository _imageRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly ISubscriptionRepository _subscriptionRepository;
+        private readonly INotificationRepository _notificationRepository;
 
-        public NotificationService(AppIdentityDbContext context)
+        public NotificationService(IImageRepository imageRepository,
+            IUserRepository userRepository,
+            ISubscriptionRepository subscriptionRepository,
+            INotificationRepository notificationRepository)
         {
-            _context = context;
+            _imageRepository = imageRepository;
+            _userRepository = userRepository;
+            _subscriptionRepository = subscriptionRepository;
+            _notificationRepository = notificationRepository;
         }
 
         public async Task AddNotificationsForUserAsync(string userId, int imageId)
         {
-            var subscriptionsId = await _context.Subscriptions
+            var subscriptionsId = await _subscriptionRepository.GetAll()
                 .Where(subscription => subscription.UserId == userId && subscription.IsActual)
                 .Select(subscription => subscription.Id)
                 .ToListAsync();
@@ -33,17 +42,19 @@ namespace ImageManager.MVC.Services
                 HasRead = false,
             }));
 
-            _context.Notices.AddRange(notices);
-            await _context.SaveChangesAsync();
+            foreach (var notification in notices)
+            {
+                await _notificationRepository.CreateAsync(notification);
+            }
         }
 
         public async Task<IEnumerable<NotificationViewModel>> GetNotificationsAsync(string adminEmail)
         {
-            var admin = await _context.Users.FirstOrDefaultAsync(u => u.Email == adminEmail);
+            var admin = await _userRepository.GetByEmailAsync(adminEmail);
 
-            var notificationViewModels = from subscription in _context.Subscriptions
-                                         join notice in _context.Notices on subscription.Id equals notice.SubscriptionId
-                                         join user in _context.Users on subscription.UserId equals user.Id
+            var notificationViewModels = from subscription in _subscriptionRepository.GetAll()
+                                         join notice in _notificationRepository.GetAll() on subscription.Id equals notice.SubscriptionId
+                                         join user in _userRepository.GetAll() on subscription.UserId equals user.Id
                                          where subscription.AdminId == admin.Id
                                          orderby notice.Id descending
                                          select new NotificationViewModel
@@ -58,9 +69,9 @@ namespace ImageManager.MVC.Services
 
         public async Task<ImageViewModel> GetImagePathAsync(int notificationId)
         {
-            var notice = await _context.Notices.FindAsync(notificationId);
-            var imageViewModels = from img in _context.Images
-                                  join user in _context.Users on img.AppUserId equals user.Id
+            var notice = await _notificationRepository.GetByIdAsync(notificationId);
+            var imageViewModels = from img in _imageRepository.GetAll()
+                                  join user in _userRepository.GetAll() on img.AppUserId equals user.Id
                                   where img.Id == notice.ImageId
                                   select new ImageViewModel
                                   {
@@ -75,9 +86,9 @@ namespace ImageManager.MVC.Services
 
         public async Task MarkNotificationAsReadAsync(int notificationId)
         {
-            var notice = await _context.Notices.FindAsync(notificationId);
-            notice.HasRead = true;
-            await _context.SaveChangesAsync();
+            var notification = await _notificationRepository.GetByIdAsync(notificationId);
+            notification.HasRead = true;
+            await _notificationRepository.UpdateAsync(notification);
         }
     }
 }
