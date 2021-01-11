@@ -17,7 +17,6 @@ namespace ImageManager.MVC.Infrastructure
         private const string UserFirstName = "Ivan";
         private const string UserLastName = "Ivanov";
 
-
         private static async Task AddAdminAsync(UserManager<AppUser> userManager,
             IdentityRole adminRole,
             IdentityRole userRole)

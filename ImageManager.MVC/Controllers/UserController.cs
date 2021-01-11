@@ -17,16 +17,19 @@ namespace ImageManager.MVC.Controllers
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _userService;
         private readonly IAccountService _accountService;
+        private readonly ISubscriptionService _subscriptionService;
         private readonly IImageService _imageService;
 
         public UserController(ILogger<UserController> logger,
             IUserService userService,
+            ISubscriptionService subscriptionService,
             IAccountService accountService,
             IImageService imageService)
         {
             _logger = logger;
             _userService = userService;
             _accountService = accountService;
+            _subscriptionService = subscriptionService;
             _imageService = imageService;
         }
 
@@ -34,7 +37,7 @@ namespace ImageManager.MVC.Controllers
         public async Task<IActionResult> ShowAll()
         {
             _logger.LogInformation("ShowAll action of UserController.");
-            return View(await _userService.GetAllUsersWithRolesAsync());
+            return View(await _userService.GetAllUsersWithRolesAsync(User.Identity.Name));
         }
 
         [HttpGet]
@@ -151,6 +154,22 @@ namespace ImageManager.MVC.Controllers
         {
             _logger.LogInformation($"Delete action of UserController with userId = {userId}.");
             await _userService.DeleteAsync(userId);
+            return RedirectToAction(RedirectPath.ShowAllAction, RedirectPath.UserController);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Subscribe(string userId)
+        {
+            _logger.LogInformation($"Subscribe action of UserController with userId = {userId}.");
+            await _subscriptionService.AddSubscriptionAsync(User.Identity.Name, userId);
+            return RedirectToAction(RedirectPath.ShowAllAction, RedirectPath.UserController);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Unsubscribe(string userId)
+        {
+            _logger.LogInformation($"Unsubscribe action of UserController with userId = {userId}.");
+            await _subscriptionService.DeactivateSubscriptionAsync(User.Identity.Name, userId);
             return RedirectToAction(RedirectPath.ShowAllAction, RedirectPath.UserController);
         }
     }

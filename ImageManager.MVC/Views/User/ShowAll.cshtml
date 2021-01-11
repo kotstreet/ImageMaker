@@ -27,12 +27,14 @@
             </tr>
             @foreach (var item in Model)
             {
-            <tr class="text-black-50">
-                <td class="text-sm-center" title="Посмотреть историю редактирования"><a asp-action="ShowImage" asp-controller="User" asp-route-userId="@item.Id">@item.Email</a></td>
-                <td class="text-sm-center">@item.FullName</td>
-                <td class="text-sm-center">@(item.IsAdmin ? "да" : "нет")</td>
-                <td class="text-sm-center">@(item.IsUser ? "да" : "нет")</td>
-                @if (User.Identity.Name != item.Email)
+        <tr class="text-black-50">
+            <td class="text-sm-center" title="Посмотреть историю редактирования"><a asp-action="ShowImage" asp-controller="User" asp-route-userId="@item.Id">@item.Email</a></td>
+            <td class="text-sm-center">@item.FullName</td>
+            <td class="text-sm-center">@(item.IsAdmin ? "да" : "нет")</td>
+            <td class="text-sm-center">@(item.IsUser ? "да" : "нет")</td>
+            @if (User.Identity.Name != item.Email)
+            {
+                @if (item.IsUser)
                 {
                     @if (item.HasSubscription)
                     {
@@ -46,29 +48,35 @@
                             <a class="btn btn-subscribe" asp-action="Subscribe" asp-controller="User" asp-route-userId="@item.Id">Подписаться</a>
                         </td>
                     }
-                    @if (item.IsActive)
-                    {
-                        <td title="Сейчас пользователь активирован." class="text-sm-center">
-                            <a class="btn btn-deactivate" asp-action="Deactivate" asp-controller="User" asp-route-userId="@item.Id">Деактивировать</a>
-                        </td>
-                    }
-                    else
-                    {
-                        <td title="Сейчас пользователь деактивирован." class="text-sm-center">
-                            <a class="btn btn-activate" asp-action="Activate" asp-controller="User" asp-route-userId="@item.Id">Активировать</a>
-                        </td>
-                    }
-                    <td class="text-sm-center"><a class="btn btn-outline-info" asp-action="Edit" asp-controller="User" asp-route-userId="@item.Id">Редактировать</a></td>
-                    <td class="text-sm-center"><a class="btn btn-outline-danger" asp-action="Delete" asp-controller="User" asp-route-userId="@item.Id">Удалить</a></td>
                 }
                 else
                 {
-                    <td title="Вы не можете быть подписаны на себя."></td>
-                    <td title="Вы не можете управлять собой."></td>
-                    <td title="Вы не можете изменять себя."></td>
-                    <td title="Вы не можете удалить себя."></td>
+                    <td title="Вы не можете быть подписаны на пользователя, который не может редактировать изображения."></td>
                 }
-            </tr>
+
+                @if (item.IsActive)
+                {
+                    <td title="Сейчас пользователь активирован." class="text-sm-center">
+                        <a class="btn btn-deactivate" asp-action="Deactivate" asp-controller="User" asp-route-userId="@item.Id">Деактивировать</a>
+                    </td>
+                }
+                else
+                {
+                    <td title="Сейчас пользователь деактивирован." class="text-sm-center">
+                        <a class="btn btn-activate" asp-action="Activate" asp-controller="User" asp-route-userId="@item.Id">Активировать</a>
+                    </td>
+                }
+                <td class="text-sm-center"><a class="btn btn-outline-info" asp-action="Edit" asp-controller="User" asp-route-userId="@item.Id">Редактировать</a></td>
+                <td class="text-sm-center"><a class="btn btn-outline-danger" asp-action="Delete" asp-controller="User" asp-route-userId="@item.Id">Удалить</a></td>
+            }
+            else
+            {
+                <td title="Вы не можете быть подписаны на себя."></td>
+                <td title="Вы не можете управлять собой."></td>
+                <td title="Вы не можете изменять себя."></td>
+                <td title="Вы не можете удалить себя."></td>
+            }
+        </tr>
             }
         </table>
     </div>

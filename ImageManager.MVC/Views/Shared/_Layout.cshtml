@@ -27,6 +27,10 @@
             <div class="d-sm-inline-flex pr-md-5">
                 @if (User.Identity.IsAuthenticated)
                 {
+                    if (User.IsInRole(ImageManager.MVC.Constants.UserRoles.Admin))
+                    {
+                        @Html.ActionLink("Уведомления", "GetAll", "Notification", null, new { @class = "text-white m-2", id = "profileLink" })
+                    }
                     @Html.ActionLink(User.Identity.Name, "Show", "Profile", null, new { @class = "text-white m-2", id = "profileLink" })
                     @Html.ActionLink("Выход", "Logout", "Account", null, new { @class = "text-white m-2", id = "logoutLink" })
                 }

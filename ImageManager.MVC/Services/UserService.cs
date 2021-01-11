@@ -17,22 +17,27 @@ namespace ImageManager.MVC.Services
     {
         private readonly AppIdentityDbContext _context;
         private readonly IAccountService _accountService;
+        private readonly ISubscriptionService _subscriptionService;
         private readonly ILogger<UserService> _logger;
         private readonly UserManager<AppUser> _userManager;
 
         public UserService(AppIdentityDbContext context,
             IAccountService accountService,
+            ISubscriptionService subscriptionService,
             UserManager<AppUser> userManager,
             ILogger<UserService> logger)
         {
             _context = context;
             _accountService = accountService;
+            _subscriptionService = subscriptionService;
             _userManager = userManager;
             _logger = logger;
         }
 
-        public async Task<List<UserWithRolesInfoViewModel>> GetAllUsersWithRolesAsync()
+        public async Task<List<UserWithRolesInfoViewModel>> GetAllUsersWithRolesAsync(string email)
         {
+            var admin = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
             var users = _context.Users.AsQueryable();
             var userRoles = _context.UserRoles.AsQueryable();
             var roles = _context.Roles.AsQueryable();
@@ -63,6 +68,11 @@ namespace ImageManager.MVC.Services
                 .OrderByDescending(user => user.IsAdmin)
                 .ThenBy(user => user.Email)
                 .ToListAsync();
+
+            for(var i = 0; i < usersForReturn.Count; i++)
+            {
+                usersForReturn.ElementAt(i).HasSubscription = await _subscriptionService.HasSubscriptionAsync(admin.Id, usersForReturn.ElementAt(i).Id);
+            }
 
             _logger.LogInformation($"GetAllUsersWithRolesAsync method of UserService before return, usersForReturn= {JsonConvert.SerializeObject(usersForReturn)}.");
             return usersForReturn;

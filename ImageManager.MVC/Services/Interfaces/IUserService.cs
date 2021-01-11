@@ -10,8 +10,9 @@ namespace ImageManager.MVC.Services.Interfaces
         /// <summary>
         /// Get all users with their base info and info aboute their roles.
         /// </summary>
+        /// <param name="email">The user email.</param>
         /// <returns>UserWithRolesInfoViewModel.</returns>
-        Task<List<UserWithRolesInfoViewModel>> GetAllUsersWithRolesAsync();
+        Task<List<UserWithRolesInfoViewModel>> GetAllUsersWithRolesAsync(string email);
 
         /// <summary>
         /// Activate user.

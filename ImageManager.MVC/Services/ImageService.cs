@@ -4,7 +4,6 @@ using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Web;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,10 +18,13 @@ namespace ImageManager.MVC.Services
         private const char CharForReplace = '+';
 
         private readonly AppIdentityDbContext _context;
+        private readonly INotificationService _notificationService;
 
-        public ImageService(AppIdentityDbContext context)
+        public ImageService(AppIdentityDbContext context,
+            INotificationService notificationService)
         {
             _context = context;
+            _notificationService = notificationService;
         }
 
         private async Task<UserImagesViewModel> GetImagesForUserAsync(AppUser user)
@@ -82,6 +84,8 @@ namespace ImageManager.MVC.Services
 
             img.Path = CreateImage(img.Id, imageUrl);
             await _context.SaveChangesAsync();
+
+            await _notificationService.AddNotificationsForUserAsync(user.Id, img.Id);
         }
     }
 }

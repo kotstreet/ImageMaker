@@ -374,3 +374,19 @@ function backOrClose() {
 		}
 	}, 500);
 }
+
+function notification_click(elementId) {
+	var link = document.getElementById(elementId);
+	link.click();
+
+	var td = document.getElementsByName(elementId);
+
+	if (td.classList.contains('td-notice-read')) {
+		td.classList.remove('td-notice-read');
+		td.classList.add('td-notice-new');
+	}
+	else {
+		td.classList.remove('td-notice-new');
+		td.classList.add('td-notice-read');
+    }
+}
