@@ -1,0 +1,60 @@
+﻿@model ImageManager.MVC.ViewModels.CreateUserViewModel
+
+@{
+    ViewBag.Title = "Создание пользователя";
+}
+
+<div class="row justify-content-center">
+    <div class="text-center pt-md-2 mt-md-2">
+        <div class="mb-3">
+            <h2>Создание пользователя</h2>
+        </div>
+        <div class="border border-secondary rounded bg-white">
+            @using (@Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, null, new { @class = "text-danger small" })
+                <div class="form-group pl-md-5 pr-md-5 pt-md-3 pb-md-2 text-md-left">
+                    <div class="pt-md-1">
+                        @Html.LabelFor(model => model.LastName, "Фамилия", new { @class = "small" })<br />
+                        @Html.TextBoxFor(model => model.LastName, null, new { style = "width: 320px;" })<br />
+                        @Html.ValidationMessageFor(model => model.LastName, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.FirstName, "Имя", new { @class = "small" })<br />
+                        @Html.TextBoxFor(model => model.FirstName, null, new { style = "width: 320px;" })<br />
+                        @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.Email, "Почта", new { @class = "small" })<br />
+                        @Html.TextBoxFor(model => model.Email, null, new { style = "width: 320px;" })<br />
+                        @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="row pt-md-2 mt-2 justify-content-around">
+                        @Html.LabelFor(model => model.IsAdmin, "Администратор", new { @class = "small pl-3 mr-4" })
+                        @Html.CheckBoxFor(model => model.IsAdmin, new { @class = "form-control pr-3 mr-4", style = "width:20px; height:20px;" })
+                    </div>
+                    <div class="row pt-md-2 justify-content-around" >
+                        @Html.LabelFor(model => model.IsUser, "Пользователь", new { @class = "small pl-3 mr-4" })
+                        @Html.CheckBoxFor(model => model.IsUser, new {  @class = "form-control pr-3 mr-4", style = "width:20px; height:20px;", @checked="true" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.Password, "Пароль", new { @class = "small" })<br />
+                        @Html.PasswordFor(model => model.Password, new { style = "width: 320px;" })<br />
+                        @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.ConfirmPassword, "Подтверждение пароля", new { @class = "small" })<br />
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { style = "width: 320px;" })<br />
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-4 text-center">
+                        <input type="submit" class="btn btn-success" value="Создать" \>
+                    </div>
+                </div>
+            }
+        </div>
+        <br />
+        <br />
+    </div>
+</div>

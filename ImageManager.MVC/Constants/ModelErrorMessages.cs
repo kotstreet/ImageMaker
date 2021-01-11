@@ -7,5 +7,7 @@
         public const string PasswordOrEmailIncorrect = "Почта или пароль указаны неверно.";
         public const string EmailIsNotUnique = "Такая почта уже существует.";
         public const string SomethingIsGoingWrong = "Что-то пошло не так.";
+
+        public const string RoleNotSelected = "Вы должны указать хотя бы одну роль.";
     }
 }

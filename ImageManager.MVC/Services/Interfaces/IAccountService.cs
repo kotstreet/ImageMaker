@@ -47,10 +47,16 @@ namespace ImageManager.MVC.Services.Interfaces
         Task<AppUser> CreateNewUserAsync(RegisterViewModel model);
 
         /// <summary>
-        /// Add User role to a new user.
+        /// Add User role to a user.
         /// </summary>
         /// <param name="user">The user.</param>
         Task AddUserToRoleAsync(AppUser user);
+
+        /// <summary>
+        /// Add Admin role to a user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        Task MarkUserAsAdminAsync(AppUser user);
 
         /// <summary>
         /// Check if user has admin role.
