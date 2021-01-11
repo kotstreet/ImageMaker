@@ -27,7 +27,7 @@
                     </div>
                     <div class="pt-md-2">
                         @Html.LabelFor(model => model.Email, "Почта", new { @class = "small" })<br />
-                        @Html.TextBoxFor(model => model.Email)<br />
+                        <input type="email" name="email" asp-for="Email" /><br />
                         @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger small" })
                     </div>
                     <div class="pt-md-2">

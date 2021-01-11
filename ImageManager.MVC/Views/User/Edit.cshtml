@@ -28,7 +28,7 @@
                     </div>
                     <div class="pt-md-2">
                         @Html.LabelFor(model => model.Email, "Почта", new { @class = "small" })<br />
-                        @Html.TextBoxFor(model => model.Email, null, new { style = "width: 320px;" })<br />
+                        <input type="email" name="email" asp-for="Email" style="width: 320px;" /><br />
                         @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger small" })
                     </div>
                     <div class="row pt-md-2 mt-2 justify-content-around">
