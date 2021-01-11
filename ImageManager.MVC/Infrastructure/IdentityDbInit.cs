@@ -1,40 +1,45 @@
 ﻿using ImageManager.MVC.Constants;
 using ImageManager.MVC.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
 namespace ImageManager.MVC.Infrastructure
 {
     internal static class IdentityDbInit
     {
-        private const string AdminPassword = "admin1";
-        private const string AdminEmail = "admin@mail.ru";
-        private const string AdminFirstName = "Anton";
-        private const string AdminLastName = "Antonov";
+        private const string AdminPassword = "AdminPassword";
+        private const string AdminEmail = "AdminEmail";
+        private const string AdminFirstName = "AdminFirstName";
+        private const string AdminLastName = "AdminLastName";
 
-        private const string UserPassword = "user11";
-        private const string UserEmail = "user@mail.ru";
-        private const string UserFirstName = "Ivan";
-        private const string UserLastName = "Ivanov";
+        private const string UserPassword = "UserPassword";
+        private const string UserEmail = "UserEmail";
+        private const string UserFirstName = "UserFirstName";
+        private const string UserLastName = "UserLastName";
 
         private static async Task AddAdminAsync(UserManager<AppUser> userManager,
             IdentityRole adminRole,
-            IdentityRole userRole)
+            IdentityRole userRole,
+            IConfiguration configuration)
         {
-            if (await userManager.FindByEmailAsync(AdminEmail) != null)
+            var adminEmail = configuration.GetValue<string>(AdminEmail);
+            if (await userManager.FindByEmailAsync(adminEmail) != null)
             {
                 return;
             }
 
             var admin = new AppUser
             {
-                UserName = AdminEmail,
-                Email = AdminEmail,
-                FirstName = AdminFirstName,
-                LastName = AdminLastName,
+                UserName = adminEmail,
+                Email = adminEmail,
+                FirstName = configuration.GetValue<string>(AdminFirstName),
+                LastName = configuration.GetValue<string>(AdminLastName),
                 IsActive = true,
             };
-            var resultAdmin = await userManager.CreateAsync(admin, AdminPassword);
+
+            var adminPassword = configuration.GetValue<string>(AdminPassword);
+            var resultAdmin = await userManager.CreateAsync(admin, adminPassword);
             if (resultAdmin.Succeeded)
             {
                 await userManager.AddToRoleAsync(admin, adminRole.Name);
@@ -42,22 +47,27 @@ namespace ImageManager.MVC.Infrastructure
             }
         }
 
-        private static async Task AddUserAsync(UserManager<AppUser> userManager, IdentityRole userRole)
+        private static async Task AddUserAsync(UserManager<AppUser> userManager,
+            IdentityRole userRole,
+            IConfiguration configuration)
         {
-            if (await userManager.FindByEmailAsync(UserEmail) != null)
+            var userEmail = configuration.GetValue<string>(UserEmail);
+            if (await userManager.FindByEmailAsync(userEmail) != null)
             {
                 return;
             }
 
             var user = new AppUser
             {
-                UserName = UserEmail,
-                Email = UserEmail,
-                FirstName = UserFirstName,
-                LastName = UserLastName,
+                UserName = userEmail,
+                Email = userEmail,
+                FirstName = configuration.GetValue<string>(UserFirstName),
+                LastName = configuration.GetValue<string>(UserLastName),
                 IsActive = true,
             };
-            var resultUser = await userManager.CreateAsync(user, UserPassword);
+
+            var userPassword = configuration.GetValue<string>(UserPassword);
+            var resultUser = await userManager.CreateAsync(user, userPassword);
             if (resultUser.Succeeded)
             {
                 await userManager.AddToRoleAsync(user, userRole.Name);
@@ -65,7 +75,8 @@ namespace ImageManager.MVC.Infrastructure
         }
 
         public static async Task SeedDataAsync(UserManager<AppUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IConfiguration configuration)
         {
             var adminRole = new IdentityRole { Name = UserRoles.Admin };
             var userRole = new IdentityRole { Name = UserRoles.User };
@@ -80,8 +91,8 @@ namespace ImageManager.MVC.Infrastructure
                 await roleManager.CreateAsync(userRole);
             }
 
-            await AddAdminAsync(userManager, adminRole, userRole);
-            await AddUserAsync(userManager, userRole);
+            await AddAdminAsync(userManager, adminRole, userRole, configuration);
+            await AddUserAsync(userManager, userRole, configuration);
         }
     }
 }

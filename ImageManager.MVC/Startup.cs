@@ -72,7 +72,7 @@ namespace ImageManager.MVC
             app.UseAuthentication();
             app.UseAuthorization();
 
-            IdentityDbInit.SeedDataAsync(userManager, roleManager).Wait();
+            IdentityDbInit.SeedDataAsync(userManager, roleManager, Configuration).Wait();
             logger.LogInformation("SeedDataAsync finished withiut errors.");
 
             app.UseEndpoints(endpoints =>
