@@ -267,9 +267,14 @@ function open_click() {
 }
 
 function deleteTitles() {
-	imageActionDivItem.title = "";
+	for (var i = 0; i < filters.length; i++) {
+		filters[i].title = "";
+	}
+	for (var i = 0; i < forActivate.length; i++) {
+		forActivate[i].title = "";
+	}
+
 	cancelAllButttonItem.title = "Откатить все сделанные изменения.";
-	saveButttonItem.title = "";
 }
 
 function activateElements() {

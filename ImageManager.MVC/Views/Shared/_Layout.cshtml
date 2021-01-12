@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,29 +18,27 @@
             <div class="d-sm-inline-flex ml-md-5">
                 @if (User.IsInRole(ImageManager.MVC.Constants.UserRoles.User))
                 {
-                    @Html.ActionLink("Главная", "Index", "Home", null, new { @class = "text-white m-2", id = "homeLink" })
-                    @Html.ActionLink("История", "History", "Home", null, new { @class = "text-white m-2", id = "homeLink" })
+                    <a asp-action="Index" asp-controller="Home" class="text-white m-2" id="homeLink">@Localizer["BasePage"]</a>
+                    <a asp-action="History" asp-controller="Home" class="text-white m-2" id="historyLink">@Localizer["HistoryPage"]</a>
                 }
                 @if (User.IsInRole(ImageManager.MVC.Constants.UserRoles.Admin))
                 {
-                    @Html.ActionLink("Пользователи", "ShowAll", "User", null, new { @class = "text-white m-2" })
+                    <a asp-action="ShowAll" asp-controller="User" class="text-white m-2" id="usersLink">@Localizer["UsersPage"]</a>
+                    <a asp-action="GetAll" asp-controller="Notification" class="text-white m-2" id="notificationLink">@Localizer["NotificationPage"]</a>
                 }
             </div>
 
             <div class="d-sm-inline-flex pr-md-5">
+                @await Html.PartialAsync("_SelectLanguagePartial")
                 @if (User.Identity.IsAuthenticated)
                 {
-                    if (User.IsInRole(ImageManager.MVC.Constants.UserRoles.Admin))
-                    {
-                        @Html.ActionLink("Уведомления", "GetAll", "Notification", null, new { @class = "text-white m-2", id = "profileLink" })
-                    }
-                    @Html.ActionLink(User.Identity.Name, "Show", "Profile", null, new { @class = "text-white m-2", id = "profileLink" })
-                    @Html.ActionLink("Выход", "Logout", "Account", null, new { @class = "text-white m-2", id = "logoutLink" })
+                    <a asp-action="Show" asp-controller="Profile" class="text-white m-2" id="profileLink">@User.Identity.Name</a>
+                    <a asp-action="Logout" asp-controller="Account" class="text-white m-2" id="logoutLink">@Localizer["LogoutAction"]</a>
                 }
                 else
                 {
-                    @Html.ActionLink("Вход", "Login", "Account", new { }, new { @class = "text-white m-2", id = "loginLink" })
-                    @Html.ActionLink("Регистрация", "Register", "Account", new { }, new { @class = "text-white m-2", id = "registerLink" })
+                    <a asp-action="Login" asp-controller="Account" class="text-white m-2" id="loginLink">@Localizer["LoginPage"]</a>
+                    <a asp-action="Register" asp-controller="Account" class="text-white m-2" id="registerLink">@Localizer["RegisterPage"]</a>
                 }
             </div>
         </div>
@@ -48,7 +49,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - Создание картинок - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика Конфиденциальности.</a>
+            &copy; 2020 - @Localizer["SiteTextFooter"] - <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Policy"].</a>
         </div>
     </footer>
 

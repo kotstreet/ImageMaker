@@ -4,6 +4,7 @@ using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
@@ -15,18 +16,21 @@ namespace ImageManager.MVC.Controllers
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
+        private readonly IStringLocalizer<UserController> _localizer;
         private readonly IUserService _userService;
         private readonly IAccountService _accountService;
         private readonly ISubscriptionService _subscriptionService;
         private readonly IImageService _imageService;
 
         public UserController(ILogger<UserController> logger,
+            IStringLocalizer<UserController> localizer,
             IUserService userService,
             ISubscriptionService subscriptionService,
             IAccountService accountService,
             IImageService imageService)
         {
             _logger = logger;
+            _localizer = localizer;
             _userService = userService;
             _accountService = accountService;
             _subscriptionService = subscriptionService;
@@ -83,14 +87,14 @@ namespace ImageManager.MVC.Controllers
 
             if (model.IsAdmin == false && model.IsUser == false)
             {
-                ModelState.AddModelError(string.Empty, ModelErrorMessages.RoleNotSelected);
+                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.RoleNotSelected]);
                 _logger.LogDebug("Create action, no one roles selected.");
                 return View(model);
             }
 
             if (!await _accountService.IsEmailUniqueAsync(model.Email))
             {
-                ModelState.AddModelError(string.Empty, ModelErrorMessages.EmailIsNotUnique);
+                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.EmailIsNotUnique]);
                 _logger.LogDebug("Create action, email is not unique.");
                 return View(model);
             }
@@ -103,7 +107,7 @@ namespace ImageManager.MVC.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, ModelErrorMessages.SomethingIsGoingWrong);
+                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.SomethingIsGoingWrong]);
                 _logger.LogDebug("Create action, something was wrong while create user.");
                 return View(model);
             }
@@ -129,7 +133,7 @@ namespace ImageManager.MVC.Controllers
 
             if (model.IsAdmin == false && model.IsUser == false)
             {
-                ModelState.AddModelError(string.Empty, ModelErrorMessages.RoleNotSelected);
+                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.RoleNotSelected]);
                 _logger.LogDebug("Edit action, no one roles selected.");
                 return View(model);
             }
@@ -137,7 +141,7 @@ namespace ImageManager.MVC.Controllers
             var modelBefore = await _userService.GetEditUserViewModel(model.Id);
             if (modelBefore.Email != model.Email && await _accountService.IsEmailUniqueAsync(model.Email) == false)
             {
-                ModelState.AddModelError(string.Empty, ModelErrorMessages.EmailIsNotUnique);
+                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.EmailIsNotUnique]);
                 _logger.LogDebug("Edit action, email is not unique.");
                 return View(model);
             }

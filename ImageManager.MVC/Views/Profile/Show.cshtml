@@ -1,13 +1,16 @@
 ﻿@model ImageManager.MVC.ViewModels.UserInfoViewModel
 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 @{
-    ViewBag.Title = "Профиль";
+    ViewBag.Title = Localizer["Profile"];
 }
 
 <div class="row justify-content-center">
     <div class="text-center pt-md-5 mt-md-2">
         <div class="mb-4">
-            <h2>Информация пользователя</h2>
+            <h2>@Localizer["ProfileInfo"]</h2>
         </div>
         <br />
 
@@ -15,15 +18,15 @@
             <div class="border rounded m-sm-3 p-sm-4 bg-lightgrey">
                 <div>
                     <div class="text-sm-left">
-                        <span class="text-black-50">Почта:</span> <i>@Model.Email</i><br />
-                        <span class="text-black-50">Фамилия:</span> <i>@Model.LastName</i><br />
-                        <span class="text-black-50">Имя:</span> <i>@Model.FirstName</i><br />
+                        <span class="text-black-50">@Localizer["Email"]:</span> <i>@Model.Email</i><br />
+                        <span class="text-black-50">@Localizer["Surname"]:</span> <i>@Model.LastName</i><br />
+                        <span class="text-black-50">@Localizer["FirstName"]:</span> <i>@Model.FirstName</i><br />
                     </div>
                 </div>
                 <br />
                 <div class="m-2 row justify-content-sm-around">
-                    <button class="btn btn-outline-warning mr-sm-2" onclick="window.history.back()">Назад</button>
-                    <a class="btn btn-outline-info" asp-route-userId="@Model.Id" asp-action="Edit" asp-controller="Profile">Изменить</a>
+                    <button class="btn btn-outline-warning mr-sm-2" onclick="window.history.back()">@Localizer["BackButton"]</button>
+                    <a class="btn btn-outline-info" asp-route-userId="@Model.Id" asp-action="Edit" asp-controller="Profile">@Localizer["EditButton"]</a>
                 </div>
             </div>
         </div>

@@ -1,7 +1,12 @@
 ﻿@model ImageManager.MVC.ViewModels.IndexViewModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Главная";
+    ViewBag.Title = Localizer["Title"];
 }
+
 <div class="container body-content">
     <div class="col-sm-12">
         <br />
@@ -10,60 +15,77 @@
             <input type="file" accept=".jpg, .jpeg, .png" hidden id="fileInputItem" onchange="inputFile_changed(this.files)" />
             <a id="downloadLnk" download="File from online editor.jpg" hidden></a>
 
-            <button id="openButton" class="btn btn-menu btn-menu-open ml-0" onclick="open_click();"> Открыть</button>
-            <button id="saveButtton" class="btn btn-menu btn-menu-save mr-sm-5" disabled title="Сначала откройте изображение." onclick="save_click();">Сохранить</button>
-            <button id="canselAllButtton" class="btn btn-menu btn-menu-cancel" disabled title="Сначала откройте изображение." onclick="canselAll_click();">Откатить всё</button>
+            <button id="openButton" class="btn btn-menu btn-menu-open ml-0" onclick="open_click();">@Localizer["OpenButton"]</button>
+            <button id="saveButtton" class="btn btn-menu btn-menu-save mr-sm-5" disabled title="@Localizer["ElementDisableTitle"]" 
+                    onclick="save_click();">@Localizer["SaveButton"]</button>
+            <button id="canselAllButtton" class="btn btn-menu btn-menu-cancel" disabled title="@Localizer["ElementDisableTitle"]" 
+                    onclick="canselAll_click();">@Localizer["RollBackButton"]</button>
         </div>
 
         <div class="row work-div">
-            <div id="imageActionDiv" class="pl-sm-4 pr-sm-4 border rounded tool-div" title="Сначала откройте изображение.">
-                <b>Модераторы</b><br />
-                <button id="resizeAction" class="btn btn-filter" disabled onclick="resizeAction_click();">изменить размер</button><br />
+            <div id="imageActionDiv" class="pl-sm-4 pr-sm-4 border rounded tool-div">
+                <b>@Localizer["ModeratorsText"]</b><br />
+                <button id="resizeAction" class="btn btn-filter" disabled onclick="resizeAction_click();" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["ChangeSizeButton"]</button><br />
 
                 <div id="changeSizeDiv" class="change-size-div col-11 ml-2 mr-2">
                     <div class="row justify-content-around">
                         <div class="m-1 p-1" id="changeSizeHDiv">
-                            <label>высота</label><br />
+                            <label>@Localizer["HeightText"]</label><br />
                             <input type="number" id="changeSizeH" class="change-size-input" value="0" min="0" onchange="changeSizeH_change();" />
                         </div>
                         <div class="m-1 p-1" id="changeSizeWDiv">
-                            <label>ширина</label><br />
+                            <label>@Localizer["WidthText"]</label><br />
                             <input type="number" id="changeSizeW" class="change-size-input" value="0" min="0" onchange="changeSizeW_change();" />
                         </div>
                     </div>
                     <div class="text-center p-2">
                         <div>
-                            <button id="changeSizeBtn" class="btn change-size-btn" onclick="changeSizeBtn_click();">Сохранить</button>
+                            <button id="changeSizeBtn" class="btn change-size-btn" onclick="changeSizeBtn_click();">@Localizer["SaveSizeButton"]</button>
                         </div>
                     </div>
                 </div>
                 <br />
 
-                <b>Повороты</b><br />
-                <button id="rightRotate" class="btn btn-filter" disabled onclick="rotateRight_click()">поворот вправо</button><br />
-                <button id="leftRotate" class="btn btn-filter" disabled onclick="rotateLeft_click()">поворот влево</button><br />
+                <b>@Localizer["RotatesText"]</b><br />
+                <button id="rightRotate" class="btn btn-filter" disabled onclick="rotateRight_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["RotateRightButton"]</button><br />
+                <button id="leftRotate" class="btn btn-filter" disabled onclick="rotateLeft_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["RotateRightLeftButton"]</button><br />
                 <br />
 
-                <b>Фильтры</b><br />
-                <button id="blurFilter" class="btn btn-filter" disabled onclick="blurFiltrButton_click()">размытие</button><br />
-                <button id="brightnessFilter" class="btn btn-filter" disabled onclick="brightnessFiltrButton_click()">яркое</button><br />
-                <button id="notBrightnessFilter" class="btn btn-filter" disabled onclick="notBrightnessFiltrButton_click()">темное</button><br />
+                <b>@Localizer["FiltersText"]</b><br />
+                <button id="blurFilter" class="btn btn-filter" disabled onclick="blurFiltrButton_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["BlurButton"]</button><br />
+                <button id="brightnessFilter" class="btn btn-filter" disabled onclick="brightnessFiltrButton_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["BrightButton"]</button><br />
+                <button id="notBrightnessFilter" class="btn btn-filter" disabled onclick="notBrightnessFiltrButton_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["DarkButton"]</button><br />
 
-                <button id="contrastFilter" class="btn btn-filter" disabled onclick="contrastFiltrButton_click()">контрастное</button><br />
-                <button id="shadowFilter" class="btn btn-filter" disabled onclick="shadowFiltrButton_click()">тени</button><br />
-                <button id="grayscaleFilter" class="btn btn-filter" disabled onclick="grayscaleButton_click()">черно-белое</button><br />
+                <button id="contrastFilter" class="btn btn-filter" disabled onclick="contrastFiltrButton_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["ContrastButton"]</button><br />
+                <button id="shadowFilter" class="btn btn-filter" disabled onclick="shadowFiltrButton_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["ShadowButton"]</button><br />
+                <button id="grayscaleFilter" class="btn btn-filter" disabled onclick="grayscaleButton_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["BlackAndWhiteButton"]</button><br />
 
-                <button id="hueRotate1Filter" class="btn btn-filter" disabled onclick="hueRotate1Button_click()">замена цвета 1</button><br />
-                <button id="hueRotate2Filter" class="btn btn-filter" disabled onclick="hueRotate2Button_click()">замена цвета 2</button><br />
-                <button id="hueRotate3Filter" class="btn btn-filter" disabled onclick="hueRotate3Button_click()">замена цвета 3</button><br />
+                <button id="hueRotate1Filter" class="btn btn-filter" disabled onclick="hueRotate1Button_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["ColorChange1Button"]</button><br />
+                <button id="hueRotate2Filter" class="btn btn-filter" disabled onclick="hueRotate2Button_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["ColorChange2Button"]</button><br />
+                <button id="hueRotate3Filter" class="btn btn-filter" disabled onclick="hueRotate3Button_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["ColorChange3Button"]</button><br />
 
-                <button id="invertFilter" class="btn btn-filter" disabled onclick="invertButton_click()">неготив</button><br />
-                <button id="sepiaFilter" class="btn btn-filter" disabled onclick="sepiaFiltrButton_click()">старина</button><br />
-                <button id="noneFilter" class="btn btn-filter" disabled onclick="noneFiltrButton_click()">нет</button><br />
+                <button id="invertFilter" class="btn btn-filter" disabled onclick="invertButton_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["NegativeButton"]</button><br />
+                <button id="sepiaFilter" class="btn btn-filter" disabled onclick="sepiaFiltrButton_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["SemiAntiqueButton"]</button><br />
+                <button id="noneFilter" class="btn btn-filter" disabled onclick="noneFiltrButton_click()" 
+                        title="@Localizer["ElementDisableTitle"]">@Localizer["NoneButton"]</button><br />
             </div>
 
             <div class="bg-secondary canvas-div">
-                <canvas id="myCanvas" class=""></canvas>
+                <canvas id="myCanvas"></canvas>
             </div>
         </div>
     </div>

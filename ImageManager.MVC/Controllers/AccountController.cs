@@ -5,6 +5,7 @@ using ImageManager.MVC.Services.Interfaces;
 using ImageManager.MVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
@@ -15,12 +16,15 @@ namespace ImageManager.MVC.Controllers
     {
         private readonly ILogger<AccountController> _logger;
         private readonly IAccountService _accountService;
+        private readonly IStringLocalizer<AccountController> _localizer;
 
         public AccountController(ILogger<AccountController> logger,
-            IAccountService accountService)
+            IAccountService accountService,
+            IStringLocalizer<AccountController> localizer)
         {
             _logger = logger;
             _accountService = accountService;
+            _localizer = localizer;
         }
 
         private async Task<IActionResult> SettingActionForReturnAferLoginAsync(AppUser user)
@@ -38,7 +42,7 @@ namespace ImageManager.MVC.Controllers
             else
             {
                 _logger.LogDebug("Login action, user signed in, but have not any role.");
-                return BadRequest(HttpErrorMessages.YouHaveNotAnyRole);
+                return BadRequest(_localizer[ModelErrorMessages.YouHaveNotAnyRole]);
             }
         }
 
@@ -65,20 +69,20 @@ namespace ImageManager.MVC.Controllers
             var user = await _accountService.FindUserAsync(model.Email);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, ModelErrorMessages.UserNotExist);
+                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.UserNotExist]); 
                 _logger.LogDebug("Login action, user with such email is not exist yet.");
                 return View(model);
             }
 
             if (!await _accountService.CheckPasswordAsync(user, model.Password))
             {
-                ModelState.AddModelError(string.Empty, ModelErrorMessages.PasswordOrEmailIncorrect);
+                ModelState.AddModelError(string.Empty, _localizer[ ModelErrorMessages.PasswordOrEmailIncorrect]); 
                 _logger.LogDebug("Login action, password is not valid for the email.");
                 return View(model);
             }
             else if (!user.IsActive)
             {
-                ModelState.AddModelError(string.Empty, ModelErrorMessages.UserIsNotActive);
+                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.UserIsNotActive]); 
                 _logger.LogDebug("Login action, user is not activated.");
                 return View(model);
             }
@@ -111,7 +115,7 @@ namespace ImageManager.MVC.Controllers
 
             if (!await _accountService.IsEmailUniqueAsync(model.Email))
             {
-                ModelState.AddModelError(string.Empty, ModelErrorMessages.EmailIsNotUnique);
+                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.EmailIsNotUnique]);
                 _logger.LogDebug("Register action, email is not unique.");
                 return View(model);
             }
@@ -127,7 +131,7 @@ namespace ImageManager.MVC.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, ModelErrorMessages.SomethingIsGoingWrong);
+                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.SomethingIsGoingWrong]);
                 _logger.LogDebug("Register action, something was wrong while create user.");
                 return View(model);
             }

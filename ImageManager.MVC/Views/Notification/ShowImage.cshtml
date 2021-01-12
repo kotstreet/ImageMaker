@@ -1,19 +1,22 @@
 ﻿@model ImageManager.MVC.ViewModels.ImageViewModel
-@{
-    ViewData["Title"] = "Новое изобраажение";
-}
 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["NewPicture"];
+}
 
 <div class="justify-content-center">
     <div class="col">
         <div class="text-center m-sm-4">
-            <h4>Новое изображение пользователя @Model.FullName (@Model.Email)</h4>
+            <h4>@Localizer["NewUserPicture"] @Model.FullName (@Model.Email)</h4>
         </div>
         <div class="justify-content-center row">
-            <img class="img-notice" src="@Model.Path"/>
+            <img class="img-notice" src="@Model.Path" />
         </div>
         <div class="text-sm-center m-sm-3">
-            <button class="btn btn-outline-info" onclick="backOrClose();">Назад</button>
+            <button class="btn btn-outline-info" onclick="backOrClose();">@Localizer["BackButton"]</button>
         </div>
     </div>
 </div>

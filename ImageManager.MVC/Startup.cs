@@ -10,11 +10,13 @@ using ImageManager.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Globalization;
 
 namespace ImageManager.MVC
 {
@@ -55,7 +57,25 @@ namespace ImageManager.MVC
 
 
 
-            services.AddControllersWithViews();
+
+            services.AddLocalization(options => options.ResourcesPath = LocalizationSettings.ResourcesFolder);
+            services.AddControllersWithViews()
+                .AddDataAnnotationsLocalization()
+                .AddViewLocalization();
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo(LocalizationSettings.EnglishCulture),
+                    new CultureInfo(LocalizationSettings.RussianCulture)
+                };
+
+                var defaultCulture = Configuration[LocalizationSettings.DefaultCulture];
+                options.DefaultRequestCulture = new RequestCulture(defaultCulture);
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
         }
 
         public void Configure(IApplicationBuilder app,
@@ -73,7 +93,9 @@ namespace ImageManager.MVC
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
+            app.UseRequestLocalization();
             app.UseStaticFiles();
 
             app.UseRouting();

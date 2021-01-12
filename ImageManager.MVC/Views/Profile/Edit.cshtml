@@ -1,14 +1,18 @@
 ﻿@model ImageManager.MVC.ViewModels.UserInfoViewModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 @{
-    ViewBag.Title = "Изменение профиля";
+    ViewBag.Title = Localizer["ProfileEditing"];
 }
 
 <div class="row justify-content-center">
-    <div >
+    <div>
         <br />
         <br />
         <div>
-            <h3 class="text-center">Редактирование профиля</h3>
+            <h3 class="text-center">@Localizer["ProfileEditing"]</h3>
         </div>
         <br />
         <div class="border border-secondary rounded bg-white p-4 m-3">
@@ -16,27 +20,27 @@
                 <div class="validation" asp-validation-summary="ModelOnly" />
                 <div>
                     <div class="form-group">
-                        <label class="text-secondary small" asp-for="LastName">Фамилия</label><br />
+                        <label class="text-secondary small" asp-for="LastName">@Localizer["Surname"]</label><br />
                         <input class="w-100" type="text" asp-for="LastName" />
                         <span asp-validation-for="LastName" />
                     </div>
                     <div class="form-group">
-                        <label class="text-secondary small" asp-for="FirstName">Имя</label><br />
+                        <label class="text-secondary small" asp-for="FirstName">@Localizer["FirstName"]</label><br />
                         <input class="w-100" type="text" asp-for="FirstName" />
                         <span asp-validation-for="FirstName" />
                     </div>
                     <div class="form-group">
-                        <label class="text-secondary small" asp-for="Email">Почта</label><br />
+                        <label class="text-secondary small" asp-for="Email">@Localizer["Email"]</label><br />
                         <input class="w-100" type="email" asp-for="Email" />
                         <span asp-validation-for="Email" />
                     </div>
                     <br />
                     <div class="form-group row justify-content-sm-around">
                         <div>
-                            <button onclick="JavaScript:window.history.back(1); return false;" class="btn btn-outline-warning">Отмена</button>
+                            <button onclick="JavaScript:window.history.back(1); return false;" class="btn btn-outline-warning">@Localizer["CancelButton"]</button>
                         </div>
                         <div class="ml-sh-5">
-                            <input type="submit" value="Изменить" class="btn btn-outline-primary" />
+                            <input type="submit" value="@Localizer["EditButton"]" class="btn btn-outline-primary" />
                         </div>
                     </div>
                 </div>

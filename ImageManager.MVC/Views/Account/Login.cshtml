@@ -1,13 +1,16 @@
 ﻿@model ImageManager.MVC.ViewModels.LoginViewModel
 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 @{
-    ViewBag.Title = "Вход";
+    ViewBag.Title = Localizer["Login"];
 }
 
 <div class="row justify-content-center">
     <div class="text-center pt-md-5 mt-md-2">
         <div class="mb-4">
-            <h2>Вход</h2>
+            <h2>@Localizer["Login"]</h2>
         </div>
         <div class="border border-secondary rounded bg-white">
             @using (@Html.BeginForm())
@@ -17,25 +20,25 @@
                 <div class="was-validated" asp></div>
                 <div class="form-group pl-md-5 pr-md-5 pt-md-3 pb-md-2 text-md-left">
                     <div class="pt-md-2">
-                        @Html.LabelFor(model => model.Email, "Почта", new { @class = "small" })<br />
+                        @Html.LabelFor(model => model.Email, Localizer["Email"].Value, new { @class = "small" })<br />
                         <input type="email" name="email" asp-for="Email" /><br />
                         @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger small" })
                     </div>
                     <div class="pt-md-2">
-                        @Html.LabelFor(model => model.Password, "Пароль", new { @class = "small" })<br />
+                        @Html.LabelFor(model => model.Password, Localizer["Password"].Value, new { @class = "small" })<br />
                         @Html.PasswordFor(model => model.Password)<br />
                         @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger small" })
                     </div>
                     <div class="pt-md-4 form-group text-sm-center">
-                        <input type="submit" class="btn btn-success" value="Вход" \>
+                        <input type="submit" class="btn btn-success" value="@Localizer["Login"]" \>
                     </div>
                 </div>
             }
         </div>
         <div class="m-2">
             <b>
-                <label>Нет аккаунта?</label>
-                @Html.ActionLink("Зарегестрируйся!", "Register", "Account")
+                <label>@Localizer["HaveAccountQuestion"]</label>
+                @Html.ActionLink(Localizer["Register"].Value, "Register", "Account")
             </b>
         </div>
         <br />

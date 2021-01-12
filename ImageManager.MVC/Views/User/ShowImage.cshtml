@@ -1,22 +1,26 @@
 ﻿@model ImageManager.MVC.ViewModels.UserImagesViewModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "История пользователя";
+    ViewData["Title"] = Localizer["UserHistory"];
 }
 
 <div>
     <div>
         <br />
-        <h3 class="text-center">История пользователя</h3>
+        <h3 class="text-center">@Localizer["UserHistory"]</h3>
         @if (Model.ImageUrls.Count == 0)
         {
-            <h4 class="text-center mt-sm-3">Данный пользователь ещё не успел поработать с изображениями, как только он с ними поработает, они появятся здесь.</h4>
+            <h4 class="text-center mt-sm-3">@Localizer["HistoryIsClear"]</h4>
         }
         else
         {
-            <h4 class="text-center mt-sm-3">Здесь вы можете увидеть все редактируемые изображения пользователя.</h4>
+            <h4 class="text-center mt-sm-3">@Localizer["UserHistoryText"]</h4>
         }
         <p class="text-center">
-            Имя пользователя: <i>@Model.FullName</i>. Почта пользователя: <i>@Model.Email</i>.
+            @Localizer["Name"]: <i>@Model.FullName</i>. @Localizer["Email"]: <i>@Model.Email</i>.
         </p>
     </div>
     <br />
@@ -27,7 +31,7 @@
         <br />
         <br />
         <div class="row justify-content-center mr-4 ml-4">
-            <button class="btn btn-outline-info text-center" onclick="backOrClose();">Назад</button>
+            <button class="btn btn-outline-info text-center" onclick="backOrClose();">@Localizer["Back"]</button>
         </div>
     }
     else

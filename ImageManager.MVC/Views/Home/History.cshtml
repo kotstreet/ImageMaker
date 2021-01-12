@@ -1,14 +1,17 @@
 ﻿@model ImageManager.MVC.ViewModels.UserImagesViewModel
-@{
-    ViewData["Title"] = "История";
-}
 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["History"];
+}
 <div>
     <div>
         <br />
-        <h3 class="text-center">Ваша история.</h3>
-        <h4 class="text-center mt-sm-3">Здесь вы можете увидеть все редактируемые вами изображения.</h4>
-        <p class="text-center">Сделано для приятных воспоминаниях о прошлом, котрые не хочется забывать. @Model.FullName, с заботой о вас)</p>
+        <h3 class="text-center">@Localizer["YourHistory"]</h3>
+    <h4 class="text-center mt-sm-3">@Localizer["FirstHeader"]</h4>
+    <p class="text-center">@Localizer["SecondHeaderBeforeEmail"] @Model.FullName, @Localizer["SecondHeaderAfterEmail"]</p>
     </div>
     <br />
 
@@ -18,7 +21,7 @@
         <br />
         <br />
         <div class="row justify-content-center mr-4 ml-4">
-            <button class="btn btn-outline-info text-center" onclick="backOrClose();">Назад</button>
+            <button class="btn btn-outline-info text-center" onclick="backOrClose();">@Localizer["Back"]</button>
         </div>
     }
     else

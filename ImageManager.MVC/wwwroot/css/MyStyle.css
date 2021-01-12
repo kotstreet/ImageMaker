@@ -178,3 +178,9 @@
     max-height: 500px;
     max-width: 900px;
 }
+
+.select-lang {
+    background-color: #57233e;
+    border-color: snow;
+    color: white;
+}
