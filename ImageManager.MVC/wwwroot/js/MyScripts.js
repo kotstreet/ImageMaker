@@ -66,7 +66,7 @@ function calcAngle(incAngle) {
 }
 
 function setCanvasTitle(width, height) {
-	canvas.title = "ширина: " + width + "; высота: " + height + "; изначальный размер:" + size + " байт;";
+	canvas.title = "ширина: " + width + "; высота: " + height + "; изначальный размер:" + size + " байт;"; // loc
 }
 
 function settingCanvasByAngle() {
@@ -163,7 +163,7 @@ function inputFile_changed(files) {
 
 function canselAll_click() {
 	if (!imageUrlInput.value.length) {
-		alert("Что-то пошло не так.");
+		alert("Что-то пошло не так."); // loc
 		return;
 	}
 
@@ -206,8 +206,8 @@ function showResizeDiv() {
 	changeSizeH.value = canvas.height;
 	changeSizeW.value = canvas.width;
 
-	document.getElementById('changeSizeHDiv').title = 'максимальное значение: ' + canvas.height;
-	document.getElementById('changeSizeWDiv').title = 'максимальное значение: ' + canvas.width;
+	document.getElementById('changeSizeHDiv').title = 'максимальное значение: ' + canvas.height; // loc
+	document.getElementById('changeSizeWDiv').title = 'максимальное значение: ' + canvas.width; // loc
 
 	if (!changeSizeDiv.classList.contains('change-size-div-show')) {
 		changeSizeDiv.classList.add('change-size-div-show');
@@ -274,7 +274,7 @@ function deleteTitles() {
 		forActivate[i].title = "";
 	}
 
-	cancelAllButttonItem.title = "Откатить все сделанные изменения.";
+	cancelAllButttonItem.title = "Откатить все сделанные изменения."; // loc
 }
 
 function activateElements() {

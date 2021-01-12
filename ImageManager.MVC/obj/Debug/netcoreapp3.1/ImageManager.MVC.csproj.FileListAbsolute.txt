@@ -139,3 +139,5 @@ D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\ImageMana
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\ImageManager.MVC.Resources.Controllers.AccountController.ru.resources
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\ImageManager.MVC.Resources.Controllers.UserController.en.resources
 D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\ImageManager.MVC.Resources.Controllers.UserController.ru.resources
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\ImageManager.MVC.Resources.ViewModels.SharedViewModelsResource.en.resources
+D:\C#\_Asyst-lab\ImageManager\ImageManager.MVC\obj\Debug\netcoreapp3.1\ImageManager.MVC.Resources.ViewModels.SharedViewModelsResource.ru.resources

@@ -1,5 +1,4 @@
 using ImageManager.MVC.Constants;
-using ImageManager.MVC.Filters;
 using ImageManager.MVC.Infrastructure;
 using ImageManager.MVC.Models;
 using ImageManager.MVC.Repositories;
@@ -7,6 +6,7 @@ using ImageManager.MVC.Repositories.Helpers;
 using ImageManager.MVC.Repositories.Interfaces;
 using ImageManager.MVC.Services;
 using ImageManager.MVC.Services.Interfaces;
+using ImageManager.MVC.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -55,12 +55,12 @@ namespace ImageManager.MVC
             })
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
 
-
-
-
             services.AddLocalization(options => options.ResourcesPath = LocalizationSettings.ResourcesFolder);
             services.AddControllersWithViews()
-                .AddDataAnnotationsLocalization()
+                .AddDataAnnotationsLocalization(options => {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(SharedViewModelsResource));
+                })
                 .AddViewLocalization();
 
             services.Configure<RequestLocalizationOptions>(options =>
