@@ -7,11 +7,11 @@
     ViewBag.Title = Localizer["UserCreating"];
 }
 
-<div class="row justify-content-center">
-    <div class="text-center pt-md-2 mt-md-2">
-        <div class="mb-3">
-            <h2>@Localizer["UserCreating"]</h2>
-        </div>
+<div>
+    <div class="m-sm-3 text-center">
+        <h2>@Localizer["UserCreating"]</h2>
+    </div>
+    <div class="row justify-content-center pt-md-2 mt-md-2">
         <div class="border border-secondary rounded bg-white">
             @using (@Html.BeginForm())
             {
@@ -20,17 +20,17 @@
                 <div class="form-group pl-md-5 pr-md-5 pt-md-3 pb-md-2 text-md-left">
                     <div class="pt-md-1">
                         @Html.LabelFor(model => model.LastName, Localizer["Surname"].Value, new { @class = "small" })<br />
-                        @Html.TextBoxFor(model => model.LastName, null, new { style = "width: 320px;" })<br />
+                        @Html.TextBoxFor(model => model.LastName)<br />
                         @Html.ValidationMessageFor(model => model.LastName, null, new { @class = "text-danger small" })
                     </div>
                     <div class="pt-md-2">
                         @Html.LabelFor(model => model.FirstName, Localizer["FirstName"].Value, new { @class = "small" })<br />
-                        @Html.TextBoxFor(model => model.FirstName, null, new { style = "width: 320px;" })<br />
+                        @Html.TextBoxFor(model => model.FirstName)<br />
                         @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger small" })
                     </div>
                     <div class="pt-md-2">
                         @Html.LabelFor(model => model.Email, Localizer["Email"].Value, new { @class = "small" })<br />
-                        <input type="email" name="email" asp-for="Email" style="width: 320px;" /><br />
+                        <input type="email" name="email" asp-for="Email" /><br />
                         @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger small" })
                     </div>
                     <div class="row pt-md-2 mt-2 justify-content-around">
@@ -43,22 +43,20 @@
                     </div>
                     <div class="pt-md-2">
                         @Html.LabelFor(model => model.Password, Localizer["Password"].Value, new { @class = "small" })<br />
-                        @Html.PasswordFor(model => model.Password, new { style = "width: 320px;" })<br />
+                        @Html.PasswordFor(model => model.Password)<br />
                         @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger small" })
                     </div>
                     <div class="pt-md-2">
                         @Html.LabelFor(model => model.ConfirmPassword, Localizer["ConfirmationPassword"].Value, new { @class = "small" })<br />
-                        @Html.PasswordFor(model => model.ConfirmPassword, new { style = "width: 320px;" })<br />
+                        @Html.PasswordFor(model => model.ConfirmPassword)<br />
                         @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger small" })
                     </div>
-                        <div class="pt-md-4 text-center">
-                            <button class="btn btn-outline-info mr-sm-4" onclick="backOrClose();">@Localizer["CancelButton"].Value</button>
-                            <input type="submit" class="btn btn-outline-success ml-sm-4" value="@Localizer["CreateButton"].Value" \>
+                    <div class="pt-md-4 text-center justify-content-around">
+                        <button type="button" class="btn btn-outline-info" onclick="backOrClose();">@Localizer["CancelButton"].Value</button>
+                        <input type="submit" class="btn btn-outline-success" value="@Localizer["CreateButton"].Value" \>
                     </div>
                 </div>
             }
         </div>
-        <br />
-        <br />
     </div>
 </div>
