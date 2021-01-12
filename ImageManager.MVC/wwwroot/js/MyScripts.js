@@ -66,7 +66,9 @@ function calcAngle(incAngle) {
 }
 
 function setCanvasTitle(width, height) {
-	canvas.title = "ширина: " + width + "; высота: " + height + "; изначальный размер:" + size + " байт;"; // loc
+	canvas.title = localizedStrings[getLocale()]["width"] + ": " + width + "; " +
+		localizedStrings[getLocale()]["heigth"] + ": " + height + "; " +
+		localizedStrings[getLocale()]["originalSize"] + ":" + size + " " + localizedStrings[getLocale()]["bytes"] + ";";
 }
 
 function settingCanvasByAngle() {
@@ -163,7 +165,7 @@ function inputFile_changed(files) {
 
 function canselAll_click() {
 	if (!imageUrlInput.value.length) {
-		alert("Что-то пошло не так."); // loc
+		alert(localizedStrings[getLocale()]["somethingIsWrong"]);
 		return;
 	}
 
@@ -206,8 +208,8 @@ function showResizeDiv() {
 	changeSizeH.value = canvas.height;
 	changeSizeW.value = canvas.width;
 
-	document.getElementById('changeSizeHDiv').title = 'максимальное значение: ' + canvas.height; // loc
-	document.getElementById('changeSizeWDiv').title = 'максимальное значение: ' + canvas.width; // loc
+	document.getElementById('changeSizeHDiv').title = localizedStrings[getLocale()]["maxValue"] + ': ' + canvas.height;
+	document.getElementById('changeSizeWDiv').title = localizedStrings[getLocale()]["maxValue"] + ': ' + canvas.width;
 
 	if (!changeSizeDiv.classList.contains('change-size-div-show')) {
 		changeSizeDiv.classList.add('change-size-div-show');
@@ -235,6 +237,7 @@ function resizeAction_click() {
 
 function save_click() {
 	var url = canvas.toDataURL('image/jpeg');
+	saveImage(url);
 	console.log(url);
 
 	console.log('before start');
@@ -274,7 +277,7 @@ function deleteTitles() {
 		forActivate[i].title = "";
 	}
 
-	cancelAllButttonItem.title = "Откатить все сделанные изменения."; // loc
+	cancelAllButttonItem.title = localizedStrings[getLocale()]["rollBackTitle"];
 }
 
 function activateElements() {
@@ -368,44 +371,3 @@ function sepiaFiltrButton_click() {
 	settingCanvasByAngle();
 	someFiterClick(sepiaFilterButton);
 }
-
-function backOrClose() {
-	var prevPage = window.location.href;
-	window.history.back();
-
-	setTimeout(function () {
-		if (window.location.href == prevPage) {
-			window.close();
-		}
-	}, 500);
-}
-
-function notification_click(elementId) {
-	var link = document.getElementById(elementId);
-	link.click();
-
-	var td = document.getElementsByName(elementId);
-
-	if (td.classList.contains('td-notice-read')) {
-		td.classList.remove('td-notice-read');
-		td.classList.add('td-notice-new');
-	}
-	else {
-		td.classList.remove('td-notice-new');
-		td.classList.add('td-notice-read');
-    }
-}
-
-document.querySelector("input[name='email']").addEventListener("keypress", (event) => {
-	var validCharCodes = [
-		//"!", "#", "$", "%", "&", "'", "*", "+", "-", "/", "\\", "=", "?", "^", "_", "`", "{", "|", "}", "~", "@", ".", "0-9", "a-z", "A-Z"
-		33, 35, 36, 37, 38, 39, 42, 43, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
-		81, 82, 83, 84, 85, 86, 87, 88, 88, 89, 90, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116,
-		117, 118, 119, 120, 121, 122, 123, 124, 125, 126
-	];
-
-	if (!validCharCodes.includes(event.charCode)) {
-		event.preventDefault();
-	}
-	console.log("inputed in email field(char code) = " + event.charCode);
-});
