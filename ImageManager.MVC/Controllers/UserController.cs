@@ -94,7 +94,7 @@ namespace ImageManager.MVC.Controllers
 
             if (!await _accountService.IsEmailUniqueAsync(model.Email))
             {
-                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.EmailIsNotUnique]);
+                ModelState.AddModelError(ModelErrorMessages.EmailField, _localizer[ModelErrorMessages.EmailIsNotUnique]);
                 _logger.LogDebug("Create action, email is not unique.");
                 return View(model);
             }
@@ -141,7 +141,7 @@ namespace ImageManager.MVC.Controllers
             var modelBefore = await _userService.GetEditUserViewModel(model.Id);
             if (modelBefore.Email != model.Email && await _accountService.IsEmailUniqueAsync(model.Email) == false)
             {
-                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.EmailIsNotUnique]);
+                ModelState.AddModelError(ModelErrorMessages.EmailField, _localizer[ModelErrorMessages.EmailIsNotUnique]);
                 _logger.LogDebug("Edit action, email is not unique.");
                 return View(model);
             }

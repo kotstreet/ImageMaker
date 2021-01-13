@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EmailIsNotUnique" xml:space="preserve">
-    <value>Такая почта уже существует.</value>
+    <value>Такая почта уже существует</value>
   </data>
   <data name="PasswordOrEmailIncorrect" xml:space="preserve">
     <value>Почта или пароль указаны неверно.</value>
@@ -130,7 +130,7 @@
     <value>Учетная запись деактивирована.</value>
   </data>
   <data name="UserNotExist" xml:space="preserve">
-    <value>Такого пользвателя не существует.</value>
+    <value>Такого пользвателя не существует</value>
   </data>
   <data name="YouHaveNotAnyRole" xml:space="preserve">
     <value>Вы являетесь пользователем без ролей! Пожалуйста, обратитесь к администратору.</value>

@@ -69,20 +69,20 @@ namespace ImageManager.MVC.Controllers
             var user = await _accountService.FindUserAsync(model.Email);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.UserNotExist]); 
+                ModelState.AddModelError(ModelErrorMessages.EmailField, _localizer[ModelErrorMessages.UserNotExist]);
                 _logger.LogDebug("Login action, user with such email is not exist yet.");
                 return View(model);
             }
 
             if (!await _accountService.CheckPasswordAsync(user, model.Password))
             {
-                ModelState.AddModelError(string.Empty, _localizer[ ModelErrorMessages.PasswordOrEmailIncorrect]); 
+                ModelState.AddModelError(string.Empty, _localizer[ ModelErrorMessages.PasswordOrEmailIncorrect]);
                 _logger.LogDebug("Login action, password is not valid for the email.");
                 return View(model);
             }
             else if (!user.IsActive)
             {
-                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.UserIsNotActive]); 
+                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.UserIsNotActive]);
                 _logger.LogDebug("Login action, user is not activated.");
                 return View(model);
             }
@@ -115,7 +115,7 @@ namespace ImageManager.MVC.Controllers
 
             if (!await _accountService.IsEmailUniqueAsync(model.Email))
             {
-                ModelState.AddModelError(string.Empty, _localizer[ModelErrorMessages.EmailIsNotUnique]);
+                ModelState.AddModelError(ModelErrorMessages.EmailField, _localizer[ModelErrorMessages.EmailIsNotUnique]); 
                 _logger.LogDebug("Register action, email is not unique.");
                 return View(model);
             }
