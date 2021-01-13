@@ -7,7 +7,6 @@
     ViewBag.Title = Localizer["Register"];
 }
 
-
 <div class="row justify-content-center">
     <div class="text-center pt-md-5 mt-md-2">
         <div class="mb-4">
@@ -17,35 +16,30 @@
             @using (@Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, null, new { @class = "text-danger small" })
-                <div class="form-group pl-md-5 pr-md-5 pt-md-3 pb-md-2 text-md-left">
-                    <div class="pt-md-1">
-                        @Html.LabelFor(model => model.LastName, Localizer["Surname"].Value, new { @class = "small" })<br />
-                        @Html.TextBoxFor(model => model.LastName)<br />
+                <div class="form-group pl-md-5 pr-md-5 pt-md-3 pb-sm-1 text-md-left">
+                    <div class="pt-md-4">
+                        @Html.TextBoxFor(model => model.LastName, null, new { @class = "data-input", placeholder = Localizer["Surname"].Value })<br />
                         @Html.ValidationMessageFor(model => model.LastName, null, new { @class = "text-danger small" })
                     </div>
-                    <div class="pt-md-2">
-                        @Html.LabelFor(model => model.FirstName, Localizer["FirstName"].Value, new { @class = "small" })<br />
-                        @Html.TextBoxFor(model => model.FirstName)<br />
+                    <div class="pt-md-3">
+                        @Html.TextBoxFor(model => model.FirstName, null, new { @class = "data-input", placeholder = Localizer["FirstName"].Value })<br />
                         @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger small" })
                     </div>
-                    <div class="pt-md-2">
-                        @Html.LabelFor(model => model.Email, Localizer["Email"].Value, new { @class = "small" })<br />
-                        <input type="email" name="email" asp-for="Email" /><br />
+                    <div class="pt-md-3">
+                        <input type="email" name="email" asp-for="Email" class="data-input" placeholder="@Localizer["Email"].Value"/><br />
                         @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger small" })
                     </div>
-                    <div class="pt-md-2">
-                        @Html.LabelFor(model => model.Password, Localizer["Password"].Value, new { @class = "small" })<br />
-                        @Html.PasswordFor(model => model.Password)<br />
+                    <div class="pt-md-3">
+                        @Html.PasswordFor(model => model.Password, new { @class = "data-input", placeholder = Localizer["Password"].Value })<br />
                         @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger small" })
                     </div>
-                    <div class="pt-md-2">
-                        @Html.LabelFor(model => model.ConfirmPassword, Localizer["ConfirmPassword"].Value, new { @class = "small" })<br />
-                        @Html.PasswordFor(model => model.ConfirmPassword)<br />
+                    <div class="pt-md-3">
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "data-input", placeholder = Localizer["ConfirmPassword"].Value })<br />
                         @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger small" })
                     </div>
-                    <div class="pt-md-4 text-center">
-                        <input type="submit" class="btn btn-success" value="@Localizer["RegisterButton"]" \>
+                    @Html.ValidationSummary(true, null, new { @class = "small mt-sm-3 p-sm-2 rounded my-validation" })
+                    <div class="pt-md-3 text-center">
+                        <input type="submit" class="btn btn-success data-input-btn" value="@Localizer["RegisterButton"]" \>
                     </div>
                 </div>
             }

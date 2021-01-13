@@ -16,20 +16,18 @@
             @using (@Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, null, new { @class = "text-danger small" })
-                <div class="form-group pl-md-5 pr-md-5 pt-md-3 pb-md-2 text-md-left">
-                    <div class="pt-md-2">
-                        @Html.LabelFor(model => model.Email, Localizer["Email"].Value, new { @class = "small" })<br />
-                        <input type="email" name="email" asp-for="Email" /><br />
+                <div class="form-group pl-md-5 pr-md-5 pt-md-3 pb-sm-1 text-md-left">
+                    <div class="pt-md-4">
+                        <input type="email" name="email" asp-for="Email" class="data-input" placeholder="@Localizer["Email"]" /><br />
                         @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger small" })
                     </div>
-                    <div class="pt-md-2">
-                        @Html.LabelFor(model => model.Password, Localizer["Password"].Value, new { @class = "small" })<br />
-                        @Html.PasswordFor(model => model.Password)<br />
+                    <div class="pt-md-3">
+                        @Html.PasswordFor(model => model.Password, new { @class = "data-input", placeholder = @Localizer["Password"].Value })<br />
                         @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger small" })
                     </div>
-                    <div class="pt-md-4 form-group text-sm-center">
-                        <input type="submit" class="btn btn-success" value="@Localizer["Login"]" \>
+                    @Html.ValidationSummary(true, null, new { @class = "small mt-sm-3 p-sm-2 rounded my-validation" })
+                    <div class="pt-md-3 form-group text-sm-center">
+                        <input type="submit" class="btn btn-success data-input-btn" value="@Localizer["Login"]" \>
                     </div>
                 </div>
             }
@@ -40,7 +38,5 @@
                 @Html.ActionLink(Localizer["Register"].Value, "Register", "Account")
             </b>
         </div>
-        <br />
-        <br />
     </div>
 </div>

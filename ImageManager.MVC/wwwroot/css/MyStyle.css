@@ -184,3 +184,27 @@
     border-color: snow;
     color: white;
 }
+
+.data-input {
+    width: 250px;
+    height: 30px;
+}
+
+.data-input-btn {
+    width: 250px;
+    height: 40px;
+}
+
+.my-validation {
+    background-color: #ffe2e0;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #c20027;
+    width: 250px;
+}
+
+.my-validation ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
