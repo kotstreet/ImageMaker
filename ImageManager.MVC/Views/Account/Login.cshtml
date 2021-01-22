@@ -1,0 +1,42 @@
+﻿@model ImageManager.MVC.ViewModels.LoginViewModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["Login"];
+}
+
+<div class="row justify-content-center">
+    <div class="text-center pt-md-5 mt-md-2">
+        <div class="mb-4">
+            <h2>@Localizer["Login"]</h2>
+        </div>
+        <div class="border border-secondary rounded bg-white">
+            @using (@Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group pl-md-5 pr-md-5 pt-md-3 pb-sm-1 text-md-left">
+                    <div class="pt-md-4">
+                        <input type="email" name="email" asp-for="Email" class="data-input" placeholder="@Localizer["Email"]" /><br />
+                        @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-3">
+                        @Html.PasswordFor(model => model.Password, new { @class = "data-input", placeholder = @Localizer["Password"].Value })<br />
+                        @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger small" })
+                    </div>
+                    @Html.ValidationSummary(true, null, new { @class = "small mt-sm-3 p-sm-2 rounded my-validation" })
+                    <div class="pt-md-3 form-group text-sm-center">
+                        <input type="submit" class="btn btn-success data-input-btn" value="@Localizer["Login"]" \>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="m-2">
+            <b>
+                <label>@Localizer["HaveAccountQuestion"]</label>
+                @Html.ActionLink(Localizer["Register"].Value, "Register", "Account")
+            </b>
+        </div>
+    </div>
+</div>

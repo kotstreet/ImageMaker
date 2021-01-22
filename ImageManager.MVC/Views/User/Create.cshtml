@@ -1,0 +1,62 @@
+﻿@model ImageManager.MVC.ViewModels.CreateUserViewModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["UserCreating"];
+}
+
+<div>
+    <div class="m-sm-3 text-center">
+        <h2>@Localizer["UserCreating"]</h2>
+    </div>
+    <div class="row justify-content-center pt-md-2 mt-md-2">
+        <div class="border border-secondary rounded bg-white">
+            @using (@Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group pl-md-5 pr-md-5 pt-md-3 pb-md-1 text-md-left">
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.LastName, Localizer["Surname"].Value, new { @class = "small" })<br />
+                        @Html.TextBoxFor(model => model.LastName, null, new { @class = "data-input" })<br />
+                        @Html.ValidationMessageFor(model => model.LastName, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.FirstName, Localizer["FirstName"].Value, new { @class = "small" })<br />
+                        @Html.TextBoxFor(model => model.FirstName, null, new { @class = "data-input" })<br />
+                        @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.Email, Localizer["Email"].Value, new { @class = "small" })<br />
+                        <input type="email" name="email" asp-for="Email" class="data-input" /><br />
+                        @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="row pt-md-2 mt-2 justify-content-around">
+                        @Html.LabelFor(model => model.IsAdmin, Localizer["AdminRole"].Value, new { @class = "small pl-3 mr-4" })
+                        @Html.CheckBoxFor(model => model.IsAdmin, new { @class = "form-control pr-3 mr-4", style = "width:20px; height:20px;" })
+                    </div>
+                    <div class="row pt-md-2 justify-content-around">
+                        @Html.LabelFor(model => model.IsUser, Localizer["UserRole"].Value, new { @class = "small pl-3 mr-4" })
+                        @Html.CheckBoxFor(model => model.IsUser, new { @class = "form-control pr-3 mr-4", style = "width:20px; height:20px;", @checked = "true" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.Password, Localizer["Password"].Value, new { @class = "small" })<br />
+                        @Html.PasswordFor(model => model.Password, new { @class = "data-input" })<br />
+                        @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger small" })
+                    </div>
+                    <div class="pt-md-2">
+                        @Html.LabelFor(model => model.ConfirmPassword, Localizer["ConfirmationPassword"].Value, new { @class = "small" })<br />
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "data-input" })<br />
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text-danger small" })
+                    </div>
+                    @Html.ValidationSummary(true, null, new { @class = "small mt-sm-3 p-sm-2 rounded my-validation" })
+                <div class="row pt-md-4  justify-content-around">
+                    <a asp-action="ShowAll" asp-controller="User" class="btn btn-outline-info text-center">@Localizer["CancelButton"].Value</a>
+                    <input type="submit" class="btn btn-outline-success text-center" value="@Localizer["CreateButton"].Value" \>
+                </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

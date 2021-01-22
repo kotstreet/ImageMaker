@@ -1,0 +1,48 @@
+﻿@model ImageManager.MVC.ViewModels.UserImagesViewModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["UserHistory"];
+}
+
+<div>
+    <div>
+        <br />
+        <h3 class="text-center">@Localizer["UserHistory"]</h3>
+        @if (Model.ImageUrls.Count == 0)
+        {
+            <h4 class="text-center mt-sm-3">@Localizer["HistoryIsClear"]</h4>
+        }
+        else
+        {
+            <h4 class="text-center mt-sm-3">@Localizer["UserHistoryText"]</h4>
+        }
+        <p class="text-center">
+            @Localizer["Name"]: <i>@Model.FullName</i>. @Localizer["Email"]: <i>@Model.Email</i>.
+        </p>
+    </div>
+    <br />
+
+    @if (Model.ImageUrls.Count == 0)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="row justify-content-center mr-4 ml-4">
+            <button class="btn btn-outline-info text-center" onclick="backOrClose();">@Localizer["Back"]</button>
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center mr-4 ml-4">
+            @foreach (var imgUrl in Model.ImageUrls)
+            {
+                <div class="m-sm-2">
+                    <img src="@imgUrl" class=" my-img" />
+                </div>
+            }
+        </div>
+    }
+</div>

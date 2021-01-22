@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ImageManager.MVC.ViewModels.NotificationViewModel>
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["Notification"];
+}
+
+
+<div class="container body-content">
+    <div class="col">
+        <div class="text-center m-sm-1">
+            <p class="display-4">@Localizer["Notification"]</p>
+            <p>
+                @Localizer["NotificationInstruction"]
+            </p>
+        </div>
+        <br />
+        <div>
+            @foreach (var item in Model)
+            {
+                @if (item.HasRead)
+                {
+                    <div name="@item.NotificationId" class="text-sm-left td-notice-read p-sm-3 mb-sm-1" onclick="notification_click('@item.NotificationId')" )>
+                        @item.FullName (@item.Email) @Localizer["NotificationText"].
+                        <a id="@item.NotificationId" asp-action="ShowImage" asp-controller="Notification" asp-route-notificationId="@item.NotificationId"></a>
+                    </div>
+                }
+                else
+                {
+                    <div name="@item.NotificationId" class="text-sm-left td-notice-new p-sm-3 mb-sm-1" onclick="notification_click('@item.NotificationId')" )>
+                        @item.FullName (@item.Email) @Localizer["NotificationText"].
+                        <a id="@item.NotificationId" asp-action="ShowImage" asp-controller="Notification" asp-route-notificationId="@item.NotificationId"></a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
